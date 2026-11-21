@@ -1,5 +1,8 @@
 {
-  "include": ["functions/**/*", "lib/**/*"],
+  "include": [
+    "functions/**/*",
+    "lib/**/*"
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
@@ -7,7 +10,16 @@
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "types": ["node"]
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "node"
+    ],
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "resolveJsonModule": true
   }
 }

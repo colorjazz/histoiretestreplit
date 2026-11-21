@@ -3132,6 +3132,8 @@ Critères incomplets à remplacer : ${JSON.stringify(question.criteresCorrection
 CONTRATS PÉDAGOGIQUES OBLIGATOIRES PAR OPÉRATION :
 ${contratsOperationsPourPrompt()}
 Dans ce lot de Section A, l'opération "espace-temps" doit obligatoirement utiliser "dimension":"temps" et le format "classement"; la localisation spatiale est évaluée dans le dossier interactif de Section B.
+Pour ce classement "espace-temps", fournis exactement quatre documents textuels distincts et le champ interne "ordreCorrect" : un tableau des quatre indices des documents (0 à 3), du plus ancien au plus récent.
+Pour la mise en relation, "associationsAttendues" ne doit jamais valoir [0,1,2] : présente les documents dans un ordre différent de celui des faits.
 Les champs internes servent à valider et corriger l'activité; ne les révèle jamais dans la consigne destinée à l'élève.`;
     const regleFormats = parcoursPourGeneration === 'reponses'
          ? `Répartis les bonnes réponses des QCM de façon aléatoire entre A, B, C et D. Pour chaque réponse courte rédigée, ajoute "reponseAttendue" et "criteresCorrection" internes sans les révéler dans la consigne; son barème est de 2 points, accordés seulement si la réponse est correcte et formulée en phrase complète. Si l’élève écrit un ou deux mots, la note maximale est 1/2 même si l’idée est juste. Chaque réponse courte doit couvrir et permettre d’évaluer séparément les critères suivants : ${JSON.stringify(CRITERES_REPONSE_COURTE_PFEQ)}. Pour au moins une réponse courte, ajoute exactement quatre "elementsChronologiques" contenant chacun "label" et "annee" ou "ordre", dans l'ordre du plus ancien au plus récent; l'élève devra pouvoir les réorganiser. Pour cette question, retourne "documents":[] et ne demande pas de réponse rédigée : la correction doit porter uniquement sur l'ordre chronologique choisi. Pour les autres questions, chaque document doit être textuel, de type "Source primaire" ou "Source secondaire", avec "typeDoc", "texte" et "reference"; n'ajoute aucun champ d'image et ne demande jamais à l'élève de nommer un document. Une réponse courte doit être formulée directement avec le fait historique attendu, sans commencer par « Selon le document ». Ajoute "marqueursRelationAttendus" avec des mots adaptés à la réponse historique attendue.`
@@ -3235,7 +3237,10 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
               etapes: Array.isArray(question.etapes) ? question.etapes.slice(0, 3) : undefined
            };
            }));
-           if (!questionsNormalisees.some((question: any) => Array.isArray(question.elementsChronologiques) && question.elementsChronologiques.length === 4)) {
+           // Exigence propre au module de réponses courtes; le module d'opérations
+           // évalue la chronologie par le classement de documents (espace-temps).
+           if (parcoursPourGeneration === 'reponses'
+             && !questionsNormalisees.some((question: any) => Array.isArray(question.elementsChronologiques) && question.elementsChronologiques.length === 4)) {
              throw new Error("Le lot doit contenir au moins un classement chronologique réorganisable.");
            }
            memoriserQuestionsGenerees(questionsNormalisees);

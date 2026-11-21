@@ -134,8 +134,10 @@ export async function appelerFocusTraining(
     || globalThis.crypto?.randomUUID?.()
     || `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
   requete.headers["Idempotency-Key"] = requestId;
-  const pollIntervalMs = options.pollIntervalMs ?? 400;
-  const maxPollAttempts = options.maxPollAttempts ?? 225;
+  // Une génération de lot peut durer 2 à 4 minutes (sous-lots, validation, relances).
+  // 1,5 s × 240 ≈ 6 minutes de suivi, avec peu d'appels aux fonctions Netlify.
+  const pollIntervalMs = options.pollIntervalMs ?? 1500;
+  const maxPollAttempts = options.maxPollAttempts ?? 240;
   const maxPollRetries = options.maxPollRetries ?? 4;
   const pollRetryDelayMs = options.pollRetryDelayMs ?? 350;
 

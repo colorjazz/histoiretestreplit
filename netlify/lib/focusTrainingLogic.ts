@@ -1,4 +1,11 @@
 import {
+  normaliserConsigneTroisPicots,
+  normaliserQuestionSectionA as normaliserQuestionApplication,
+  pointsOperation,
+  validerContenuOperation,
+} from "../../src/histoire/assessmentContracts.ts";
+import { OPERATIONS } from "../../src/histoire/operations.js";
+import {
   createGeminiContextCacheManager,
   type GeminiContextCacheLookup,
 } from "../lib/gemini-context-cache";
@@ -46,11 +53,21 @@ type JsonOperationResult =
 
 // Modèle configurable sur Netlify (GEMINI_MODEL); défaut identique au serveur Replit.
 export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.6-flash";
+// Les jetons de « réflexion » comptent dans maxOutputTokens : avec la réflexion par
+// défaut (élevée) et des limites de 7000/12000, les sorties JSON longues étaient souvent
+// coupées (finishReason MAX_TOKENS), d'où des régénérations en chaîne. « medium » avec
+// des limites plus larges termine les lots; « low » respecte moins bien les contrats.
+// Valeurs : minimal | low | medium | high | off (n'envoie rien). Gemini 3+ seulement.
+const GEMINI_THINKING_LEVEL = (process.env.GEMINI_THINKING_LEVEL || "medium").trim().toLowerCase();
+function thinkingConfig(): { thinkingConfig?: { thinkingLevel: string } } {
+  if (GEMINI_THINKING_LEVEL === "off" || !/^gemini-(?:[3-9]|\d{2,})/.test(GEMINI_MODEL)) return {};
+  return { thinkingConfig: { thinkingLevel: GEMINI_THINKING_LEVEL } };
+}
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models";
-const SECTION_A_PRIMARY_MAX_OUTPUT_TOKENS = 12000;
-const SECTION_A_FALLBACK_MAX_OUTPUT_TOKENS = 7000;
+const SECTION_A_PRIMARY_MAX_OUTPUT_TOKENS = 24000;
+const SECTION_A_FALLBACK_MAX_OUTPUT_TOKENS = 16000;
 const STRUCTURED_BATCH_RETRY_ATTEMPTS = 2;
-const SECTION_A_SUBLOT_RETRY_ATTEMPTS = 2;
+const SECTION_A_SUBLOT_RETRY_ATTEMPTS = 4;
 type ProviderLogStatus = number | "network_error" | "unknown";
 type GeminiGenerationConfig = {
   maxOutputTokens: number;
@@ -170,7 +187,7 @@ async function appelerGeminiGenerateContent({
     }],
     ...(cachedContent ? { cachedContent } : {}),
     ...(useGrounding ? { tools: [{ google_search: {} }] } : {}),
-    generationConfig,
+    generationConfig: { ...generationConfig, ...thinkingConfig() },
   });
 
   let response = await fetcher(url, {
@@ -248,17 +265,106 @@ function extraireTableauQuestions(value: unknown): unknown[] | null {
   return null;
 }
 
+/** Champs où l'appli cherche un marqueur de relation, par opération. */
+const CHAMPS_AVEC_MARQUEURS: Record<string, string[]> = {
+  "causes-consequences": ["elementAttendu"],
+  "liens-causalite": ["liensAttendus"],
+  comparaisons: ["positionCommuneAttendue", "positionDissidenteAttendue"],
+  "continuite-changement": ["changementAttendu", "continuiteAttendue"],
+};
+
+/**
+ * Aligne la liste interne « marqueursRelationAttendus » sur les phrases attendues :
+ * ajoute les marqueurs autorisés qu'elles emploient réellement et retire ceux qui
+ * ne sont pas permis pour l'opération. Le texte présenté à l'élève n'est pas modifié.
+ */
+function alignerMarqueurs(question: any): void {
+  const champs = CHAMPS_AVEC_MARQUEURS[question?.operationId];
+  if (!champs) return;
+  const operation: any = OPERATIONS.find((item: any) => item.id === question.operationId);
+  const autorises: string[] = (operation?.marqueursRecommandes || [])
+    .flatMap((groupe: any) => String(groupe.marqueurs || "").split(","))
+    .map((marqueur: string) => marqueur.trim())
+    .filter(Boolean);
+  if (autorises.length === 0) return;
+  const estAutorise = (marqueur: string) =>
+    autorises.some((autorise) => normaliserTexteSectionA(autorise) === normaliserTexteSectionA(marqueur));
+  const textes = champs.flatMap((champ) => Array.isArray(question[champ]) ? question[champ] : [question[champ]])
+    .map(normaliserTexteSectionA)
+    .filter(Boolean);
+  const employes = autorises.filter((marqueur) =>
+    textes.some((texte) => texte.includes(normaliserTexteSectionA(marqueur))));
+  const actuels = textesSectionA(question.marqueursRelationAttendus).filter(estAutorise);
+  const fusion = [...actuels];
+  for (const marqueur of employes) {
+    if (!fusion.some((actuel) => normaliserTexteSectionA(actuel) === normaliserTexteSectionA(marqueur))) {
+      fusion.push(marqueur);
+    }
+  }
+  if (fusion.length > 0) question.marqueursRelationAttendus = fusion;
+}
+
+// Listes reprises de src/histoire/assessmentContracts.ts (validées aussi par l'appli).
+const CATEGORIES_FAIT = [
+  "acteur", "groupe", "institution", "gouvernement", "action", "mesure", "loi", "rôle",
+  "territoire", "activité économique", "mouvement de pensée", "phénomène historique",
+];
+const ASPECTS_SOCIETE = ["politique", "économique", "social", "culturel", "territorial"];
+
 function normaliserQuestionSectionA(question: any): any {
   if (!question || typeof question !== "object") return question;
   const type = String(question.type || "").trim().toLowerCase();
   const format = question.format || question.formatReponse
     || (type === "qcm" || type === "court" ? type : undefined);
   const consigne = question.question || question.consigne;
-  return {
+  const normalisee: any = {
     ...question,
     ...(format ? { format } : {}),
     ...(consigne ? { question: consigne } : {}),
   };
+  // Petites incohérences fréquentes de Gemini, corrigées plutôt que de rejeter le lot.
+  if (normalisee.operationId === "faits" && normalisee.categorieFait !== undefined) {
+    const valeur = normaliserTexteSectionA(normalisee.categorieFait);
+    const correspondance = CATEGORIES_FAIT
+      .filter((categorie) => valeur === normaliserTexteSectionA(categorie)
+        || valeur.includes(normaliserTexteSectionA(categorie)))
+      .sort((a, b) => b.length - a.length)[0];
+    if (correspondance) normalisee.categorieFait = correspondance;
+  }
+  if (normalisee.operationId === "faits" && !String(normalisee.faitAttendu || "").trim()) {
+    const faits = textesSectionA(normalisee.faitsAttendus);
+    if (faits.length > 0) normalisee.faitAttendu = faits.join(" ; ");
+  }
+  alignerMarqueurs(normalisee);
+  if (["faits", "causes-consequences"].includes(normalisee.operationId)
+    && normalisee.aspectSociete !== undefined && normalisee.aspectSociete !== null
+    && String(normalisee.aspectSociete).trim()
+    && !ASPECTS_SOCIETE.map(normaliserTexteSectionA).includes(normaliserTexteSectionA(normalisee.aspectSociete))) {
+    // Champ facultatif : une valeur hors liste ferait rejeter la question par l'appli.
+    delete normalisee.aspectSociete;
+  }
+  if (normalisee.operationId === "comparaisons"
+    && !normalisee.positionDissidenteAttendue && normalisee.positionDissidentAttendue) {
+    normalisee.positionDissidenteAttendue = normalisee.positionDissidentAttendue;
+  }
+  if (normalisee.operationId === "mise-en-relation"
+    && Array.isArray(normalisee.propositions) && normalisee.propositions.length === 3
+    && normalisee.propositions.every((item: unknown) => typeof item === "string" && item.trim())
+    && Array.isArray(normalisee.faitsRelier) && normalisee.faitsRelier.length === 3) {
+    // Les deux listes doivent être identiques; « propositions » est celle affichée à l'élève.
+    normalisee.faitsRelier = [...normalisee.propositions];
+  }
+  if (normalisee.operationId === "mise-en-relation"
+    && Array.isArray(normalisee.documents) && normalisee.documents.length === 3
+    && Array.isArray(normalisee.associationsAttendues)
+    && normalisee.associationsAttendues.map(Number).every((valeur: number, index: number) => valeur === index)) {
+    // Associations laissées dans l'ordre [0,1,2] : la réponse serait évidente.
+    // On déplace les documents (A,B,C → C,A,B) et on ajuste la clé en conséquence.
+    const [a, b, c] = normalisee.documents;
+    normalisee.documents = [c, a, b];
+    normalisee.associationsAttendues = [1, 2, 0];
+  }
+  return normalisee;
 }
 
 function normaliserQuestionsSectionA(questions: unknown[]): any[] {
@@ -337,11 +443,36 @@ function normaliserTexteSectionA(value: unknown): string {
     .trim();
 }
 
+/**
+ * Applique le validateur de l'appli (src/histoire/assessmentContracts.ts) avec la même
+ * préparation qu'elle (App.tsx, genererLotQuestionsA). Un lot que l'appli refuserait
+ * est ainsi régénéré ici plutôt que d'afficher une erreur à l'élève.
+ * Renvoie le message d'erreur de l'appli, ou null si la question est acceptée.
+ */
+function erreurContratApplication(question: any): string | null {
+  try {
+    const copie = normaliserQuestionApplication(structuredClone(question));
+    if (copie.operationId === "liens-causalite") {
+      copie.question = normaliserConsigneTroisPicots(copie.question, copie.etapes);
+    }
+    copie.points = pointsOperation(copie, copie.operationId);
+    validerContenuOperation(copie);
+    return null;
+  } catch (error) {
+    return error instanceof Error ? error.message : "Contrat de l'appli non respecté.";
+  }
+}
+
 function operationSectionAUtilisable(question: any): boolean {
+  return operationSectionAUtilisableServeur(question) && erreurContratApplication(question) === null;
+}
+
+function operationSectionAUtilisableServeur(question: any): boolean {
   const marqueurs = textesSectionA(question.marqueursRelationAttendus);
   switch (question.operationId) {
     case "faits":
-      return Boolean(String(question.categorieFait || "").trim() && String(question.faitAttendu || "").trim());
+      return CATEGORIES_FAIT.map(normaliserTexteSectionA).includes(normaliserTexteSectionA(question.categorieFait))
+        && Boolean(String(question.faitAttendu || "").trim() || textesSectionA(question.faitsAttendus).length === 2);
     case "espace-temps":
       return question.dimension === "temps"
         && Boolean(String(question.repereAttendu || "").trim())
@@ -390,9 +521,11 @@ function operationSectionAUtilisable(question: any): boolean {
         && new Set(associations).size === 3
         && !associations.every((association: number, index: number) => association === index)
         && Boolean(String(question.constatAttendu || "").trim())
+        // Aligné sur l'appli (assessmentContracts.ts) : le constat ne doit pas être
+        // causal; il n'a pas à contenir lui-même un marqueur de relation.
+        && !/\b(parce que|donc|entraine|provoque|cause|consequence|par consequent)\b/.test(constatNormalise)
         && marqueursNormalises.length > 0
-        && marqueursNormalises.every((marqueur) => marqueursAutorises.includes(marqueur))
-        && marqueursNormalises.some((marqueur) => constatNormalise.includes(marqueur));
+        && marqueursNormalises.every((marqueur) => marqueursAutorises.includes(marqueur));
     case "causes-consequences":
       return ["cause", "consequence", "conséquence"].includes(String(question.relationDemandee || "").toLowerCase())
         && Boolean(String(question.evenementCible || "").trim() && String(question.elementAttendu || "").trim())
@@ -402,12 +535,21 @@ function operationSectionAUtilisable(question: any): boolean {
         && new Set(textesSectionA(question.etapes).map((item) => item.toLowerCase())).size === 3
         && textesSectionA(question.liensAttendus).length === 2
         && marqueurs.length > 0;
-    case "comparaisons":
-      return textesSectionA(question.elementsComparer).length === 2
-        && Boolean(String(question.critereComparaison || "").trim())
-        && Boolean(String(question.similitudeAttendue || "").trim())
-        && Boolean(String(question.differenceAttendue || "").trim())
+    case "comparaisons": {
+      // Aligné sur le contrat actuel de l'appli (assessmentContracts.ts) :
+      // trois acteurs, un enjeu commun, un acteur dissident et deux positions.
+      // L'ancien contrat (elementsComparer, similitudeAttendue…) n'est plus demandé
+      // dans la consigne, ce qui faisait échouer chaque sous-lot.
+      const acteurs = textesSectionA(question.acteursComparer);
+      const acteursNormalises = acteurs.map(normaliserTexteSectionA);
+      return acteurs.length === 3
+        && new Set(acteursNormalises).size === 3
+        && Boolean(String(question.enjeuCommun || "").trim())
+        && acteursNormalises.includes(normaliserTexteSectionA(question.acteurDissident))
+        && Boolean(String(question.positionCommuneAttendue || "").trim())
+        && Boolean(String(question.positionDissidenteAttendue || "").trim())
         && marqueurs.length > 0;
+    }
     case "continuite-changement":
       return Boolean(String(question.realiteComparee || "").trim())
         && textesSectionA(question.moments).length === 2
@@ -475,6 +617,14 @@ function resumeStructureLotSectionA(questions: unknown): Record<string, unknown>
     operationIds: questions.map((question: any) => String(question?.operationId || "")).filter(Boolean),
     formats: questions.map((question: any) => formatQuestionSectionA(question)).filter(Boolean),
     qcmCount: questions.filter((question: any) => formatQuestionSectionA(question) === "qcm").length,
+    // Diagnostic : opérations présentes mais refusées par le contrat structurel.
+    operationsRefusees: questions
+      .filter((question: any) => question?.operationId && !operationSectionAUtilisable(question))
+      .map((question: any) => {
+        const erreur = erreurContratApplication(question);
+        return erreur ? `${question.operationId}: ${erreur}` : String(question.operationId);
+      }),
+    qcmRefuses: questions.filter((question: any) => formatQuestionSectionA(question) === "qcm" && !qcmSectionAUtilisable(question)).length,
     keys: questions.map((question: any) =>
       question && typeof question === "object" ? Object.keys(question).sort() : []),
   };
@@ -502,6 +652,27 @@ function normaliserIdentifiantsSousLotSectionA(questions: any[], prompt: string)
       ? { ...question, operationId: operationsAttendues[index] }
       : question;
   });
+}
+
+/** Problèmes précis du sous-lot précédent, pour guider la nouvelle génération. */
+function problemesSousLot(questions: unknown): string {
+  if (!Array.isArray(questions)) return "";
+  const problemes = questions
+    .filter((question: any) => question?.operationId && !operationSectionAUtilisable(question))
+    .map((question: any) => {
+      const erreur = erreurContratApplication(question) || "champs internes incomplets ou incohérents pour cette opération";
+      const operation: any = OPERATIONS.find((item: any) => item.id === question.operationId);
+      const marqueurs = (operation?.marqueursRecommandes || [])
+        .map((groupe: any) => `${groupe.typeLien} : ${groupe.marqueurs}`)
+        .join(" ; ");
+      const precision = question.operationId === "faits"
+        ? ` "categorieFait" doit valoir exactement l'une de ces valeurs : ${CATEGORIES_FAIT.join(", ")}.`
+        : CHAMPS_AVEC_MARQUEURS[question.operationId] && marqueurs
+          ? ` Chaque phrase de ${CHAMPS_AVEC_MARQUEURS[question.operationId].map((champ) => `"${champ}"`).join(" et ")} doit contenir mot pour mot un de ces marqueurs, aussi inscrit dans "marqueursRelationAttendus" : ${marqueurs}.`
+          : "";
+      return `- ${question.operationId} : ${erreur}${precision}`;
+    });
+  return problemes.length ? `\nPROBLÈMES DÉTECTÉS DANS LA VERSION PRÉCÉDENTE :\n${problemes.join("\n")}` : "";
 }
 
 function qcmSectionAUtilisable(question: any): boolean {
@@ -662,7 +833,7 @@ ${sortieAExaminer}`,
         logger,
         signal,
         phase: "batch_regeneration",
-        generationConfig: { maxOutputTokens: nombreAttendu === 5 ? 7000 : 12000, responseMimeType: "application/json" },
+        generationConfig: { maxOutputTokens: nombreAttendu === 5 ? 16000 : 24000, responseMimeType: "application/json" },
       });
     } catch {
       journaliserErreurFournisseur(logger, "batch_regeneration", "network_error", "Erreur réseau pendant la régénération du lot Section A");
@@ -831,7 +1002,7 @@ async function genererSousLotSectionA(
   try {
     const parsed = JSON.parse(jsonComplet.text);
     const questions = Array.isArray(parsed)
-      ? normaliserIdentifiantsSousLotSectionA(parsed, prompt)
+      ? normaliserIdentifiantsSousLotSectionA(normaliserQuestionsSectionA(parsed), prompt)
       : parsed;
     if (Array.isArray(questions) && questions.length === 5 && sousLotSectionAUtilisable(questions, prompt)) {
       return { ok: true, questions };
@@ -844,7 +1015,7 @@ async function genererSousLotSectionA(
       return genererSousLotSectionA(
         apiKey,
         stableContext,
-        `${prompt}\n\nCORRECTION OBLIGATOIRE : ce sous-lot doit respecter exactement sa composition annoncée. Conserve les critères internes complets des opérations, mets l'identifiant operationId exact sur chaque opération et ajoute les QCM de consolidation demandés, avec quatre choix distincts et un indexReponseCorrecte valide.`,
+        `${prompt}\n\nCORRECTION OBLIGATOIRE : ce sous-lot doit respecter exactement sa composition annoncée. Conserve les critères internes complets des opérations, mets l'identifiant operationId exact sur chaque opération et ajoute les QCM de consolidation demandés, avec quatre choix distincts et un indexReponseCorrecte valide.${problemesSousLot(questions)}`,
         action,
         fetcher,
         logger,
