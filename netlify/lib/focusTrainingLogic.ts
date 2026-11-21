@@ -1,4 +1,5 @@
 import {
+  getSectionAFormat,
   normaliserConsigneTroisPicots,
   normaliserQuestionSectionA as normaliserQuestionApplication,
   pointsOperation,
@@ -321,6 +322,10 @@ function normaliserQuestionSectionA(question: any): any {
     ...(format ? { format } : {}),
     ...(consigne ? { question: consigne } : {}),
   };
+  // Un seul format, écrit dans les deux champs que l'appli peut lire.
+  const formatCanonique = getSectionAFormat(normalisee);
+  normalisee.format = formatCanonique;
+  normalisee.formatReponse = formatCanonique;
   // Petites incohérences fréquentes de Gemini, corrigées plutôt que de rejeter le lot.
   if (normalisee.operationId === "faits" && normalisee.categorieFait !== undefined) {
     const valeur = normaliserTexteSectionA(normalisee.categorieFait);
@@ -366,8 +371,17 @@ function normaliserQuestionSectionA(question: any): any {
   return normalisee;
 }
 
-function normaliserQuestionsSectionA(questions: unknown[]): any[] {
-  return questions.map(normaliserQuestionSectionA);
+function normaliserQuestionsSectionA(questions: unknown[], prompt = ""): any[] {
+  const moduleReponses = /MODULE\s+RÉPONSES COURTES/i.test(prompt);
+  return questions.map((question: any) => {
+    // Le module de réponses courtes n'évalue pas d'opération : un operationId
+    // (souvent « faits ») ferait lire chaque QCM comme une réponse courte.
+    if (moduleReponses && question && typeof question === "object") {
+      const { operationId: _operationId, operation: _operation, ...reste } = question;
+      return normaliserQuestionSectionA(reste);
+    }
+    return normaliserQuestionSectionA(question);
+  });
 }
 
 function trouverStructuresJson(texte: string): Array<{ debut: number; fin: number }> {
@@ -425,8 +439,10 @@ const OPERATIONS_SECTION_A = [
   "comparaisons",
 ] as const;
 
+// Même lecture du format que l'appli (getSectionAFormat) : sinon le serveur et
+// l'appli peuvent compter différemment les QCM et les réponses courtes.
 function formatQuestionSectionA(question: any): string {
-  return String(question?.format || question?.formatReponse || "").trim();
+  return question && typeof question === "object" ? getSectionAFormat(question) : "";
 }
 
 function textesSectionA(value: unknown): string[] {
@@ -799,7 +815,7 @@ async function garantirLotDeQuestions(
 
   const questionsInitiales = extraireTableauQuestions(parsed);
   if (questionsInitiales && questionsInitiales.length === nombreAttendu) {
-    return { ok: true, text: JSON.stringify(normaliserQuestionsSectionA(questionsInitiales)) };
+    return { ok: true, text: JSON.stringify(normaliserQuestionsSectionA(questionsInitiales, prompt)) };
   }
   const nombreRecu = questionsInitiales?.length ?? 0;
   logger.warn?.({ model: GEMINI_MODEL, nombreRecu, nombreAttendu }, `${libelleLot} incomplet; régénération structurée`);
@@ -877,7 +893,7 @@ ${sortieAExaminer}`,
       const regeneratedParsed = JSON.parse(regenerated);
       const regeneratedQuestions = extraireTableauQuestions(regeneratedParsed);
       if (regeneratedQuestions && regeneratedQuestions.length === nombreAttendu) {
-        return { ok: true, text: JSON.stringify(normaliserQuestionsSectionA(regeneratedQuestions)) };
+        return { ok: true, text: JSON.stringify(normaliserQuestionsSectionA(regeneratedQuestions, prompt)) };
       }
       dernierEchec = { ok: false, status: 502, error: `Gemini n'a pas produit exactement ${nombreAttendu} questions. Réessaie dans quelques instants.` };
     } catch {
@@ -1001,7 +1017,7 @@ async function genererSousLotSectionA(
   try {
     const parsed = JSON.parse(jsonComplet.text);
     const questions = Array.isArray(parsed)
-      ? normaliserIdentifiantsSousLotSectionA(normaliserQuestionsSectionA(parsed), prompt)
+      ? normaliserIdentifiantsSousLotSectionA(normaliserQuestionsSectionA(parsed, prompt), prompt)
       : parsed;
     if (Array.isArray(questions) && questions.length === 5 && sousLotSectionAUtilisable(questions, prompt)) {
       return { ok: true, questions };

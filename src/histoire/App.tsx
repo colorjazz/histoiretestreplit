@@ -3206,11 +3206,21 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
     sauvegarderRepriseSectionA(reprise);
     try {
       await executerGenerationAvecTentatives(async () => {
+        // Après un lot refusé, l'identifiant est effacé : la tentative suivante
+        // doit en créer un nouveau, sinon le serveur renvoie le même lot.
+        const requestIdTentative = sectionAGenerationIdRef.current
+          || (sectionAGenerationIdRef.current = globalThis.crypto?.randomUUID?.()
+            || `section-a-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+        const repriseTentative = { ...reprise, requestId: requestIdTentative };
+        if (requestIdTentative !== generationId) {
+          delete (repriseTentative as { statusUrl?: string }).statusUrl;
+          sauvegarderRepriseSectionA(repriseTentative);
+        }
         const response = await callGenerationService('generer', { prompt: systemPrompt }, {
-          requestId: generationId,
-          ...(resume?.statusUrl ? { statusUrl: resume.statusUrl } : {}),
+          requestId: requestIdTentative,
+          ...(resume?.statusUrl && requestIdTentative === generationId ? { statusUrl: resume.statusUrl } : {}),
           onJobCreated: ({ statusUrl }) => {
-            sauvegarderRepriseSectionA({ ...reprise, statusUrl });
+            sauvegarderRepriseSectionA({ ...repriseTentative, statusUrl });
           },
           onProgress: (progress) => setGenerationProgressA({
             stage: progress.stage,
@@ -3235,6 +3245,12 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
                   : question
               ))
             : questions;
+          // Le module de réponses courtes n'évalue pas d'opération : un
+          // operationId ajouté par Gemini y transformait chaque QCM en
+          // réponse courte (format attendu de l'opération « faits »).
+          if (parcoursPourGeneration === 'reponses' && Array.isArray(questions)) {
+            questions = questions.map(({ operationId: _operationId, operation: _operation, ...question }: any) => question);
+          }
           questions = Array.isArray(questions)
             ? questions.map((question: any) => question?.operationId
               ? {
@@ -3299,7 +3315,7 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
           }
           throw error;
         }
-      });
+      }, 3);
     } catch(err) {
       afficherErreurGeneration("section-a", err);
     } finally {
