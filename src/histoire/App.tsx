@@ -1699,6 +1699,39 @@ function normaliserActiviteFocus(reponse: any, intention: FocusIntention, catalo
   };
 }
 
+const CLE_RESERVE_VUES = "corrige-reserve-section-a-vues";
+
+function lireQuestionsDeReserveVues(): string[] {
+  try {
+    const valeur = JSON.parse(localStorage.getItem(CLE_RESERVE_VUES) || "[]");
+    return Array.isArray(valeur) ? valeur.filter((id) => typeof id === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
+function retenirQuestionsDeReserveVues(ids: string[]) {
+  try {
+    const toutes = [...new Set([...lireQuestionsDeReserveVues(), ...ids])].slice(-400);
+    localStorage.setItem(CLE_RESERVE_VUES, JSON.stringify(toutes));
+  } catch {
+    // Stockage indisponible (navigation privée) : on accepte des répétitions.
+  }
+}
+
+/** Lot de réserve de la Section A, ou null si la réserve n'a rien pour ces périodes. */
+async function chargerLotDeReserveA(parcours: string, periodes: number[]): Promise<any[] | null> {
+  const parametres = new URLSearchParams({
+    parcours,
+    periodes: periodes.join(","),
+    exclure: lireQuestionsDeReserveVues().slice(-300).join(","),
+  });
+  const reponse = await fetch(`/api/banque-section-a?${parametres.toString()}`, { headers: { Accept: "application/json" } });
+  if (!reponse.ok) return null;
+  const donnees = await reponse.json().catch(() => null);
+  return Array.isArray(donnees?.questions) && donnees.questions.length === 10 ? donnees.questions : null;
+}
+
 async function executerGenerationAvecTentatives<T>(
   operation: () => Promise<T>,
   nombreTentatives = 2,
@@ -2720,6 +2753,8 @@ ${dejaVues.length ? dejaVues.map((item) => `- ${item}`).join("\n") : "- aucune a
   const [ordreChronologiqueA, setOrdreChronologiqueA] = useState<number[]>([]);
   const [erreurFormatA, setErreurFormatA] = useState<string | null>(null);
   const [feedbackA, setFeedbackA] = useState<any>(null);
+  // Correction automatique indisponible : message pour réessayer + réponse attendue.
+  const [correctionIndisponibleA, setCorrectionIndisponibleA] = useState<null | { bonneReponse?: string; ordre?: string[]; reponseAttendue?: string; criteres?: string[]; explication?: string }>(null);
   const [isAnswerValidated, setIsAnswerValidated] = useState(false);
   const [savingQcmA, setSavingQcmA] = useState(false);
   const [scoreA, setScoreA] = useState({ correct: 0, total: 0 });
@@ -3204,36 +3239,14 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
       code: resume?.code || codeUtilise,
     } satisfies SectionAGenerationResume;
     sauvegarderRepriseSectionA(reprise);
-    try {
-      await executerGenerationAvecTentatives(async () => {
-        // Après un lot refusé, l'identifiant est effacé : la tentative suivante
-        // doit en créer un nouveau, sinon le serveur renvoie le même lot.
-        const requestIdTentative = sectionAGenerationIdRef.current
-          || (sectionAGenerationIdRef.current = globalThis.crypto?.randomUUID?.()
-            || `section-a-${Date.now()}-${Math.random().toString(36).slice(2)}`);
-        const repriseTentative = { ...reprise, requestId: requestIdTentative };
-        if (requestIdTentative !== generationId) {
-          delete (repriseTentative as { statusUrl?: string }).statusUrl;
-          sauvegarderRepriseSectionA(repriseTentative);
-        }
-        const response = await callGenerationService('generer', { prompt: systemPrompt }, {
-          requestId: requestIdTentative,
-          ...(resume?.statusUrl && requestIdTentative === generationId ? { statusUrl: resume.statusUrl } : {}),
-          onJobCreated: ({ statusUrl }) => {
-            sauvegarderRepriseSectionA({ ...repriseTentative, statusUrl });
-          },
-          onProgress: (progress) => setGenerationProgressA({
-            stage: progress.stage,
-            percent: Math.max(0, Math.min(100, progress.percent)),
-          }),
-        });
-        try {
-          let questions = extraireJSON<any[]>(response.text);
+    // Préparation et validation d'un lot reçu (généré ou tiré de la réserve).
+    const preparerLotSectionA = async (questionsBrutes: unknown, options: { reparer: boolean }): Promise<any[]> => {
+          let questions: any = questionsBrutes;
           questions = Array.isArray(questions)
             ? questions.map(normaliserQuestionSectionA)
             : questions;
           questions = Array.isArray(questions)
-            ? (await reparerLotSectionAEnUnAppel(questions)).map((question) =>
+            ? (options.reparer ? await reparerLotSectionAEnUnAppel(questions) : questions).map((question: any) =>
                 question?.operationId === "liens-causalite"
                   ? { ...question, question: normaliserConsigneTroisPicots(question.question, question.etapes) }
                   : question)
@@ -3301,6 +3314,34 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
              && !questionsNormalisees.some((question: any) => Array.isArray(question.elementsChronologiques) && question.elementsChronologiques.length === 4)) {
              throw new Error("Le lot doit contenir au moins un classement chronologique réorganisable.");
            }
+           return questionsNormalisees;
+    };
+
+    try {
+      await executerGenerationAvecTentatives(async () => {
+        // Après un lot refusé, l'identifiant est effacé : la tentative suivante
+        // doit en créer un nouveau, sinon le serveur renvoie le même lot.
+        const requestIdTentative = sectionAGenerationIdRef.current
+          || (sectionAGenerationIdRef.current = globalThis.crypto?.randomUUID?.()
+            || `section-a-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+        const repriseTentative = { ...reprise, requestId: requestIdTentative };
+        if (requestIdTentative !== generationId) {
+          delete (repriseTentative as { statusUrl?: string }).statusUrl;
+          sauvegarderRepriseSectionA(repriseTentative);
+        }
+        const response = await callGenerationService('generer', { prompt: systemPrompt }, {
+          requestId: requestIdTentative,
+          ...(resume?.statusUrl && requestIdTentative === generationId ? { statusUrl: resume.statusUrl } : {}),
+          onJobCreated: ({ statusUrl }) => {
+            sauvegarderRepriseSectionA({ ...repriseTentative, statusUrl });
+          },
+          onProgress: (progress) => setGenerationProgressA({
+            stage: progress.stage,
+            percent: Math.max(0, Math.min(100, progress.percent)),
+          }),
+        });
+        try {
+          const questionsNormalisees = await preparerLotSectionA(extraireJSON<any[]>(response.text), { reparer: true });
            memoriserQuestionsGenerees(questionsNormalisees);
           setBanqueQuestionsA(questionsNormalisees); setCurrentIndexA(0); setReponsesStructureA({}); setErreurFormatA(null);
           sectionAGenerationIdRef.current = null;
@@ -3317,7 +3358,26 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
         }
       }, 3);
     } catch(err) {
-      afficherErreurGeneration("section-a", err);
+      // Toutes les tentatives ont échoué : on pige un lot dans la réserve
+      // plutôt que d'afficher une erreur. Erreur seulement si la réserve
+      // ne peut rien fournir pour ces périodes.
+      const lotDeReserve = await chargerLotDeReserveA(parcoursPourGeneration, periodesPourGeneration)
+        .then((questions) => questions ? preparerLotSectionA(questions, { reparer: false }) : null)
+        .catch((erreurReserve) => {
+          console.warn("Réserve inutilisable", erreurReserve);
+          return null;
+        });
+      if (lotDeReserve && lotDeReserve.length === 10) {
+        console.warn("Lot de réserve utilisé après l'échec de la génération", err);
+        const marques = lotDeReserve.map((question: any) => ({ ...question, sourceQuestion: "reserve" }));
+        retenirQuestionsDeReserveVues(marques.map((question: any) => question.reserveId).filter(Boolean));
+        memoriserQuestionsGenerees(marques);
+        setBanqueQuestionsA(marques); setCurrentIndexA(0); setReponsesStructureA({}); setErreurFormatA(null);
+        sectionAGenerationIdRef.current = null;
+        supprimerRepriseSectionA();
+      } else {
+        afficherErreurGeneration("section-a", err);
+      }
     } finally {
       sectionAGenerationInFlightRef.current = false;
       setLoadingQuestionA(false);
@@ -3365,6 +3425,7 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
   }, [currentIndexA, banqueQuestionsA]);
 
   const passerQuestionSuivanteA = () => {
+    setCorrectionIndisponibleA(null);
     setSelectedChoice(null); setReponseCourteA(""); setReponsesStructureA({}); setAnnonceReponseStructureA(""); setOrdreChronologiqueA([]); setErreurFormatA(null); setFeedbackA(null); setIsAnswerValidated(false);
     if (currentIndexA + 1 < banqueQuestionsA.length) { setCurrentIndexA(currentIndexA + 1); } else { genererLotQuestionsA(); }
   };
@@ -3471,7 +3532,7 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
       : estClassementChronologique
         ? JSON.stringify({ ordreChronologique: ordreChronologiqueA.map((index) => elementsChronologiques[index]) })
         : reponseCourteA;
-    setLoadingCorrectionA(true); setErreurGlobal(null);
+    setLoadingCorrectionA(true); setErreurGlobal(null); setCorrectionIndisponibleA(null);
     setErreurFormatA(null);
     const operationQuestionA = OPERATIONS.find((operation) => operation.id === questionA.operationId);
        const correctionPrompt = `Tu es un correcteur d'histoire du Québec et du Canada de secondaire ${niveauScolaire}. Évalue cette réponse selon le barème de ${questionA.points || 1} point(s). Format : ${format}. Question : ${questionA.question}. Documents visibles : ${JSON.stringify(questionA.documents || [])}. Faits à mettre en relation affichés : ${format === "association-paires" ? JSON.stringify(questionA.faitsRelier || questionA.propositions || []) : "non applicable"}. Clé interne des associations par document : ${format === "association-paires" ? JSON.stringify(questionA.associationsAttendues || []) : "non applicable"}. Réponse attendue interne : ${questionA.reponseAttendue || ""}. Explication historique interne : ${questionA.explication || ""}. Réponse correcte du QCM (métadonnée interne, à ne pas révéler dans le commentaire) : ${estQcm ? questionA.choix?.[questionA.indexReponseCorrecte] || "" : ""}. Classement chronologique attendu interne (métadonnée à ne pas révéler) : ${estClassementChronologique ? JSON.stringify(elementsChronologiques) : "non applicable"}. Critères internes : ${JSON.stringify(questionA.criteresCorrection || [])}. Critères transversaux des réponses courtes : ${JSON.stringify(CRITERES_REPONSE_COURTE_PFEQ)}. Contrat de l'opération : ${operationQuestionA ? contratOperationPourPrompt(operationQuestionA) : "question de connaissance sans opération intellectuelle"}. Marqueurs attendus : ${JSON.stringify(questionA.marqueursRelationAttendus || [])}. Réponse de l'élève : "${reponseSoumise}". ${estClassementChronologique ? "Pour ce classement, évalue uniquement l'ordre du plus ancien au plus récent; l'élève n'a aucun texte à rédiger et ne doit pas être pénalisé pour l'absence de réponse textuelle." : ""} ${format === "association-paires" ? "Pour cette mise en relation officielle, compare le numéro choisi pour chaque fait à la clé interne qui associe chaque fait au document présentant sa manifestation ou sa description apparentée. N’expose jamais les indices de la clé dans la rétroaction." : ""} Pour ce module de QCM et de réponses courtes, n'exige jamais le nom d'un document et ne commence jamais une réponse modèle par « Selon le document » : formule directement le fait historique, puis le lien demandé s'il y en a un. Respecte la méthode historique et la progression des apprentissages du PFEQ. Les documents doivent fournir des indices sans écrire explicitement la réponse attendue. Commence toujours la rétroaction par un encouragement sincère et concret avant de nommer une erreur. Le champ "commentaire" doit contenir uniquement l'analyse générale : une première phrase qui indique clairement ce qui fonctionne ou ne fonctionne pas, puis une ligne vide, puis une explication qui aide l'élève à formuler sa réponse. Ne mets jamais dans "commentaire" de point fort, de défi, d'élément à travailler, d'astuce documentaire ou leurs étiquettes; ces informations vont dans leurs champs séparés. Formule l'explication avec les marqueurs de relation historiques appropriés. ${format === "court" && !estClassementChronologique ? `RÈGLE POUR LES RÉPONSES COURTES : n’écris jamais « Ta réponse a été reçue », « Relis la consigne et vérifie chaque élément attendu » ni « Appuie-toi sur un fait précis et explique le lien avec la question ». Si la réponse est partielle ou erronée, explique le fait historique attendu et son contexte afin que l’élève comprenne son erreur. L’astuce documentaire doit nommer un document visible précis et indiquer quel indice chercher pour répondre à cette question. Évalue séparément chaque critère de ${JSON.stringify(CRITERES_REPONSE_COURTE_PFEQ)} et chaque critère interne de la question dans "criteresEvaluation"; chaque entrée doit contenir le texte exact du critère et "statut" égal à "respecte" ou "a-retravailler".` : ""} Pour une opération intellectuelle, ajoute "diagnosticOperation" avec les critères respectés, les critères à retravailler, les marqueurs réellement utilisés par l'élève, une preuve documentaire précise et un champ "lienExtraitReponse" qui explique clairement comment l'extrait soutient ou contredit la réponse. Même si la réponse est vide de sens, le pointFort doit encourager une prochaine action concrète et ne doit jamais dire "aucun point fort décelé". ${questionA.documents?.length ? "Donne une astuce documentaire précise." : "Retourne une chaîne vide pour astuceDocumentaire."} Réponds UNIQUEMENT en JSON valide : {"correct":true,"note":"2/2","commentaire":"Première phrase de diagnostic.\n\nExplication historique liée à cette question.","explication":"Le fait historique attendu, son contexte et le lien avec la question","exempleReponse":"Réponse modèle conforme","criteresEvaluation":[{"critere":"Critère exact","statut":"respecte"}],"diagnosticOperation":{"criteresRespectes":[],"criteresARetravailler":[],"marqueursUtilises":[],"preuveDocumentaire":"Indice précis observé ou attendu","lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève"},"lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève","pointFort":"Encouragement fondé sur une prochaine action","elementATravailler":"Élément à préciser","astuceDocumentaire":"Conseil qui nomme un document précis et l’indice à y chercher","progressionOperation":"Compétence travaillée"}. La note doit respecter le barème demandé, de 0 à ${questionA.points || 1}.`;
@@ -3523,12 +3584,18 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
          note: `${Math.min(total, Math.max(0, points))}/${total}`, commentaire: parsed.commentaire || '-', detailCorrection: parsed,
          ...(format === "court" && !estClassementChronologique ? { criteresCibles: parsed.criteresCibles || [], criteresEvaluation: parsed.criteresEvaluation || [] } : {}),
          ...(operationQuestionA ? { criteresCibles: operationQuestionA.criteresObligatoires || [] } : {}),
+         ...(questionA.sourceQuestion === "reserve" ? { sourceQuestion: "reserve", reserveId: questionA.reserveId || null } : {}),
        });
     } catch (err) {
       console.error(err);
-      setErreurGlobal(err instanceof Error && err.message
-        ? err.message
-        : "CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      // Pas d'« Oups! » : on invite à réessayer et on montre la réponse attendue.
+      setCorrectionIndisponibleA({
+        ...(estQcm && Array.isArray(questionA.choix) ? { bonneReponse: String(questionA.choix[questionA.indexReponseCorrecte] ?? "") } : {}),
+        ...(estClassementChronologique ? { ordre: elementsChronologiques.map((element: any) => `${element.label}${element.annee ? ` (${element.annee})` : ""}`) } : {}),
+        ...(String(questionA.reponseAttendue || "").trim() ? { reponseAttendue: String(questionA.reponseAttendue).trim() } : {}),
+        ...(Array.isArray(questionA.criteresCorrection) && !estQcm && !estClassementChronologique ? { criteres: questionA.criteresCorrection.map(String) } : {}),
+        ...(String(questionA.explication || "").trim() ? { explication: String(questionA.explication).trim() } : {}),
+      });
     } finally { setLoadingCorrectionA(false); }
   }
 
@@ -4892,6 +4959,21 @@ Réponds UNIQUEMENT en format JSON valide:
                               corrige.moi
                             </button>
                           </div>
+                          {correctionIndisponibleA && !isAnswerValidated && (
+                            <div className="correction-indisponible" role="status" aria-live="polite">
+                              <strong>La correction automatique n’a pas répondu.</strong>
+                              <p>Ta réponse est toujours là : réessaie dans un instant avec le bouton corrige.moi.</p>
+                              <details>
+                                <summary>Voir la réponse attendue</summary>
+                                {correctionIndisponibleA.bonneReponse && <p><b>Bonne réponse :</b> {correctionIndisponibleA.bonneReponse}</p>}
+                                {correctionIndisponibleA.ordre && <ol>{correctionIndisponibleA.ordre.map((element) => <li key={element}>{element}</li>)}</ol>}
+                                {correctionIndisponibleA.reponseAttendue && <p><b>Réponse attendue :</b> {correctionIndisponibleA.reponseAttendue}</p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <p><b>Critères de correction :</b></p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <ul>{correctionIndisponibleA.criteres.map((critere) => <li key={critere}>{critere}</li>)}</ul>}
+                                {correctionIndisponibleA.explication && <p>{correctionIndisponibleA.explication}</p>}
+                              </details>
+                            </div>
+                          )}
                           {feedbackA && isAnswerValidated && (
                             <div className="verdict" role="status" aria-live="polite" style={{borderTopColor: 'var(--card-blue)'}}>
                               <div className={`stamp ${feedbackA.correct ? 'reussi' : ''}`} style={feedbackA.correct ? {borderColor: 'var(--card-blue)', color: 'var(--card-blue)'} : {}}>{feedbackA.correct ? 'Classement réussi !' : 'À revoir'} • {feedbackA.note}</div>
@@ -4947,6 +5029,21 @@ Réponds UNIQUEMENT en format JSON valide:
                          <div className="actions">
                                <button className="btn-generer" onClick={corrigerReponseA} disabled={loadingCorrectionA} style={{backgroundColor: 'var(--card-blue)'}}>corrige.moi</button>
                          </div>
+                          {correctionIndisponibleA && !isAnswerValidated && (
+                            <div className="correction-indisponible" role="status" aria-live="polite">
+                              <strong>La correction automatique n’a pas répondu.</strong>
+                              <p>Ta réponse est toujours là : réessaie dans un instant avec le bouton corrige.moi.</p>
+                              <details>
+                                <summary>Voir la réponse attendue</summary>
+                                {correctionIndisponibleA.bonneReponse && <p><b>Bonne réponse :</b> {correctionIndisponibleA.bonneReponse}</p>}
+                                {correctionIndisponibleA.ordre && <ol>{correctionIndisponibleA.ordre.map((element) => <li key={element}>{element}</li>)}</ol>}
+                                {correctionIndisponibleA.reponseAttendue && <p><b>Réponse attendue :</b> {correctionIndisponibleA.reponseAttendue}</p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <p><b>Critères de correction :</b></p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <ul>{correctionIndisponibleA.criteres.map((critere) => <li key={critere}>{critere}</li>)}</ul>}
+                                {correctionIndisponibleA.explication && <p>{correctionIndisponibleA.explication}</p>}
+                              </details>
+                            </div>
+                          )}
                           {feedbackA && isAnswerValidated && (
                            <div className="verdict" style={{borderTopColor: 'var(--card-blue)'}}>
                              <div className={`stamp ${feedbackA.correct ? 'reussi' : ''}`} style={feedbackA.correct ? {borderColor: 'var(--card-blue)', color: 'var(--card-blue)'} : {}}>{feedbackA.correct ? 'Réponse satisfaisante' : 'À revoir'} • {feedbackA.note}</div>
@@ -4963,6 +5060,21 @@ Réponds UNIQUEMENT en format JSON valide:
                          <div className="actions">
                              <button className="btn-generer" onClick={corrigerReponseA} disabled={loadingCorrectionA} style={{backgroundColor: 'var(--card-blue)'}}>corrige.moi</button>
                          </div>
+                          {correctionIndisponibleA && !isAnswerValidated && (
+                            <div className="correction-indisponible" role="status" aria-live="polite">
+                              <strong>La correction automatique n’a pas répondu.</strong>
+                              <p>Ta réponse est toujours là : réessaie dans un instant avec le bouton corrige.moi.</p>
+                              <details>
+                                <summary>Voir la réponse attendue</summary>
+                                {correctionIndisponibleA.bonneReponse && <p><b>Bonne réponse :</b> {correctionIndisponibleA.bonneReponse}</p>}
+                                {correctionIndisponibleA.ordre && <ol>{correctionIndisponibleA.ordre.map((element) => <li key={element}>{element}</li>)}</ol>}
+                                {correctionIndisponibleA.reponseAttendue && <p><b>Réponse attendue :</b> {correctionIndisponibleA.reponseAttendue}</p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <p><b>Critères de correction :</b></p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <ul>{correctionIndisponibleA.criteres.map((critere) => <li key={critere}>{critere}</li>)}</ul>}
+                                {correctionIndisponibleA.explication && <p>{correctionIndisponibleA.explication}</p>}
+                              </details>
+                            </div>
+                          )}
                           {feedbackA && isAnswerValidated && (
                            <div className="verdict" style={{borderTopColor: 'var(--card-blue)'}}>
                              <div className={`stamp ${feedbackA.correct ? 'reussi' : ''}`} style={feedbackA.correct ? {borderColor: 'var(--card-blue)', color: 'var(--card-blue)'} : {}}>{feedbackA.correct ? 'Réponse satisfaisante' : 'À revoir'} • {feedbackA.note}</div>

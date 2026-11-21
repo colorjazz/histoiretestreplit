@@ -9,6 +9,7 @@ const focusTraining = await load("focus-training");
 const focusTrainingJob = await load("focus-training-job");
 const worker = await load("focus-training-worker-background");
 const visuals = await load("historical-visuals");
+const banque = await load("banque-section-a");
 
 http.createServer(async (req, res) => {
   const chunks = [];
@@ -24,6 +25,8 @@ http.createServer(async (req, res) => {
     const job = url.pathname.match(/^\/api\/focus-training\/jobs\/([^/]+)$/);
     if (url.pathname === "/api/focus-training") {
       response = await focusTraining(request);
+    } else if (url.pathname === "/api/banque-section-a") {
+      response = await banque(request);
     } else if (url.pathname.startsWith("/api/historical-visuals")) {
       response = await visuals(request);
     } else if (job) {

@@ -1,0 +1,3836 @@
+[
+ {
+  "id": "e72b5a9fbb0db814",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "qcm",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Environnement"
+   ],
+   "connaissancesPfeq": [
+    "Modes de vie"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "En vous appuyant sur le document textuel ci-dessous, identifiez le mode de vie adopté par les peuples iroquoiens de la vallée du Saint-Laurent vers 1500.",
+   "documents": [
+    {
+     "titre": "L'organisation des Iroquoiens",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "Les Iroquoiens de la vallée du Saint-Laurent pratiquent la culture du maïs, de la courge et du haricot. La pratique de l'agriculture les amène à vivre dans des villages fortifiés comprenant plusieurs maisons longues, où ils demeurent une dizaine à une quinzaine d'années au même endroit."
+    }
+   ],
+   "choix": [
+    "Un mode de vie uniquement nomade fondé sur la chasse aux grands mammifères.",
+    "Un mode de vie uniquement marin axé sur la chasse à la baleine.",
+    "Un mode de vie sédentaire fondé principalement sur l'agriculture.",
+    "Un mode de vie pastoral fondé sur l'élevage d'animaux domestiques."
+   ],
+   "indexReponseCorrecte": 2,
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Sélection du bon choix de réponse"
+   ],
+   "explication": "Les Iroquoiens adoptaient un mode de vie sédentaire parce que la pratique de l'agriculture exigeait une présence continue sur un même territoire pour cultiver la terre.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Information documentaire sur le mode de vie des Iroquoiens"
+    }
+   ],
+   "limiteSource": "",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "c3e8c50d7365165d",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "court",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Alliance"
+   ],
+   "connaissancesPfeq": [
+    "Alliance franco-amérindienne de 1603"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "À l'aide du document fourni, expliquez l'entente conclue à Tadoussac en 1603 entre François Gravé Du Pont, Samuel de Champlain et les nations autochtones.",
+   "documents": [
+    {
+     "titre": "La grande alliance de Tadoussac",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "En 1603, à Tadoussac, les représentants français rencontrent le chef innu Anadabijou ainsi que des alliés etchemins et algonquins. L'accord conclu prévoit que les Français s'engagent à appuyer militairement ces nations contre leurs ennemis iroquois en échange de l'accès aux réseaux de traite des fourrures."
+    }
+   ],
+   "reponseAttendue": "En 1603, l'alliance de Tadoussac scelle un partenariat commercial et militaire : les Français s'engagent à soutenir militairement les Innus, les Algonquins et les Malécites contre les Iroquois en échange d'un accès privilégié au commerce des fourrures.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "en échange de",
+    "afin de",
+    "ainsi"
+   ],
+   "explication": "L'alliance franco-amérindienne de 1603 concilie des objectifs militaires et économiques pour assurer la présence française sur le territoire.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Information sur l'alliance franco-amérindienne de 1603"
+    }
+   ],
+   "limiteSource": "",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "60191bcebc706ded",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "qcm",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Échange"
+   ],
+   "connaissancesPfeq": [
+    "Produits échangés entre des Autochtones et des Européens"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Parmi les éléments suivants, quel type d'objet d'origine européenne est particulièrement recherché par les Autochtones lors des premiers échanges commerciaux au 16e siècle?",
+   "documents": [
+    {
+     "titre": "Les premiers objets de traite",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "Au cours du 16e siècle, lors des contacts avec les pêcheurs et baleiniers européens, les Autochtones échangent des pelleteries de castor contre des objets en métal tels que des chaudrons de cuivre, des couteaux et des haches."
+    }
+   ],
+   "choix": [
+    "Des navires de haut bord.",
+    "Des objets et outils en métal.",
+    "Des produits agricoles d'Amérique du Sud.",
+    "Des fourrures de castor déjà préparées."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "par conséquent"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Sélection du bon choix de réponse"
+   ],
+   "explication": "Les Autochtones recherchaient les objets métalliques comme les chaudrons et les couteaux en raison de leur grande durabilité et de leur utilité pratique dans la vie quotidienne.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Données historiques sur les premiers objets de traite"
+    }
+   ],
+   "limiteSource": "",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "999d4db037ebd690",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "court",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Environnement"
+   ],
+   "connaissancesPfeq": [
+    "Premiers voyages de Jacques Cartier"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "En vous basant sur la source textuelle, nommez le lieu où Jacques Cartier érige une croix en juillet 1534 pour revendiquer la possession du territoire au nom du roi de France.",
+   "documents": [
+    {
+     "titre": "Le premier voyage de Cartier (1534)",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec",
+     "texte": "Le 24 juillet 1534, lors de son premier voyage d'exploration dans le golfe du Saint-Laurent, Jacques Cartier plante une croix de trente pieds de hauteur à Gaspé, y arborant l'écu de France pour prendre possession de la terre au nom de François Ier."
+    }
+   ],
+   "reponseAttendue": "Jacques Cartier érige une croix de bois à Gaspé le 24 juillet 1534 afin de prendre possession formellement du territoire au nom du roi de France, François Ier.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "afin de",
+    "pour"
+   ],
+   "explication": "La prise de possession du territoire s'est faite à Gaspé en 1534 par l'érection d'une croix symbolisant l'autorité royale française.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Repères chronologiques sur les voyages de Jacques Cartier"
+    }
+   ],
+   "limiteSource": "",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "60c22f9ec4f9ddb9",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "qcm",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Alliance"
+   ],
+   "connaissancesPfeq": [
+    "Structures matrilinéaire et patrilinéaire"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quelle caractéristique sociale s'applique aux sociétés iroquoiennes en ce qui concerne la filiation et la transmission de l'autorité au sein des clans?",
+   "documents": [
+    {
+     "titre": "La société matrilinéaire iroquoienne",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "Dans les nations iroquoiennes, la filiation s'établit par la ligne maternelle. La mère de famille ou mère de clan transmet l'appartenance au clan et possède un rôle prépondérant dans la désignation des chefs politiques du village."
+    }
+   ],
+   "choix": [
+    "Une structure patrilinéaire où le chef est toujours remplacé par son fils aîné.",
+    "Une structure féodale gérée par des seigneurs européens.",
+    "Une structure matrilinéaire où la parenté et l'héritage se transmettent par la mère.",
+    "Une structure égalitaire sans aucune division des rôles de clan."
+   ],
+   "indexReponseCorrecte": 2,
+   "marqueursRelationAttendus": [
+    "étant donné que",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Sélection du bon choix de réponse"
+   ],
+   "explication": "Les sociétés iroquoiennes se caractérisent par une structure matrilinéaire où l'identité clanique et les biens de la famille longue se transmettent de mère en fille.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Information sur les structures matrilinéaires iroquoiennes"
+    }
+   ],
+   "limiteSource": "",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "a899593c2c82910f",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "qcm",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Environnement"
+   ],
+   "connaissancesPfeq": [
+    "Modes de vie"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel élément caractérise le mode de vie nomade des nations de la famille linguistique algonquienne avant l'arrivée des Européens ?",
+   "documents": [
+    {
+     "titre": "Description des peuples nomades",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec, https://www.mcq.org/",
+     "texte": "Les nations de famille linguistique algonquienne déplacent leurs campements au rythme des saisons pour pratiquer la chasse, la pêche et la cueillette sur de vastes territoires."
+    }
+   ],
+   "choix": [
+    "L'agriculture intensive du maïs, de la courge et du haricot",
+    "Le déplacement saisonnier du campement pour la chasse et la cueillette",
+    "La construction de villages fortifiés permanents entravés de palissades",
+    "La fabrication de poteries lourdes destinées à l'emmagasinage des récoltes"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent"
+   ],
+   "explication": "Les nations algonquiennes suivaient un mode de vie nomade caractérisé par des déplacements fréquents selon les saisons et les ressources disponibles.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Information sur le mode de vie des Algonquiens"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "e0446abd16fe7e0a",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "qcm",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Alliance"
+   ],
+   "connaissancesPfeq": [
+    "Alliance franco-amérindienne de 1603"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "En 1603, quelle entente formelle conclue à Tadoussac officialise le partenariat commercial et militaire entre les Français et plusieurs nations autochtones ?",
+   "documents": [
+    {
+     "titre": "L'accord de Tadoussac",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle, https://bilan.usherbrooke.ca/",
+     "texte": "En 1603, François Gravé Du Pont et Samuel de Champlain rencontrent le chef innu Anadabijou à Tadoussac pour sceller un accord de commerce et d'alliance militaire."
+    }
+   ],
+   "choix": [
+    "La Grande Paix de Montréal",
+    "L'Alliance franco-amérindienne de 1603",
+    "Le Traité d'Utrecht",
+    "La Proclamation royale"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "en vue de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent"
+   ],
+   "explication": "L'Alliance franco-amérindienne de 1603, scellée à Tadoussac, permet aux Français de s'installer sur le territoire en échange d'un soutien militaire aux Innus, Algonquins et Malécites.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Renseignements sur l'Alliance de Tadoussac de 1603"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "3d0d6236dbf86b87",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Échange"
+   ],
+   "connaissancesPfeq": [
+    "Explorations européennes en Amérique"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Replacez les événements suivants liés à l'exploration et aux tentatives d'établissement français en Amérique du Nord dans l'ordre chronologique, du plus ancien au plus récent.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Premier voyage de Jacques Cartier dans le golfe du Saint-Laurent",
+     "annee": 1534
+    },
+    {
+     "label": "Tentative de colonie de peuplement au Cap-Rouge par Roberval et Cartier",
+     "annee": 1541
+    },
+    {
+     "label": "Fondation de l'établissement temporaire de l'Île Sainte-Croix en Acadie",
+     "annee": 1604
+    },
+    {
+     "label": "Fondation de Port-Royal par Pierre Dugua de Mons et Samuel de Champlain",
+     "annee": 1605
+    }
+   ],
+   "marqueursRelationAttendus": [
+    "d'abord",
+    "ensuite",
+    "puis",
+    "enfin"
+   ],
+   "criteresCorrection": [
+    "Ordre chronologique exact des quatre événements historiques"
+   ],
+   "explication": "Le premier voyage de Cartier a lieu en 1534, suivi de la tentative au Cap-Rouge en 1541, puis des projets en Acadie à l'Île Sainte-Croix en 1604 et Port-Royal en 1605.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Chronologie des voyages d'exploration français"
+    }
+   ],
+   "formatReponse": "court",
+   "reponseAttendue": "Ordre chronologique : Premier voyage de Jacques Cartier dans le golfe du Saint-Laurent (1534) → Tentative de colonie de peuplement au Cap-Rouge par Roberval et Cartier (1541) → Fondation de l'établissement temporaire de l'Île Sainte-Croix en Acadie (1604) → Fondation de Port-Royal par Pierre Dugua de Mons et Samuel de Champlain (1605)."
+  }
+ },
+ {
+  "id": "f10844e1ff3fd6d1",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "court",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Échange"
+   ],
+   "connaissancesPfeq": [
+    "Pêcheries européennes et chasse à la baleine"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Identifiez le type d'objets européens particulièrement recherchés par les Autochtones lors des premiers contacts informels avec les pêcheurs au 16e siècle, et expliquez l'avantage recherché.",
+   "documents": [
+    {
+     "titre": "Premiers trocs sur les côtes de Terre-Neuve et du golfe",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques, https://www.bac-lac.gc.ca/",
+     "texte": "Les marins européens échangeaient des couteaux, des chaudrons de métal et des haches de fer contre de belles pelisses de castor apportées par les Autochtones venus à leur rencontre."
+    }
+   ],
+   "reponseAttendue": "Les Autochtones recherchaient des objets et outils en métal comme des chaudrons ou des couteaux, car ces matériaux étaient plus durables et efficaces que la pierre, le bois ou l'os pour leurs activités quotidiennes.",
+   "marqueursRelationAttendus": [
+    "car",
+    "parce que",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "L'acquisition d'outils métalliques transformait le travail du bois, la préparation de la nourriture et la chasse grâce à la résistance du métal par rapport aux matériaux traditionnels.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Description des biens échangés lors des premiers trocs"
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "6891288ba1452fbe",
+  "parcours": "reponses",
+  "periodeId": 1,
+  "format": "court",
+  "question": {
+   "periodeId": 1,
+   "periode": "Période 1 — Des origines à 1608 : L’expérience des Autochtones et le projet de colonie",
+   "conceptsPfeq": [
+    "Environnement"
+   ],
+   "connaissancesPfeq": [
+    "Structures matrilinéaire et patrilinéaire"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez le rôle des femmes aînées (mères de clan) dans la structure matrilinéaire des nations iroquoiennes avant 1608.",
+   "documents": [
+    {
+     "titre": "La société iroquoienne",
+     "typeDoc": "Source secondaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec, https://www.quebec.ca/",
+     "texte": "Chez les Iroquoiens, l'organisation sociale repose sur la matrilinéarité. La filiation s'établit par la mère et les femmes aînées des clans possèdent l'autorité pour désigner les chefs civils."
+    }
+   ],
+   "reponseAttendue": "Dans la structure matrilinéaire iroquoienne, les femmes aînées transmettent la filiation et le nom du clan aux enfants, tout en possédant le pouvoir de choisir ou de destituer les chefs civils.",
+   "marqueursRelationAttendus": [
+    "ainsi",
+    "par conséquent",
+    "c'est pourquoi"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Au sein des sociétés matrilinéaires iroquoiennes, l'autorité familiale et le pouvoir politique de nomination des chefs civils reposaient entre les mains des mères de clan.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Information sur la matrilinéarité iroquoienne"
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "59a9b9426c4c1ffa",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "qcm",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2 — 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Mercantilisme"
+   ],
+   "connaissancesPfeq": [
+    "Privilèges et obligations des compagnies"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel privilège principal le roi de France accorde-t-il aux compagnies à charte en Nouvelle-France au début du 17e siècle ?",
+   "documents": [
+    {
+     "titre": "Édit de création de la Compagnie des Cent-Associés",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques, https://www.bac-lac.gc.ca/",
+     "texte": "Le Roi accorde à la dite compagnie le privilège exclusif de tout le commerce des fourrures et autres marchandises dans toute l'étendue de la Nouvelle-France."
+    }
+   ],
+   "choix": [
+    "Le monopole du commerce des fourrures",
+    "Le droit exclusif d'imposer des taxes sur les produits agricoles",
+    "Le monopole de la vente de poisson en Europe",
+    "La possession exclusive des terres des Treize Colonies"
+   ],
+   "indexReponseCorrecte": 0,
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en échange de"
+   ],
+   "criteresCorrection": [
+    "Identification du monopole du commerce des fourrures"
+   ],
+   "explication": "Dans le cadre du système mercantiliste, le roi accordait le monopole du commerce des fourrures aux compagnies à charte en échange de leur engagement à peupler la colonie.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Source primaire sur le privilège commercial des compagnies."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "fd3de072a314ad50",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "qcm",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2 — 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Évangélisation"
+   ],
+   "connaissancesPfeq": [
+    "Communautés religieuses"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel est le rôle principal des communautés religieuses féminines, comme les Ursulines et les Augustines, en Nouvelle-France ?",
+   "documents": [
+    {
+     "titre": "Récit sur la fondation des institutions coloniales",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec, https://www.mcq.org/",
+     "texte": "Dès les premières décennies de la colonie, des congrégations religieuses s'installent en Nouvelle-France pour ouvrir des hôpitaux et assurer l'instruction des jeunes filles."
+    }
+   ],
+   "choix": [
+    "Assurer l'entraînement militaire des habitants",
+    "Offrir des soins de santé, des services sociaux et l'éducation",
+    "Gérer la perception des impôts royaux",
+    "Mener des expéditions de traite des fourrures"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de"
+   ],
+   "criteresCorrection": [
+    "Identification des services sociaux et de santé de l'Église"
+   ],
+   "explication": "Les communautés religieuses féminines prenaient en charge l'éducation des filles ainsi que l'administration des hôpitaux pour soigner les malades.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Information sur le rôle des communautés religieuses en Nouvelle-France."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "338e2be6c0f910c2",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "qcm",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2 — 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Mercantilisme"
+   ],
+   "connaissancesPfeq": [
+    "Intendant"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Sous le Gouvernement royal établi en 1663, de quelles responsabilités majeures l'intendant a-t-il la charge ?",
+   "documents": [
+    {
+     "titre": "Instructions au sieur Jean Talon",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec, https://www.quebec.ca/",
+     "texte": "L'intendant s'appliquera particulièrement à la justice, à la police et au soin des finances dans le pays de la Nouvelle-France."
+    }
+   ],
+   "choix": [
+    "La direction des affaires militaires et la diplomatie",
+    "La justice, la police, les finances et le développement économique",
+    "Le contrôle exclusif des affaires religieuses et des paroisses",
+    "Le commandement de la flotte navale française"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "afin de"
+   ],
+   "criteresCorrection": [
+    "Identification des champs de responsabilité de l'intendant"
+   ],
+   "explication": "Dans le gouvernement royal, l'intendant administrait la justice, la police, les finances, le peuplement et le développement économique de la colonie.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Mandat de l'intendant dans la structure du gouvernement royal."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "aa6d365b2e49923d",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "court",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2 — 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Adaptation"
+   ],
+   "connaissancesPfeq": [
+    "Acclimatation"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Présentez une manière dont les colons français se sont adaptés aux rigueurs de l'hiver en Nouvelle-France.",
+   "documents": [
+    {
+     "titre": "La vie quotidienne en Nouvelle-France",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle, https://bilan.usherbrooke.ca/",
+     "texte": "Confrontés à des hivers très froids, les colons d'origine française adoptent progressivement des vêtements chauds en peau de bête et modifient la structure de leurs habitations en y intégrant des foyers plus performants."
+    }
+   ],
+   "reponseAttendue": "Les colons français ont adapté leur mode de vie en modifiant leur habillement avec des vêtements de fourrure et en ajustant la construction de leurs maisons avec de meilleurs foyers pour faire face aux froids hivers de la vallée du Saint-Laurent.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "pour",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "L'acclimatation des colons français au territoire nord-américain s'est traduite par des modifications vestimentaires et architecturales pour faire face aux rigueurs du climat hivernal.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Adaptation matérielle et acclimatation des colons en Nouvelle-France."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "bb47c7a36b249697",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "court",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2 — 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Mercantilisme"
+   ],
+   "connaissancesPfeq": [
+    "Commerce triangulaire"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez l'objectif de l'instauration du commerce triangulaire par l'intendant Jean Talon en Nouvelle-France.",
+   "documents": [
+    {
+     "titre": "Essais de diversification économique sous le Gouvernement royal",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques, https://www.bac-lac.gc.ca/",
+     "texte": "L'intendant Talon tente de diversifier l'économie en organisant des échanges commerciaux entre la Nouvelle-France, les Antilles et la France. La colonie du Saint-Laurent y expédie du bois, du poisson et du blé."
+    }
+   ],
+   "reponseAttendue": "L'objectif de l'intendant Jean Talon était d'intégrer la Nouvelle-France dans un réseau commercial avec les Antilles et la France afin d'exporter du bois, des matières agricoles et du poisson et d'ainsi diversifier l'économie coloniale.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Le commerce triangulaire visait à faire circuler les ressources entre les colonies et la métropole tout en permettant à la Nouvelle-France de diversifier son économie au-delà du simple commerce des fourrures.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Explication sur les objectifs du commerce triangulaire."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "7b39f2de35f47f27",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "qcm",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2: 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Mercantilisme"
+   ],
+   "connaissancesPfeq": [
+    "Mercantilisme"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel est l'objectif principal de la politique économique du mercantilisme appliquée par la France en Nouvelle-France au XVIIe siècle ?",
+   "documents": [
+    {
+     "titre": "Le rôle des colonies selon la métropole",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "Dans le système mercantiliste, la colonie est soumise aux intérêts économiques de la métropole. Elle doit lui fournir des matières premières brutes, comme les fourrures, et lui acheter ses produits manufacturés."
+    }
+   ],
+   "choix": [
+    "Enrichir la métropole en fournissant des matières premières et en achetant ses produits.",
+    "Développer une industrie locale forte et autonome au sein de la colonie.",
+    "Accorder la liberté de commerce internationale aux habitants de la Nouvelle-France.",
+    "Distribuer gratuitement les terres agricoles aux négociants d'Europe."
+   ],
+   "indexReponseCorrecte": 0,
+   "marqueursRelationAttendus": [
+    "car",
+    "afin de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Réponse directement liée à la question"
+   ],
+   "explication": "Le mercantilisme vise à enrichir la métropole française en exploitant les ressources naturelles des colonies, comme les fourrures, tout en interdisant à la colonie de concurrencer les manufactures métropolitaines.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Extrait adapté sur la doctrine mercantiliste en Nouvelle-France."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "cbad2dae3220d78d",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "qcm",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2: 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Adaptation"
+   ],
+   "connaissancesPfeq": [
+    "Conseil souverain"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "En 1663, Louis XIV établit le gouvernement royal en Nouvelle-France. Quelle est la fonction principale du Conseil souverain au sein de cette nouvelle structure administrative ?",
+   "documents": [
+    {
+     "titre": "L'administration coloniale sous le gouvernement royal",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "Le Conseil souverain regroupe le gouverneur général, l'intendant, l'évêque et des conseillers. Il sert de plus haute cour de justice de la colonie tout en enregistrant les édits et ordonnances du roi."
+    }
+   ],
+   "choix": [
+    "Commander les troupes militaires coloniales lors des offensive en territoire ennemi.",
+    "Servir de cour d'appel de haute justice et enregistrer les lois royales.",
+    "Fixer le prix de vente des fourrures directement auprès des marchands anglais.",
+    "Organiser le recrutement des Filles du Roy dans les paroisses de France."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "car",
+    "en effet"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Réponse directement liée à la question"
+   ],
+   "explication": "Le Conseil souverain est le tribunal suprême en Nouvelle-France et veille à l'application des décisions administratives et juridiques du roi.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Information contextuelle sur la création du Conseil souverain en 1663."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "9a3bb85e84fb2759",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2: 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Adaptation"
+   ],
+   "connaissancesPfeq": [
+    "Grande Paix de Montréal"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Replacez ces événements marquant l'histoire de la Nouvelle-France dans l'ordre chronologique, du plus ancien au plus récent.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Fondation de Québec par Samuel de Champlain",
+     "annee": 1608
+    },
+    {
+     "label": "Instauration du gouvernement royal par Louis XIV",
+     "annee": 1663
+    },
+    {
+     "label": "Signature de la Grande Paix de Montréal",
+     "annee": 1701
+    },
+    {
+     "label": "Bataille des Plaines d'Abraham",
+     "annee": 1759
+    }
+   ],
+   "criteresCorrection": [
+    "Ordre chronologique exact du plus ancien au plus récent"
+   ],
+   "explication": "La fondation de Québec a lieu en 1608, le gouvernement royal est mis en place en 1663, la Grande Paix de Montréal est signée en 1701 et la bataille des Plaines d'Abraham se déroule en 1759.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Repères chronologiques majeurs du régime français."
+    }
+   ],
+   "formatReponse": "court",
+   "reponseAttendue": "Ordre chronologique : Fondation de Québec par Samuel de Champlain (1608) → Instauration du gouvernement royal par Louis XIV (1663) → Signature de la Grande Paix de Montréal (1701) → Bataille des Plaines d'Abraham (1759)."
+  }
+ },
+ {
+  "id": "79f8daa4af3a89d7",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "court",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2: 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Adaptation"
+   ],
+   "connaissancesPfeq": [
+    "Filles du Roy"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Identifiez le groupe d'immigrantes envoyées en Nouvelle-France sous l'intendance de Jean Talon entre 1663 et 1673, et précisez l'objectif principal de leur venue.",
+   "documents": [
+    {
+     "titre": "Les mesures de peuplement de Jean Talon",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "À son arrivée, l'intendant Jean Talon constate un déséquilibre important entre le nombre d'hommes et de femmes dans la colonie. Pour encourager les mariages et la natalité, la couronne française prend en charge le voyage et la dot de jeunes orphelines."
+    }
+   ],
+   "reponseAttendue": "Il s'agit des Filles du Roy. Elles ont été envoyées en Nouvelle-France afin d'épouser des colons et de favoriser l'accroissement naturel de la population coloniale.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "pour",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Les Filles du Roy étaient des orphelines parrainées par le roi Louis XIV afin de rétablir le ratio hommes-femmes et d'accélérer le peuplement de la colonie.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Extrait traitant du programme des Filles du Roy sous Jean Talon."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "92ef1050c0f2a636",
+  "parcours": "reponses",
+  "periodeId": 2,
+  "format": "court",
+  "question": {
+   "periodeId": 2,
+   "periode": "Période 2: 1608-1760 : L’évolution de la société coloniale sous l’autorité de la métropole française",
+   "conceptsPfeq": [
+    "Évangélisation"
+   ],
+   "connaissancesPfeq": [
+    "Communautés religieuses"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Mentionnez deux rôles sociaux essentiels assumés par les communautés religieuses féminines en Nouvelle-France au XVIIe siècle.",
+   "documents": [
+    {
+     "titre": "L'œuvre des communautés religieuses",
+     "typeDoc": "Source secondaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec",
+     "texte": "Dès le début de la colonisation, des religieuses comme les Ursulines et les Augustines fondent des établissements en Nouvelle-France. Elles prennent en charge le soin des malades dans les hôpitaux ainsi que l'instruction des jeunes filles françaises et autochtones."
+    }
+   ],
+   "reponseAttendue": "Les communautés religieuses féminines assuraient l'éducation des jeunes filles et fournissaient les soins de santé dans les hôpitaux de la colonie.",
+   "marqueursRelationAttendus": [
+    "notamment",
+    "ainsi que",
+    "comme"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "En plus de participer à l'évangélisation, les congrégations religieuses féminines ont jeté les bases du système de santé (Hôtel-Dieu) et d'enseignement (écoles pour filles) en Nouvelle-France.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Information historique sur l'action sociale et éducative des congrégations religieuses."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "832301bf5d4fdba9",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "qcm",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Constitution"
+   ],
+   "connaissancesPfeq": [
+    "Traité de Paris (1763)"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel traité met officiellement fin à la guerre de Sept Ans en 1763 et confirme la cession définitive de la Nouvelle-France à la Grande-Bretagne?",
+   "documents": [
+    {
+     "titre": "Extrait relatif au Traité de Paris",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "Le 10 février 1763, la France et la Grande-Bretagne signent le traité de paix. Le roi de France cède à la Couronne britannique le Canada avec toutes ses dépendances."
+    }
+   ],
+   "choix": [
+    "Le traité de Versailles",
+    "Le traité de Paris",
+    "Le traité d'Utrecht",
+    "Le traité de Gand"
+   ],
+   "indexReponseCorrecte": 1,
+   "explication": "Le traité de Paris signé en 1763 met fin à la guerre de Sept Ans et cède le territoire canadien à la Grande-Bretagne.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Confirmation des données historiques sur le traité de Paris de 1763."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "d9c352d49ee95c2c",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "qcm",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et me changement d’empire",
+   "conceptsPfeq": [
+    "Assimilation"
+   ],
+   "connaissancesPfeq": [
+    "Serment du Test"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Dans le cadre de la Proclamation royale de 1763, quelle obligation religieuse et politique empêche la majorité des Canadiens catholiques d'accéder aux charges publiques du gouvernement civil?",
+   "documents": [
+    {
+     "titre": "Instructions et serments sous la Proclamation royale",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "Tous les individus nommés à des postes d'autorité dans la Province de Québec doivent prêter le serment du Test, exigeant le reniement de l'autorité du Pape et de la transsubstantiation."
+    }
+   ],
+   "choix": [
+    "La prestation de la Dîme",
+    "Le serment du Test",
+    "L'Acte d'Union",
+    "Le serment d'allégeance à la France"
+   ],
+   "indexReponseCorrecte": 1,
+   "explication": "Le serment du Test exige d'abjurer la foi catholique, ce qui exclut les Canadiens catholiques des fonctions administratives sous la Proclamation royale.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Référence sur l'application du serment du Test."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "097cf82976bd9dcf",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "court",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Allégeance"
+   ],
+   "connaissancesPfeq": [
+    "Concessions accordées aux Canadiens"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "À l'aide du document, identifiez une concession juridique et religieuse accordée aux Canadiens par la Couronne britannique dans l'Acte de Québec en 1774.",
+   "documents": [
+    {
+     "titre": "Extrait de l'Acte de Québec (1774)",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "Il est décrété que les sujets de Sa Majesté professant la religion romaine dans la province de Québec peuvent jouir du libre exercice de cette religion... et que dans toutes les affaires relatives à la propriété et aux droits civils, on aura recours aux lois du Canada."
+    }
+   ],
+   "reponseAttendue": "L'Acte de Québec rétablit le droit civil français pour régir les propriétés et reconnaît officiellement le libre exercice de la religion catholique pour les Canadiens.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "car",
+    "ainsi",
+    "par conséquent"
+   ],
+   "explication": "L'Acte de Québec vise à s'assurer de la loyauté des Canadiens en rétablissant les lois civiles françaises et le libre exercice du catholicisme.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Source textuelle de l'Acte de Québec de 1774."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "efd3fc2ddb765657",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "qcm",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Allégeance"
+   ],
+   "connaissancesPfeq": [
+    "Lettres aux Canadiens"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quelle fut la réaction générale de la majorité des habitants canadiens face à l'invasion des troupes américaines en 1775-1776?",
+   "documents": [
+    {
+     "titre": "Note historique sur l'invasion américaine de 1775",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "Malgré les appels lancés par le Congrès américain dans la Lettre aux habitants de la province de Québec, la majorité de la population canadienne adopte une position de neutralité et refuse d'embrasser la cause des insurgents."
+    }
+   ],
+   "choix": [
+    "Une adhésion massive à la cause de la révolution américaine",
+    "Une neutralité générale refusant de s'engager activement dans le conflit",
+    "Une émigration massive vers le territoire de la France",
+    "Un engagement unanime et armé aux côtés des troupes britanniques"
+   ],
+   "indexReponseCorrecte": 1,
+   "explication": "La majorité des habitants Canadiens choisit la neutralité en 1775, ne souhaitant pas s'impliquer dans le conflit armé entre la Grande-Bretagne et ses Treize Colonies.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Information sur l'attitude des Canadiens durant la guerre d'Indépendance américaine."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "8b327c190fef9914",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "court",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Constitution"
+   ],
+   "connaissancesPfeq": [
+    "Immigration britannique"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "À l'aide du document, nommez le groupe de colons venus des Treize Colonies qui s'installe dans la Province de Québec à la suite du traité de Paris de 1783 et précisez leur principale revendication politique.",
+   "documents": [
+    {
+     "titre": "Arrivée des nouveaux colons anglophones",
+     "typeDoc": "Source secondaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec",
+     "texte": "À partir de 1783, des milliers de Loyalistes fidèles à la Couronne britannique quittent les États-Unis pour s'installer dans la Province de Québec. Ils demandent rapidement des institutions politiques anglaises et l'abolition du régime seigneurial."
+    }
+   ],
+   "reponseAttendue": "Les Loyalistes s'installent dans la Province de Québec après 1783 et réclament la création d'une chambre d'assemblée élue ainsi que l'application des lois civiles britanniques.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "en effet",
+    "de ce fait",
+    "ainsi"
+   ],
+   "explication": "L'arrivée des Loyalistes modifie la composition sociodémographique de la colonie et accentue la pression pour réformer la constitution coloniale.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Renseignements sur la migration des Loyalistes et leurs revendications politiques."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "ee49f807f32efd20",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "qcm",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Constitution"
+   ],
+   "connaissancesPfeq": [
+    "Concessions accordées aux Canadiens"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "À la suite de l'adoption de l'Acte de Québec en 1774, quelle concession majeure est accordée aux Canadiens catholiques par le Parlement britannique ?",
+   "documents": [
+    {
+     "titre": "Extrait de l'Acte de Québec (1774)",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "Il est décreté que tous les sujets de Sa Majesté professant la religion de l'Église de Rome dans la Province de Québec peuvent jouir du libre exercice de leur religion [...] et qu'un serment de fidélité sera substitué au serment du Test."
+    }
+   ],
+   "choix": [
+    "L'instauration immédiate d'une chambre d'assemblée élue par la population.",
+    "Le remplacement du serment du Test par un serment de fidélité autorisant l'accès aux fonctions publiques.",
+    "L'obligation d'adopter le droit civil anglais pour tous les litiges privés.",
+    "L'interdiction des communautés religieuses féminines dans l'enseignement et les soins."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Identification exacte de la concession accordée dans l'Acte de Québec",
+    "Sélection de la bonne option"
+   ],
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Consultation du texte officiel de l'Acte de Québec de 1774."
+    }
+   ],
+   "explication": "L'Acte de Québec de 1774 remplace le serment du Test par un serment d'allégeance au roi de Grande-Bretagne, ce qui permet aux Canadiens catholiques d'occuper des charges publiques et administratives sans devoir renier leur foi.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "b6a7265926752634",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "qcm",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Assimilation"
+   ],
+   "connaissancesPfeq": [
+    "Serment du Test"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Sous la Proclamation royale de 1763, quel était l'objectif visé par l'obligation de prêter le serment du Test pour occuper une charge publique ?",
+   "documents": [
+    {
+     "titre": "Analyse du gouvernement civil de 1763",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "La Proclamation royale vise à instaurer des institutions de tradition britannique. En imposant le serment du Test, qui exige le reniement de l'autorité du Pape, les autorités cherchent à écarter les Canadiens des affaires coloniales pour favoriser leur assimilation."
+    }
+   ],
+   "choix": [
+    "Garantir la liberté totale de culte aux communautés autochtones de la vallée du Saint-Laurent.",
+    "Exclure les Canadiens catholiques des fonctions publiques afin de favoriser leur assimilation à la culture britannique.",
+    "Inciter l'émigration des Canadiens vers les Treize Colonies britanniques au sud.",
+    "Permettre l'élection immédiate de députés canadiens à la Chambre de Grande-Bretagne."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de"
+   ],
+   "criteresCorrection": [
+    "Compréhension du rôle politique du serment du Test dans le contexte de la Proclamation royale",
+    "Sélection de l'option exacte"
+   ],
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Explication du rôle du serment du Test sous le régime de la Proclamation royale."
+    }
+   ],
+   "explication": "Le serment du Test imposait de renier le dogme catholique et l'autorité du Pape. Comme la vaste majorité des Canadiens étaient catholiques, cette obligation les écartait de l'administration et visait leur assimilation.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "edaf870fbd30dd8d",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Constitution"
+   ],
+   "connaissancesPfeq": [
+    "Traité de Paris (1763)"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Replacez les quatre événements politiques et juridiques suivants dans l'ordre chronologique, du plus ancien au plus récent.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Capitulation de Montréal",
+     "annee": 1760
+    },
+    {
+     "label": "Signature du Traité de Paris cédant la Nouvelle-France à la Grande-Bretagne",
+     "annee": 1763
+    },
+    {
+     "label": "Promulgation de l'Acte de Québec",
+     "annee": 1774
+    },
+    {
+     "label": "Traité de Paris reconnaissant l'indépendance des États-Unis et modifiant les frontières de la Province de Québec",
+     "annee": 1783
+    }
+   ],
+   "reponseAttendue": "L'ordre chronologique exact est : Capitulation de Montréal (1760), Signature du Traité de Paris cédant la Nouvelle-France (1763), Promulgation de l'Acte de Québec (1774), Traité de Paris modifiant les frontières (1783).",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "ensuite",
+    "puis",
+    "enfin"
+   ],
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Vérification de la chronologie des traités et constitutions (1760-1783)."
+    }
+   ],
+   "explication": "La Capitulation de Montréal a lieu en 1760, suivie du Traité de Paris en 1763 qui confirme la cession. L'Acte de Québec est adopté en 1774, puis le second Traité de Paris fixe les nouvelles frontières coloniales en 1783.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "957f34ab8658138c",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "court",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Allégeance"
+   ],
+   "connaissancesPfeq": [
+    "Revendications des Premières Nations"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez le chef autochtone qui a mené une soulèvement armé contre les Britanniques en 1763 et expliquez la raison principale de la réaction des Premières Nations à la suite de la Conquête.",
+   "documents": [
+    {
+     "titre": "La résistance des Premières Nations en 1763",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "Au lendemain du changement d'empire, l'attitude du commandant Jeffrey Amherst suscite une vive détresse chez les peuples autochtones. L'arrêt des présents diplomatiques et la crainte d'une usurpation de leurs terres ancestrales par les colons britanniques provoquent une prise d'armes collective sous la conduite du chef Pontiac."
+    }
+   ],
+   "reponseAttendue": "Le chef Pontiac mène ce soulèvement armé en 1763 parce que les Premières Nations craignent la perte de leurs terres territoriales et le refus des autorités britanniques de maintenir les échanges diplomatiques et les présents traditionnels.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de",
+    "afin de"
+   ],
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Informations historiques sur la révolte de Pontiac et les revendications autochtones de 1763."
+    }
+   ],
+   "explication": "Le chef Pontiac rassemble plusieurs nations autochtones en 1763 pour contester la domination britannique, qui menaçait la souveraineté territoriale des Autochtones et rompait les aliances diplomatiques établies autrefois avec les Français.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "b155755276f8be76",
+  "parcours": "reponses",
+  "periodeId": 3,
+  "format": "court",
+  "question": {
+   "periodeId": 3,
+   "periode": "Période 3 — 1760-1791 : La Conquête et le changement d’empire",
+   "conceptsPfeq": [
+    "Assimilation"
+   ],
+   "connaissancesPfeq": [
+    "Immigration britannique"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez une conséquence majeure de l'arrivée des Loyalistes britanniques dans la Province de Québec sur les revendications politiques formulées auprès de la Couronne britannique à la fin du 18e siècle.",
+   "documents": [
+    {
+     "titre": "Notice historique sur l'arrivée des Loyalistes",
+     "typeDoc": "Source secondaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec",
+     "texte": "À la suite de la Déclaration d'indépendance des États-Unis, des milliers de Loyalistes s'installent dans la Province de Québec. Habitués aux institutions britanniques, ils réclament vivement la création d'une chambre d'assemblée élue et l'application stricte des lois civiles anglaises dans la colonie."
+    }
+   ],
+   "reponseAttendue": "L'arrivée des Loyalistes entraîne une augmentation de la population anglophone et protestante, ce qui accentue les revendications pour l'obtention d'une chambre d'assemblée élue et la modification des structures politiques de la colonie.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "entraîne",
+    "ce qui",
+    "par conséquent"
+   ],
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Documentation sur la migration des Loyalistes et leurs pétitions politiques."
+    }
+   ],
+   "explication": "L'installation des Loyalistes modifie la composition sociodémographique de la Province de Québec et pousse les autorités britanniques à revoir l'organisation politique coloniale en raison des pressions exercées pour obtenir des lois civiles anglaises et un parlement élu.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "a7e4e777cc4fb3a8",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "qcm",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Bourgeoisie"
+   ],
+   "connaissancesPfeq": [
+    "Tarifs préférentiels"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quelle mesure économique adoptée par la Grande-Bretagne au début du 19e siècle a stimulé les exportations de bois du Bas-Canada en lui accordant un avantage douanier sur le marché britannique ?",
+   "documents": [
+    {
+     "titre": "L'essor du commerce du bois",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "Pour contourner le blocus continental imposé par Napoléon Ier en 1806, la Grande-Bretagne applique des tarifs préférentiels favorisant l'importation du bois en provenance de ses colonies d'Amérique du Nord au détriment des pays baltes."
+    }
+   ],
+   "choix": [
+    "L'instauration du libre-échange",
+    "L'application de tarifs préférentiels",
+    "L'abolition des Corn Laws",
+    "La création d'un marché commun avec les États-Unis"
+   ],
+   "indexReponseCorrecte": 1,
+   "explication": "Les tarifs préférentiels accordés par le gouvernement britannique réduisent les taxes à l'importation sur le bois colonial, ce qui incite le Royaume-Uni à s'approvisionner massivement au Bas-Canada pendant le blocus continental.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "a28cf5fba697d702",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "court",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Parlementarisme"
+   ],
+   "connaissancesPfeq": [
+    "Chambre d'assemblée et Conseil législatif"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Identifiez le principal problème institutionnel dénoncé par les députés du Parti canadien dans le fonctionnement du gouvernement colonial sous l'Acte constitutionnel de 1791.",
+   "documents": [
+    {
+     "titre": "Extrait des Débats sur les pouvoirs politiques",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Documents constitutionnels",
+     "texte": "Le Conseil législatif et le Conseil exécutif, nommés à vie par le gouverneur, bloquent systématiquement les projets de loi adoptés par les députés élus par la population à la Chambre d'assemblée."
+    }
+   ],
+   "reponseAttendue": "Les députés dénoncent le fait que le gouverneur et les membres non élus des conseils (législatif et exécutif) possèdent le pouvoir absolu de bloquer et de rejeter les lois votées par les représentants élus à la Chambre d'assemblée.",
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de",
+    "bloquer"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Sous l'Acte constitutionnel de 1791, la Chambre d'assemblée est élue, mais le gouverneur et le Conseil législatif non élu détiennent un droit de veto, ce qui empêche les députés de faire appliquer la volonté populaire.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "7de410fc226dea0a",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "qcm",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Nationalisme"
+   ],
+   "connaissancesPfeq": [
+    "Épidémies et quarantaine"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel établissement sanitaire est créé en 1832 par les autorités coloniales pour faire face aux épidémies de choléra introduites par l'immigration britannique ?",
+   "documents": [
+    {
+     "titre": "Mesures de quarantaine sur le Saint-Laurent",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources historiques",
+     "texte": "Afin d'intercepter les navires d'immigrants en provenance des îles Britanniques et de limiter la propagation du choléra à Québec et à Montréal, une station de quarantaine est ouverte le long du fleuve Saint-Laurent."
+    }
+   ],
+   "choix": [
+    "La station de quarantaine de Grosse-Île",
+    "Le canal de Lachine",
+    "L'Hôtel-Dieu de Montréal",
+    "Le fort Chambly"
+   ],
+   "indexReponseCorrecte": 0,
+   "explication": "La station de quarantaine de Grosse-Île est établie en 1832 sur le fleuve Saint-Laurent pour isoler et soigner les immigrants malades avant leur entrée dans la colonie.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "e62a7fdd4088877d",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "court",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Nationalisme"
+   ],
+   "connaissancesPfeq": [
+    "Les 92 résolutions"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez le document officiel adopté en 1834 par le Parti patriote qui regroupe les revendications politiques de la Chambre d'assemblée adressées au gouvernement de Londres.",
+   "documents": [
+    {
+     "titre": "Les revendications des Patriotes",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Chronologie historique",
+     "texte": "En 1834, sous la direction de Louis-Joseph Papineau, la Chambre d'assemblée du Bas-Canada vote un texte majeur exigeant le Conseil législatif électif et le contrôle du budget colonial par la Chambre d'assemblée."
+    }
+   ],
+   "reponseAttendue": "Le document officiel rédigé par le Parti patriote en 1834 regroupe l'ensemble des revendications politiques sous le nom des 92 résolutions.",
+   "marqueursRelationAttendus": [
+    "intitulé",
+    "nommé",
+    "appelé"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Les 92 résolutions constituent le document synthèse dans lequel le Parti patriote exige notamment la responsabilité ministérielle et un Conseil législatif électif.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "f0c6a57d6662b059",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "qcm",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Parlementarisme"
+   ],
+   "connaissancesPfeq": [
+    "Union des deux Canada"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quelle mesure politique majeure préconisée dans le rapport de Lord Durham vise à placer les Canadiens français en position de minorité politique au sein d'une seule Chambre d'assemblée ?",
+   "documents": [
+    {
+     "titre": "Recommandations de Lord Durham (1839)",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Rapport Durham",
+     "texte": "Lord Durham soutient qu'il faut réunir les deux provinces sous un seul gouvernement afin d'assimiler les Canadiens français et d'assurer une majorité anglophone au Parlement."
+    }
+   ],
+   "choix": [
+    "Le maintien complet de l'Acte constitutionnel",
+    "L'union du Haut-Canada et du Bas-Canada",
+    "L'indépendance immédiate du Bas-Canada",
+    "L'annexion du territoire du Bas-Canada aux États-Unis"
+   ],
+   "indexReponseCorrecte": 1,
+   "explication": "Lord Durham recommande l'union du Haut-Canada et du Bas-Canada afin d'assimiler la population canadienne-française et de rendre le groupe anglophone minoritaire au gouvernement.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "80e59aab9f7c75a4",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "qcm",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Bourgeoisie"
+   ],
+   "connaissancesPfeq": [
+    "Blocus continental"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel événement européen survenu en 1806 a poussé le Royaume-Uni à s'approvisionner en bois dans sa colonie du Bas-Canada ?",
+   "documents": [
+    {
+     "titre": "L'impact du blocus napoléonien",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "En 1806, Napoléon Bonaparte décrète le blocus continental pour couper la Grande-Bretagne de ses approvisionnements en bois de la mer Baltique. Le gouvernement britannique adopte alors des tarifs préférentiels pour favoriser l'importation du bois canadien."
+    }
+   ],
+   "choix": [
+    "Le blocus continental imposé par Napoléon Ier",
+    "La guerre de Sept Ans",
+    "L'adoption du libre-échange en Europe",
+    "La révolte des Patriotes"
+   ],
+   "indexReponseCorrecte": 0,
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Identification correcte du blocus continental"
+   ],
+   "explication": "Le blocus continental imposé en 1806 a coupé la Grande-Bretagne de son approvisionnement habituel en Europe nordique, l'obligeant à se tourner vers le Bas-Canada pour le bois d'œuvre.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "98d46e1b539fbe94",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "qcm",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Parlementarisme"
+   ],
+   "connaissancesPfeq": [
+    "Chambre d'assemblée et Conseil législatif"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "En vertu de l'Acte constitutionnel de 1791, quel organe politique non élu détient le pouvoir de bloquer les projets de loi votés par la Chambre d'assemblée du Bas-Canada ?",
+   "documents": [
+    {
+     "titre": "La structure politique sous l'Acte constitutionnel",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "L'Acte constitutionnel de 1791 crée une Chambre d'assemblée élue par la population. Cependant, le Conseil législatif, dont les membres sont nommés par le gouverneur, possède un droit de veto absolu sur les projets de loi adoptés par les députés."
+    }
+   ],
+   "choix": [
+    "Les juges de la Cour suprême",
+    "Le Conseil législatif",
+    "Le conseil municipal de Montréal",
+    "Le Conseil des gouverneurs des colonies"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "car",
+    "en effet"
+   ],
+   "criteresCorrection": [
+    "Identification du Conseil législatif comme organe détenant le droit de veto"
+   ],
+   "explication": "Le Conseil législatif, nommé par le gouverneur colonial, pouvait refuser de sanctionner les projets de loi votés par la Chambre d'assemblée élue.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "609bc966a464d608",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Nationalisme"
+   ],
+   "connaissancesPfeq": [
+    "Les 92 résolutions"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Replacez les événements suivants liés aux tensions politiques et aux soulèvements de 1837-1838 dans l'ordre chronologique, du plus ancien au plus récent.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Adoption des 92 résolutions par la Chambre d'assemblée du Bas-Canada",
+     "annee": 1834
+    },
+    {
+     "label": "Dépôt des 10 résolutions de Russell rejettant les demandes des Patriotes",
+     "annee": 1837
+    },
+    {
+     "label": "Tenue de la grande Assemblée des Six Comtés à Saint-Charles",
+     "annee": 1837
+    },
+    {
+     "label": "Déclaration d'indépendance du Bas-Canada rédigée par Robert Nelson",
+     "annee": 1838
+    }
+   ],
+   "marqueursRelationAttendus": [
+    "d'abord",
+    "ensuite",
+    "puis",
+    "finalement"
+   ],
+   "criteresCorrection": [
+    "Exactitude du classement chronologique"
+   ],
+   "explication": "Les 92 résolutions ont été adoptées en 1834. Le gouvernement britannique y répond en mars 1837 avec les résolutions Russell, entraînant l'Assemblée des Six Comtés à l'automne 1837 puis la Déclaration d'indépendance du Bas-Canada en 1838.",
+   "formatReponse": "court",
+   "reponseAttendue": "Ordre chronologique : Adoption des 92 résolutions par la Chambre d'assemblée du Bas-Canada (1834) → Dépôt des 10 résolutions de Russell rejettant les demandes des Patriotes (1837) → Tenue de la grande Assemblée des Six Comtés à Saint-Charles (1837) → Déclaration d'indépendance du Bas-Canada rédigée par Robert Nelson (1838)."
+  }
+ },
+ {
+  "id": "5cc440ef9e6f63df",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "court",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Bourgeoisie"
+   ],
+   "connaissancesPfeq": [
+    "Épidémies et quarantaine"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez la raison pour laquelle les autorités coloniales ont aménagé la station de quarantaine de Grosse-Île en 1832 lors des vagues d'immigration britannique.",
+   "documents": [
+    {
+     "titre": "L'établissement de la station sanitaire de Grosse-Île",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "En 1832, pour contrer la propagation des épidémies mortelles comme le choléra transmises à bord des navires d'immigrants en provenance des Îles Britanniques, le gouvernement du Bas-Canada établit une station sanitaire et de quarantaine à Grosse-Île, en aval de la ville de Québec."
+    }
+   ],
+   "reponseAttendue": "Les autorités coloniales ont aménagé la station sanitaire de Grosse-Île en 1832 afin d'isoler les immigrants britanniques atteints de maladies contagieuses comme le choléra et ainsi éviter la propagation de l'épidémie dans la population du Bas-Canada.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "pour",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Grosse-Île permettait d'inspecter les immigrants et d'isoler les malades à leur arrivée par le fleuve Saint-Laurent pour empêcher la propagation du choléra.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "5a53fbf582e427ce",
+  "parcours": "reponses",
+  "periodeId": 4,
+  "format": "court",
+  "question": {
+   "periodeId": 4,
+   "periode": "Période 4 — 1791-1840 : Les revendications et les luttes nationales",
+   "conceptsPfeq": [
+    "Nationalisme"
+   ],
+   "connaissancesPfeq": [
+    "Assimilation des Canadiens"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Présentez l'objectif visé par Lord Durham dans son rapport rédigé en 1839 concernant la population francophone du Bas-Canada.",
+   "documents": [
+    {
+     "titre": "Recommandation de Lord Durham (1839)",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec",
+     "texte": "On ne peut guère douter que le premier objectif du gouvernement britannique doive être d'établir une population anglaise dans cette province, avec la langue et les coutumes anglaises, et de confier le gouvernement de la colonie à une population éminemment britannique."
+    }
+   ],
+   "reponseAttendue": "Dans son rapport de 1839, Lord Durham recommande de réunir le Haut-Canada et le Bas-Canada dans le but d'assimiler les Canadiens français en les rendant minoritaires face à une majorité anglophone britannique.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de",
+    "car"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Lord Durham a préconisé l'union des deux colonies afin de favoriser l'assimilation linguistique et culturelle des Canadiens français.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "681b519eaae47586",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "qcm",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Fédéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Alliance des Réformistes"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel était l'objectif principal de l'alliance politique conclue entre Louis-Hippolyte LaFontaine et Robert Baldwin au début des années 1840 ?",
+   "documents": [
+    {
+     "titre": "Adresse aux électeurs du comté de Terrebonne",
+     "typeDoc": "Source primaire",
+     "reference": "Louis-Hippolyte LaFontaine, Adresse aux électeurs de Terrebonne, 1840. (Bibliothèque et Archives Canada)",
+     "texte": "L'union des deux Canadas est une mesure d'injustice envers le Bas-Canada. Mais les réformateurs des deux provinces doivent s'unir pour obtenir la gestion complète de nos affaires provinciales par un gouvernement responsable devant le peuple."
+    }
+   ],
+   "choix": [
+    "Obtenir l'indépendance immédiate de la Province du Canada vis-à-vis de la Grande-Bretagne.",
+    "Instaurer le gouvernement responsable et protéger la culture canadienne-française.",
+    "Annuler l'Acte d'Union pour séparer à nouveau le Haut-Canada et le Bas-Canada.",
+    "Signer un traité d'alliance militaire avec les États-Unis."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "pour"
+   ],
+   "criteresCorrection": [
+    "Identification exacte de l'objectif politique de l'Alliance des Réformistes."
+   ],
+   "explication": "L'alliance entre LaFontaine et Baldwin visait à unir les réformistes du Haut et du Bas-Canada pour obtenir l'octroi du gouvernement responsable par la Couronne britannique.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "7e8db661fa77db3c",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "court",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Industrialisation"
+   ],
+   "connaissancesPfeq": [
+    "Adoption du libre-échange par le Royaume-Uni"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Quelle est la conséquence économique directe de l'abandon des tarifs préférentiels et de l'adoption du libre-échange par le Royaume-Uni en 1846 pour la Province du Canada ?",
+   "documents": [
+    {
+     "titre": "Changement de politique commerciale britannique",
+     "typeDoc": "Source secondaire",
+     "reference": "Adapté de Bilan du siècle, Université de Sherbrooke, 2023.",
+     "texte": "En 1846, le Royaume-Uni abolit les Corn Laws et met fin au système de tarifs préférentiels qui avantagait le bois et le blé de ses colonies. La Province du Canada perd ainsi son accès privilégié au marché britannique et doit réorienter son commerce."
+    }
+   ],
+   "reponseAttendue": "L'adoption du libre-échange par le Royaume-Uni entraîne la perte des avantages commerciaux de la colonie, ce qui pousse la Province du Canada à chercher un nouveau partenaire économique et à signer le Traité de réciprocité avec les États-Unis en 1854.",
+   "marqueursRelationAttendus": [
+    "entraîner",
+    "ce qui pousse à",
+    "par conséquent"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "La fin du protectionnisme britannique force la Province du Canada à diversifier ses échanges, menant à l'accord de libre-échange avec les États-Unis.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "e2cfdab8aacabb0a",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "qcm",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Fédéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Champs de compétence"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Selon l'Acte de l'Amérique du Nord britannique (AANB) de 1867, quel champ de compétence est attribué exclusivement aux gouvernements provinciaux ?",
+   "documents": [
+    {
+     "titre": "Extrait de l'Acte de l'Amérique du Nord britannique (1867)",
+     "typeDoc": "Source primaire",
+     "reference": "Acte de l'Amérique du Nord britannique, 1867, article 92. (Gouvernement du Québec)",
+     "texte": "Dans chaque province, la législature pourra exclusivement faire des lois relatives aux matières suivantes : [...] L'éducation, les institutions municipales, les hôpitaux et les affaires locales ou privées dans la province."
+    }
+   ],
+   "choix": [
+    "La défense nationale et l'armée",
+    "La monnaie et les banques",
+    "L'éducation et les affaires locales",
+    "Les postes et le droit criminel"
+   ],
+   "indexReponseCorrecte": 2,
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "alors que"
+   ],
+   "criteresCorrection": [
+    "Identification correcte d'un champ de compétence provincial selon l'AANB."
+   ],
+   "explication": "L'article 92 de l'AANB confie l'éducation, la santé et les institutions municipales à la gestion exclusive des provinces.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "6efe2a0d5675d4df",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "court",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Migration"
+   ],
+   "connaissancesPfeq": [
+    "Émigration vers les États-Unis"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez la cause économique principale de l'émigration massive des Canadiens français vers les États-Unis dans la seconde moitié du 19e siècle.",
+   "documents": [
+    {
+     "titre": "L'exode vers la Nouvelle-Angleterre",
+     "typeDoc": "Source secondaire",
+     "reference": "Adapté de Musée de la civilisation, Ressources sur l'histoire du Québec.",
+     "texte": "Dans la seconde moitié du 19e siècle, le manque de terres agricoles disponibles dans la vallée du Saint-Laurent et la rareté d'emplois industriels au Québec poussent des dizaines de milliers de familles à s'installer dans les villes manufacturières de la Nouvelle-Angleterre."
+    }
+   ],
+   "reponseAttendue": "La surpopulation des campagnes du Bas-Canada provoque une rareté de terres agricoles disponibles, ce qui incite les Canadiens français à quitter la province pour trouver des emplois dans les usines textiles de la Nouvelle-Angleterre.",
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "parce que",
+    "ce qui incite"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "La rareté des terres agricoles et le manque d'emplois industriels locaux expliquent ce mouvement migratoire vers les usines américaines.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "d9e74dfd381b8a71",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "qcm",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Industrialisation"
+   ],
+   "connaissancesPfeq": [
+    "Conditions de vie et de travail des hommes, des femmes et des enfants"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quelle condition de travail caractérise les usines québécoises durant la première phase d'industrialisation à la fin du 19e siècle ?",
+   "documents": [
+    {
+     "titre": "Rapport sur le travail en usine",
+     "typeDoc": "Source primaire",
+     "reference": "Rapport de la Commission royale sur les relations entre le capital et le travail, Ottawa, 1889.",
+     "texte": "Dans les manufactures de Montréal, les journées de travail durent couramment de 10 à 12 heures. Les enfants de moins de 12 ans travaillent régulièrement près des machines sans protection adéquate et reçoivent des salaires dérisoires."
+    }
+   ],
+   "choix": [
+    "Des semaines de travail limitées à 35 heures pour l'ensemble des ouvriers.",
+    "Des journées de travail prolongées et l'absence de normes de sécurité pour les ouvriers et les enfants.",
+    "L'interdiction stricte du travail des enfants dans toutes les industries.",
+    "Des salaires égaux obligatoires pour les hommes et les femmes."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "qui entraîne"
+   ],
+   "criteresCorrection": [
+    "Identification exacte des conditions de travail durant la première phase d'industrialisation."
+   ],
+   "explication": "À cette époque, les ouvriers faisaient face à de longues heures de travail, des environnements dangereux et l'absence de réglementation protectrice pour les femmes et les enfants.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "10b09b126ed05146",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "qcm",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Industrialisation"
+   ],
+   "connaissancesPfeq": [
+    "Secteurs de production"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel secteur de production est au cœur de la première phase d'industrialisation au Québec durant la seconde moitié du XIXe siècle ?",
+   "documents": [
+    {
+     "titre": "Développement industriel à Montréal",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle, https://bilan.usherbrooke.ca/",
+     "texte": "Dès les années 1850, le canal de Lachine devient le cœur industriel du Canada. Les premières fabriques tirent profit de la force motrice de l'eau et de la vapeur. Les secteurs de la transformation du cuir, de la confection de chaussures et du textile embauchent une main-d’œuvre nombreuse et peu qualifiée."
+    }
+   ],
+   "choix": [
+    "L'industrie lourde de l'acier et de l'automobile",
+    "L'industrie du textile, du cuir et de la chaussure",
+    "L'industrie de l'aéronautique et de la pétrochimie",
+    "L'industrie des pâtes et papiers et de l'aluminium"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "caractérisé par",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Identification exacte du secteur de production"
+   ],
+   "explication": "Durant la première phase d'industrialisation (1850-1896), le Québec se concentre sur une industrie légère nécessitant une main-d'œuvre abondante, notamment la fabrication de textiles, de chaussures et la transformation du cuir.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "125ece0a425c7172",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "qcm",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Fédéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Alliance des Réformistes"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel objectif politique principal rassemble Louis-Hippolyte LaFontaine et Robert Baldwin dans les années 1840 ?",
+   "documents": [
+    {
+     "titre": "L'alliance politique des Réformistes",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques, https://www.bac-lac.gc.ca/",
+     "texte": "Après l'union des deux Canadas en 1840, Louis-Hippolyte LaFontaine et Robert Baldwin s'unissent pour former une coalition réformiste. Leur alliance vise à obliger le gouverneur britannique à choisir les membres du conseil exécutif parmi la majorité de la Chambre d'assemblée."
+    }
+   ],
+   "choix": [
+    "L'obtention du gouvernement responsable",
+    "L'annexion des territoires de l'Ouest canadien",
+    "La création des réserves indiennes au Bas-Canada",
+    "La signature du Traité de réciprocité avec les États-Unis"
+   ],
+   "indexReponseCorrecte": 0,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de"
+   ],
+   "criteresCorrection": [
+    "Identification exacte de l'objectif de l'alliance réformiste"
+   ],
+   "explication": "L'alliance des Réformistes menée par LaFontaine et Baldwin visait à obtenir le gouvernement responsable, accordé finalement en 1848 par la Grande-Bretagne.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "82280c4ab71fd202",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Fédéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Structure politique"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Replacez les évènements politiques et économiques suivants dans l'ordre chronologique, du plus ancien au plus récent.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Adoption de l'Acte d'Union",
+     "annee": 1840
+    },
+    {
+     "label": "Obtention du gouvernement responsable",
+     "annee": 1848
+    },
+    {
+     "label": "Adoption de l'Acte de l'Amérique du Nord britannique",
+     "annee": 1867
+    },
+    {
+     "label": "Mise en place de la Politique nationale",
+     "annee": 1879
+    }
+   ],
+   "marqueursRelationAttendus": [
+    "d'abord",
+    "ensuite",
+    "puis",
+    "enfin"
+   ],
+   "criteresCorrection": [
+    "Exactitude du classement temporel"
+   ],
+   "explication": "L'Acte d'Union survient en 1840, suivi de l'obtention du gouvernement responsable en 1848, de la création du Dominion du Canada en 1867 et de l'adoption de la Politique nationale en 1879.",
+   "formatReponse": "court",
+   "reponseAttendue": "Ordre chronologique : Adoption de l'Acte d'Union (1840) → Obtention du gouvernement responsable (1848) → Adoption de l'Acte de l'Amérique du Nord britannique (1867) → Mise en place de la Politique nationale (1879)."
+  }
+ },
+ {
+  "id": "91c5c5125493406a",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "court",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Migration"
+   ],
+   "connaissancesPfeq": [
+    "Émigration vers les États-Unis"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez la cause économique principale qui pousse de nombreux Canadiens français à émigrer vers les États-Unis dans la seconde moitié du XIXe siècle.",
+   "documents": [
+    {
+     "titre": "L'émigration vers les centres industriels américains",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec, https://www.mcq.org/",
+     "texte": "Au cours de la seconde moitié du XIXe siècle, la surpopulation des terres agricoles dans la vallée du Saint-Laurent et le manque d'emplois industriels suffisants en milieu rural poussent des dizaines de milliers de familles canadiennes-françaises à quitter le Québec pour travailler dans les usines textiles de la Nouvelle-Angleterre."
+    }
+   ],
+   "reponseAttendue": "De nombreux Canadiens français émigrent vers les États-Unis durant la seconde moitié du XIXe siècle principalement en raison de la surpopulation des terres agricoles dans la vallée du Saint-Laurent et de la recherche d'emplois dans les manufactures textiles de la Nouvelle-Angleterre.",
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "parce que",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Le manque de terres exploitables dans le rang traditionnel et la proximité des manufactures américaines offrent des perspectives d'emploi immédiates, provoquant une forte émigration.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "7bbfdc0aabc871c8",
+  "parcours": "reponses",
+  "periodeId": 5,
+  "format": "court",
+  "question": {
+   "periodeId": 5,
+   "periode": "Période 5 — 1840-1896 : La formation du régime fédéral canadien",
+   "conceptsPfeq": [
+    "Fédéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Champs de compétence"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez un champ de compétence attribué au gouvernement fédéral et un champ de compétence accordé aux provinces lors du partage des pouvoirs en 1867.",
+   "documents": [
+    {
+     "titre": "La répartition des pouvoirs en 1867",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec, https://www.quebec.ca/",
+     "texte": "L'Acte de l'Amérique du Nord britannique détermine le partage des compétences. L'article 91 confie au Parlement canadien les sujets d'intérêt général comme la défense, la monnaie et le droit criminel. L'article 92 attribue aux législatures provinciales les affaires locales, incluant l'éducation, la santé et les droits civils."
+    }
+   ],
+   "reponseAttendue": "Selon l'Acte de l'Amérique du Nord britannique de 1867, le gouvernement fédéral reçoit la responsabilité de la défense ou de la monnaie, tandis que les provinces obtiennent la gestion de l'éducation ou de la santé.",
+   "marqueursRelationAttendus": [
+    "alors que",
+    "tandis que",
+    "d'une part",
+    "d'autre part"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "La Constitution de 1867 sépare les pouvoirs : le fédéral s'occupe des questions de défense, de monnaie et de commerce central, alors que les provinces gèrent les institutions sociales comme l'éducation et la santé.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "67c8c85075d5b6d0",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "qcm",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Impérialisme"
+   ],
+   "connaissancesPfeq": [
+    "Statut de Westminster"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel événement juridique survenu en 1931 confirme l'autonomie quasi complète du Canada en interdisant au Parlement britannique de légiférer pour le Dominion sans son consentement ?",
+   "documents": [
+    {
+     "titre": "L'évolution de l'autonomie politique du Canada",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "En 1931, une loi britannique modifie profondément les relations politiques au sein de l'Empire. Elle accorde au Canada et aux autres dominions une indépendance législative presque totale vis-à-vis du Parlement de Londres."
+    }
+   ],
+   "choix": [
+    "La création de la Société des Nations",
+    "La signature du Statut de Westminster",
+    "L'adoption du Traité de Versailles",
+    "La création du Tribunal suprême du Canada"
+   ],
+   "indexReponseCorrecte": 1,
+   "explication": "Le Statut de Westminster, adopté par le Parlement britannique en 1931, confirme l'autonomie législative du Canada et met fin à la suprématie du Parlement britannique sur les lois canadiennes.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Information sur le Statut de Westminster"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "9f31dd7080e2edc6",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "qcm",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Urbanisation"
+   ],
+   "connaissancesPfeq": [
+    "Investissements étrangers"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Pendant la deuxième phase d'industrialisation (1900-1930), quel pays devient la principale source de capitaux étrangers investis dans les ressources naturelles du Québec ?",
+   "documents": [
+    {
+     "titre": "L'origine des capitaux industriels",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "Au début du 20e siècle, les investissements américains dépassent progressivement ceux du Royaume-Uni dans les secteurs clés de l'économie québécoise, notamment dans l'hydroélectricité, l'industrie minière et les pâtes et papiers."
+    }
+   ],
+   "choix": [
+    "La France",
+    "Le Royaume-Uni",
+    "Les États-Unis",
+    "L'Allemagne"
+   ],
+   "indexReponseCorrecte": 2,
+   "explication": "Durant la deuxième phase d'industrialisation, les capitalistes des États-Unis remplacent les Britanniques comme principaux investisseurs étrangers au Québec, attirés par les ressources naturelles et le potentiel hydroélectrique.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Information sur la provenance des investissements américains"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "e8b28f51b120c63b",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "qcm",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Libéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Droit de vote et d'éligibilité"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "En quelle année les femmes du Québec ont-elles obtenu le droit de vote aux élections provinciales sous le gouvernement libéral d'Adélard Godbout ?",
+   "documents": [
+    {
+     "titre": "L'obtention du droit de vote des femmes au Québec",
+     "typeDoc": "Source secondaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec",
+     "texte": "Après une longue lutte menée par des suffragettes telles que Thérèse Casgrain, le gouvernement du Québec adopte la loi accordant le droit de vote et d'éligibilité aux femmes au niveau provincial."
+    }
+   ],
+   "choix": [
+    "1918",
+    "1929",
+    "1940",
+    "1945"
+   ],
+   "indexReponseCorrecte": 2,
+   "explication": "Le Québec est la dernière province canadienne à accorder le droit de vote aux femmes aux élections provinciales, la loi ayant été adoptée en 1940.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Date de l'octroi du droit de vote aux femmes au Québec"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "7fed56c195d26bbe",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "court",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Impérialisme"
+   ],
+   "connaissancesPfeq": [
+    "Crise de la conscription"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez la cause principale des tensions politiques entre les Canadiens français et les Canadiens anglais lors de la crise de la conscription de 1917.",
+   "documents": [
+    {
+     "titre": "Débats sur le service militaire obligatoire",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "En 1917, le gouvernement fédéral de Robert Borden adopte la Loi du service militaire. Cette mesure impose l'enrôlement obligatoire pour soutenir l'effort de guerre britannique, suscitant une forte opposition dans la population francophone du Québec."
+    }
+   ],
+   "reponseAttendue": "La crise de la conscription de 1917 est causée par la décision du gouvernement fédéral d'imposer le service militaire obligatoire pour soutenir le Royaume-Uni dans la Première Guerre mondiale, mesure à laquelle les Canadiens français s'opposent fermement car ils refusent d'être forcés de se battre pour l'Empire britannique.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de",
+    "car",
+    "ainsi"
+   ],
+   "explication": "Les Canadiens français s'opposaient à l'enrôlement obligatoire imposé par Ottawa en 1917, estimant que le Canada ne devait pas être contraint de servir les intérêts impériaux britanniques dans un conflit européen.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Document d'archives sur la conscription de 1917"
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "859b028d76710ef5",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "court",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Libéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Krach boursier de 1929"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez une mesure directe mise en place par les gouvernements ou les municipalités au Québec pour soulager la misère des chômeurs pendant la Grande Dépression des années 1930.",
+   "documents": [
+    {
+     "titre": "L'aide aux chômeurs pendant la crise",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "Face à l'effondrement économique provoqué par le krach boursier de 1929, les autorités créent le système des secours directs sous forme de coupons échangeables contre de la nourriture et du chauffage, et financent des travaux publics pour réinsérer les sans-emploi."
+    }
+   ],
+   "reponseAttendue": "Durant la Grande Dépression des années 1930, les gouvernements ont mis en place le système des secours directs afin de fournir des coupons d'alimentation, de vêtements et de logement aux chômeurs.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "afin de",
+    "pour",
+    "ainsi",
+    "notamment"
+   ],
+   "explication": "Le secours direct est l'une des mesures emblématiques déployées au cours des années 1930 pour répondre au chômage de masse causé par la crise économique.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Informations sur les secours directs durant la Grande Dépression"
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "c26cac462bc91d92",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "qcm",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Impérialisme"
+   ],
+   "connaissancesPfeq": [
+    "Statut de Westminster"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel changement majeur concernant l'autonomie politique du Canada est apporté par l'adoption du Statut de Westminster par le Parlement britannique en 1931 ?",
+   "documents": [
+    {
+     "titre": "Le Statut de Westminster",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques, https://www.bac-lac.gc.ca/",
+     "texte": "En 1931, la loi britannique appelée Statut de Westminster confirme l'autonomie quasi complète du Canada en matière de politique étrangère et empêche le Parlement britannique de légiférer pour le Canada sans son consentement."
+    }
+   ],
+   "choix": [
+    "Le Canada devient totalement indépendant en ce qui a trait à sa politique étrangère et ses lois fédérales.",
+    "Le Canada est réintégré directement sous le contrôle législatif du Parlement de Londres.",
+    "Le Canada perd la gestion de ses ressources naturelles au profit du Royaume-Uni.",
+    "Le Canada abolit la monarchie britannique sur son territoire."
+   ],
+   "indexReponseCorrecte": 0,
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "ce qui entraîne"
+   ],
+   "criteresCorrection": [
+    "Identification exacte du fait historique lié à l'autonomie du Canada"
+   ],
+   "explication": "Le Statut de Westminster de 1931 confirme l'autonomie quasi totale du Canada sur les plans législatif et extérieur vis-à-vis du Royaume-Uni.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Référence pour le Statut de Westminster et l'autonomie politique du Canada."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "14b7f5fd1842a132",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "qcm",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Urbanisation"
+   ],
+   "connaissancesPfeq": [
+    "Ressources naturelles"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Pendant la deuxième phase d'industrialisation au Québec au début du 20e siècle, quelle ressource naturelle connaît un fort développement grâce aux investissements majeurs capitaux américains ?",
+   "documents": [
+    {
+     "titre": "L'essor de l'hydroélectricité",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle, https://bilan.usherbrooke.ca/",
+     "texte": "Au début du 20e siècle, le potentiel hydraulique du Québec attire de puissants capitaux américains. L'énergie hydroélectrique devient le moteur principal des usines de pâtes et papiers ainsi que de l'électrométallurgie."
+    }
+   ],
+   "choix": [
+    "Le charbon de roche",
+    "L'énergie hydroélectrique",
+    "Le pétrole brut",
+    "Le gaz naturel"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "car",
+    "grâce à"
+   ],
+   "criteresCorrection": [
+    "Identification exacte de la ressource naturelle clé développée durant la deuxième phase d'industrialisation"
+   ],
+   "explication": "L'hydroélectricité est la ressource centrale développée au Québec lors de la deuxième phase d'industrialisation, attirant d'importants investissements américains.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Information sur l'exploitation des ressources naturelles et l'hydroélectricité au Québec."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "8c8a55f23ffe430f",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Impérialisme"
+   ],
+   "connaissancesPfeq": [
+    "Société des Nations"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Replacez les événements suivants marquant l'histoire politique et socioéconomique du Canada entre 1896 et 1945 dans l'ordre chronologique, du plus ancien au plus récent.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Fondation de la Société des Nations après la Première Guerre mondiale",
+     "annee": 1919
+    },
+    {
+     "label": "Effondrement de la Bourse de New York entraînant la Grande Dépression",
+     "annee": 1929
+    },
+    {
+     "label": "Adoption du Statut de Westminster accordant la souveraineté législative au Canada",
+     "annee": 1931
+    },
+    {
+     "label": "Tenue du plébiscite sur la conscription par le gouvernement King",
+     "annee": 1942
+    }
+   ],
+   "reponseAttendue": "Les éléments doivent être classés dans cet ordre chronologique exact : 1. Fondation de la Société des Nations (1919), 2. Effondrement de la Bourse de New York (1929), 3. Adoption du Statut de Westminster (1931), 4. Tenue du plébiscite sur la conscription (1942).",
+   "marqueursRelationAttendus": [
+    "d'abord",
+    "ensuite",
+    "puis",
+    "enfin"
+   ],
+   "criteresCorrection": [
+    "Classement chronologique exact des quatre événements (2 points pour l'ordre exact, crédit partiel de 1 point pour au moins deux éléments correctement positionnés)."
+   ],
+   "explication": "La création de la SDN (1919) précède le krach boursier (1929), le Statut de Westminster (1931) et le plébiscite sur la conscription pendant la Seconde Guerre mondiale (1942).",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Validation des repères chronologiques de la période 1896-1945."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "d0efc9157ffb0d29",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "court",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Libéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Droit de vote et d'éligibilité"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez l'aboutissement de la lutte des féministes québécoises concernant leurs droits politiques provinciaux en 1940 sous le gouvernement d'Adélard Godbout.",
+   "documents": [
+    {
+     "titre": "L'obtention du droit de vote des femmes au Québec",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec, https://www.mcq.org/",
+     "texte": "Après des décennies de revendications menées notamment par Thérèse Casgrain et Idola Saint-Jean, l'Assemblée législative du Québec adopte en 1940 le projet de loi accordant aux femmes le droit de vote et le droit d'éligibilité aux élections provinciales."
+    }
+   ],
+   "reponseAttendue": "En 1940, les femmes du Québec obtiennent le droit de vote et le droit de se présenter aux élections provinciales grâce aux luttes féministes et à la législation adoptée par le gouvernement provincial d'Adélard Godbout.",
+   "marqueursRelationAttendus": [
+    "ainsi",
+    "par conséquent",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Le Québec accorde le droit de vote et d'éligibilité aux femmes aux élections provinciales en 1940, devenant ainsi la dernière province canadienne à le faire.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Information sur les luttes des femmes et l'obtention du droit de vote provincial en 1940."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "4bdddcaa81f97a9e",
+  "parcours": "reponses",
+  "periodeId": 6,
+  "format": "court",
+  "question": {
+   "periodeId": 6,
+   "periode": "Période 6 — 1896-1945 : Les nationalismes et l’autonomie du Canada",
+   "conceptsPfeq": [
+    "Libéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Mesures des gouvernements fédéral et provincial"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez deux mesures concrètes mises en place par les gouvernements pour atténuer la misère de la population pendant la Grande Dépression des années 1930.",
+   "documents": [
+    {
+     "titre": "Les interventions étatiques durant la crise économique",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle, https://bilan.usherbrooke.ca/",
+     "texte": "Face au chômage massif durant les années 1930, les gouvernements distribuent des secours directs (bons d'alimentation et de logement) et organisent des travaux publics en milieu urbain. Le gouvernement québécois stimule également les programmes de colonisation dirigée vers des régions comme l'Abitibi."
+    }
+   ],
+   "reponseAttendue": "Durant la Grande Dépression des années 1930, les gouvernements instaurent les secours directs sous forme de bons d'alimentation et organisent des chantiers de travaux publics ou des plans de colonisation agricole dirigée.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "pour contrer",
+    "tels que"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Les secours directs, les chantiers de travaux publics et les plans de colonisation dirigée (comme le plan Vautrin) comptent parmi les mesures étatiques majeures durant les années 1930.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Référence sur les mesures gouvernementales face à la Grande Dépression."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "bc78faa6841e8cda",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "qcm",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "État-providence"
+   ],
+   "connaissancesPfeq": [
+    "Création de ministères et de sociétés d'État"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quelle institution financière publique est créée par le gouvernement du Québec en 1965 afin de gérer les fonds de retraite des citoyens et d'investir dans l'économie québécoise?",
+   "documents": [
+    {
+     "titre": "Création d'un levier économique québécois",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle, https://bilan.usherbrooke.ca/",
+     "texte": "Sous le gouvernement de Jean Lesage, l'État québécois se dote d'outils financiers majeurs pour assurer son autonomie économique et financer le développement national à partir du capital public."
+    }
+   ],
+   "choix": [
+    "La Caisse de dépôt et placement du Québec",
+    "Le Conseil du trésor du Québec",
+    "La Banque de Montréal",
+    "Le Ministère des Finances du Canada"
+   ],
+   "indexReponseCorrecte": 0,
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Identification exacte de l'institution financière créée en 1965"
+   ],
+   "explication": "La Caisse de dépôt et placement du Québec (CDPQ) a été créée en 1965 sous le gouvernement Lesage pour gérer les actifs du Régime de rentes du Québec et soutenir le développement économique provincial.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Validation de la création des sociétés d'État durant la Révolution tranquille"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "5ef67d915fd58ea8",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "qcm",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "Féminisme"
+   ],
+   "connaissancesPfeq": [
+    "Gains juridiques"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel changement juridique majeur concernant le statut des femmes mariées est apporté au Québec en 1964 par la Loi 16, portée par Marie-Claire Kirkland-Casgrain?",
+   "documents": [
+    {
+     "titre": "Loi sur la capacité juridique de la femme mariée",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec, https://www.quebec.ca/",
+     "texte": "La loi adoptée en 1964 met fin à l'incapacité juridique de la femme mariée, lui permettant d'exécuter des actes civils, de signer des contrats et d'exercer une profession sans l'autorisation écrite de son mari."
+    }
+   ],
+   "choix": [
+    "L'instauration du droit de vote des femmes aux élections provinciales",
+    "La fin de l'incapacité juridique des femmes mariées au niveau civil",
+    "L'obligation de la parité salariale dans toutes les entreprises",
+    "La légalisation complète du droit à l'avortement sans condition"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "ce qui entraîne",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Identification exacte du gain juridique accordé par la Loi 16 en 1964"
+   ],
+   "explication": "La Loi 16 adoptée en 1964 met fin à l'incapacité juridique des femmes mariées au Québec, leur permettant d'avoir leur propre compte bancaire et de signer des contrats sans le consentement de leur conjoint.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Validation des événements majeurs de l'histoire des droits des femmes au Québec"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "db0bbd0b2aca4429",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "qcm",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "Laïcisation"
+   ],
+   "connaissancesPfeq": [
+    "Déconfessionnalisation"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "À la suite des recommandations du rapport de la commission Parent, quelle institution d'État est créée en 1964 pour encadrer et moderniser le système d'enseignement québécois?",
+   "documents": [
+    {
+     "titre": "Rapport de la Commission royale d'enquête sur l'enseignement",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques, https://www.bac-lac.gc.ca/",
+     "texte": "Pour démocratiser l'accès aux études et unifier le réseau scolaire, la commission Parent recommande de retirer la gestion exclusive de l'éducation à l'Église catholique et de la confier à un ministère d'État."
+    }
+   ],
+   "choix": [
+    "Le Conseil du statut de la femme",
+    "Le Ministère de l'Éducation",
+    "Le Ministère de la Culture",
+    "La Commission des droits de la personne"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "donc",
+    "par conséquent"
+   ],
+   "criteresCorrection": [
+    "Identification exacte de l'institution créée pour la déconfessionnalisation de la gestion scolaire"
+   ],
+   "explication": "En 1964, la création du ministère de l'Éducation (avec Paul Gérin-Lajoie comme premier titulaire) marque la prise en charge de l'instruction publique par l'État provincial, remplaçant la tutelle de l'Église.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Attestation des réformes de l'éducation durant la Révolution tranquille"
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "4ed1b8ceb0b07489",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "court",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "État-providence"
+   ],
+   "connaissancesPfeq": [
+    "Cléricalisme"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Caractérisez la conception du rôle de l'État défendue par Maurice Duplessis durant la période de la Grande Noirceur (1944-1959) concernant le domaine de la santé et de l'éducation.",
+   "documents": [
+    {
+     "titre": "Le rôle de l'État sous le gouvernement de l'Union nationale",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec, https://www.mcq.org/",
+     "texte": "Durant ses mandats, le premier ministre Maurice Duplessis s'oppose à l'intervention directe de l'État dans les affaires sociales, prônant le libéralisme économique et laissant aux communautés religieuses la responsabilité d'administrer les hôpitaux et les écoles."
+    }
+   ],
+   "reponseAttendue": "Maurice Duplessis privilégie un rôle d'État minimaliste en matière sociale, laissant la gestion des institutions de santé et d'éducation aux congrégations religieuses catholiques.",
+   "marqueursRelationAttendus": [
+    "en effet",
+    "parce que",
+    "tandis que"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Le gouvernement de Duplessis s'appuyait sur le cléricalisme et le conservatisme social, confiant les services sociaux et l'éducation à l'Église catholique tout en restreignant l'interventionnisme étatique.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Analyse du rôle de l'État et de l'influence religieuse durant la période duplessiste"
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "4dd81e683e67d91d",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "court",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "État-providence"
+   ],
+   "connaissancesPfeq": [
+    "Protection de la langue française"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Expliquez l'objectif principal de l'adoption de la Charte de la langue française (Loi 101) par le gouvernement du Parti québécois en 1977.",
+   "documents": [
+    {
+     "titre": "Adoption de la Charte de la langue française",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec, https://www.quebec.ca/",
+     "texte": "La loi 101 fait du français la langue officielle du Québec dans la législation, la justice, l'administration publique, le travail, le commerce et l'enseignement."
+    }
+   ],
+   "reponseAttendue": "La Charte de la langue française vise à faire du français la langue officielle et d'usage général au Québec, notamment en imposant son utilisation dans l'affichage commercial, au travail et en rendant l'école française obligatoire pour les enfants d'immigrants.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "La Loi 101, portée par Camille Laurin en 1977, visait à assurer la pérennité du français au Québec en réglementant son usage dans la sphère publique et le réseau scolaire.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Validation du contenu et des objectifs de la Loi 101"
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "3e146715a89ae2de",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "qcm",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "État-providence"
+   ],
+   "connaissancesPfeq": [
+    "Autonomie provinciale"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel objectif principal poursuit le premier ministre Maurice Duplessis lorsqu'il crée l'impôt provincial sur le revenu au Québec en 1954 ?",
+   "documents": [
+    {
+     "titre": "Déclaration sur la fiscalité provinciale",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, Discours de Maurice Duplessis, 1954",
+     "texte": "Le pouvoir de taxer est essentiel à la conservation de nos droits provinciaux. En prélevant notre propre impôt sur le revenu, nous assurons l'autonomie financière du Québec face aux empiétements du gouvernement fédéral."
+    }
+   ],
+   "choix": [
+    "Financer la nationalisation complète des compagnies d'électricité.",
+    "Défendre l'autonomie provinciale en assurant des revenus autonomes au gouvernement du Québec.",
+    "Mettre en place un régime universel d'assurance-maladie financé par l'État.",
+    "Abolir la liberté de religion et nationaliser l'éducation primaire."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "parce que"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent"
+   ],
+   "explication": "Maurice Duplessis crée l'impôt provincial sur le revenu en 1954 afin de préserver l'autonomie provinciale du Québec et d'empêcher la centralisation des pouvoirs fiscaux à Ottawa.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "363ef14ed37fb24c",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "qcm",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "Féminisme"
+   ],
+   "connaissancesPfeq": [
+    "Gains juridiques"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quelle transformation juridique majeure survenue au Québec en 1964 met fin à l'incapacité juridique des femmes mariées ?",
+   "documents": [
+    {
+     "titre": "La fin de l'incapacité juridique de la femme mariée",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "En 1964, l'adoption du projet de loi 16, porté par Marie-Claire Kirkland-Casgrain, permet aux femmes mariées au Québec de signer des contrats, d'exercer une profession et de gérer leurs propres biens sans l'autorisation de leur conjoint."
+    }
+   ],
+   "choix": [
+    "L'obtention du droit de vote des femmes aux élections provinciales.",
+    "L'adoption de la Loi 16 modifiant le Code civil du Québec.",
+    "La légalisation de l'avortement gratuit dans tous les hôpitaux.",
+    "La création de la Commission de l'équité salariale."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "par la suite",
+    "en conséquence"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent"
+   ],
+   "explication": "L'adoption de la Loi 16 en 1964 met fin à l'incapacité juridique des femmes mariées en leur accordant le droit de signer des contrats et d'exercer des professions sans le consentement de leur mari.",
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "521caa0f6c9ca3c5",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "Laïcisation"
+   ],
+   "connaissancesPfeq": [
+    "Déconfessionnalisation"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Placez en ordre chronologique, du plus ancien au plus récent, les événements marquants de l'histoire du Québec entre 1945 et 1980.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Création de l'impôt provincial sur le revenu sous le gouvernement Duplessis",
+     "annee": 1954
+    },
+    {
+     "label": "Création du ministère de l'Éducation à la suite du rapport Parent",
+     "annee": 1964
+    },
+    {
+     "label": "Adoption de la Charte de la langue française (Loi 101)",
+     "annee": 1977
+    },
+    {
+     "label": "Tenu du premier référendum sur la souveraineté-association",
+     "annee": 1980
+    }
+   ],
+   "reponseAttendue": "Création de l'impôt provincial sur le revenu (1954), Création du ministère de l'Éducation (1964), Adoption de la Charte de la langue française (1977), Premier référendum sur la souveraineté-association (1980).",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "d'abord",
+    "ensuite",
+    "puis",
+    "enfin"
+   ],
+   "explication": "L'impôt provincial est créé en 1954, la création du ministère de l'Éducation survient en 1964, la Loi 101 est adoptée en 1977 et le premier référendum a lieu en 1980.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "79cdaa77e0c5804b",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "court",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "État-providence"
+   ],
+   "connaissancesPfeq": [
+    "Fronts communs"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez la principale revendication salariale mise de l'avant par le Front commun des syndicats du secteur public lors du conflit de travail de 1972.",
+   "documents": [
+    {
+     "titre": "Revendications du Front commun de 1972",
+     "typeDoc": "Source primaire",
+     "reference": "Bibliothèque et Archives Canada, Fonds syndicats du Québec",
+     "texte": "Les trois grandes centrales syndicales (CSN, FTQ, CEQ) s'unissent en Front commun pour négocier avec le gouvernement du Québec. Elles exigent un salaire minimum de 100 $ par semaine pour l'ensemble des employés du secteur public et de parapublic."
+    }
+   ],
+   "reponseAttendue": "Le Front commun des syndicats réclamait un salaire minimum de 100 $ par semaine pour tous les employés du secteur public.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de"
+   ],
+   "explication": "Au printemps 1972, le Front commun réunissant la CSN, la FTQ et la CEQ réclame un salaire hebdomadaire minimum de 100 $ afin d'assurer un niveau de vie décent aux travailleurs du secteur public.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "db8d43cf5e97f4a6",
+  "parcours": "reponses",
+  "periodeId": 7,
+  "format": "court",
+  "question": {
+   "periodeId": 7,
+   "periode": "Période 7 — 1945-1980 : La modernisation du Québec et la Révolution tranquille",
+   "conceptsPfeq": [
+    "État-providence"
+   ],
+   "connaissancesPfeq": [
+    "Protection de la langue française"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Précisez l'objectif visé par le gouvernement du Québec lorsqu'il adopte la Charte de la langue française (Loi 101) en 1977.",
+   "documents": [
+    {
+     "titre": "La portée de la Loi 101",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "Adoptée en 1977 sous le gouvernement de René Lévesque, la Loi 101 fait du français la langue officielle de l'État, du travail, de l'enseignement, du commerce et des affaires au Québec, garantissant ainsi la prédominance du français dans la vie publique."
+    }
+   ],
+   "reponseAttendue": "Le gouvernement adopte la Loi 101 en 1977 dans le but de faire du français la langue officielle du Québec et la langue habituelle du travail, de l'enseignement et du commerce.",
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de",
+    "pour"
+   ],
+   "explication": "La Charte de la langue française vise à faire du français la langue usuelle de la société québécoise et à protéger le visage français de la province dans le travail, l'affichage et l'éducation.",
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "e6b54801adb0fe3f",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "qcm",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Souverainisme"
+   ],
+   "connaissancesPfeq": [
+    "Loi constitutionnelle de 1982"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "En 1982, le gouvernement fédéral procède au rapatriement de la Constitution canadienne. Quelle est la particularité de l'adoption de la Loi constitutionnelle de 1982 par rapport au Québec ?",
+   "documents": [
+    {
+     "titre": "Le rapatriement constitutionnel de 1982",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "Dans la nuit du 4 au 5 novembre 1981, le gouvernement fédéral et neuf provinces s'entendent sur un projet de rapatriement de la Constitution sans le consentement du Québec. La Loi constitutionnelle de 1982 est promulguée en avril 1982 sans l'accord du gouvernement québécois."
+    }
+   ],
+   "choix": [
+    "Elle a été ratifiée par référendum par l'ensemble des citoyens québécois.",
+    "Elle a été adoptée sans l'accord ni la signature du gouvernement du Québec.",
+    "Elle a accordé un droit de veto illimité au Québec sur toute modification future.",
+    "Elle a aboli le statut de la langue française dans les institutions fédérales."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "parce que",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Identification exacte du fait historique lié au rapatriement de la Constitution"
+   ],
+   "explication": "La Loi constitutionnelle de 1982 a été promulguée par le Royaume-Uni et acceptée par le gouvernement fédéral et neuf provinces canadiennes, mais le gouvernement du Québec a refusé d'y apposer sa signature.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Validation des événements entourant le rapatriement constitutionnel de 1982."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "d2f81519f9cafea6",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "court",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Société civile"
+   ],
+   "connaissancesPfeq": [
+    "Crise d'Oka"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "À partir du document, identifiez la cause principale qui déclenche la crise d'Oka à l'été 1990.",
+   "documents": [
+    {
+     "titre": "Les événements d'Oka à l'été 1990",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "À l'été 1990, un conflit armé éclate à Oka entre la communauté mohawk de Kanesatake et la municipalité d'Oka. Le projet d'agrandissement d'un terrain de golf et de construction de résidences sur des terres revendiquées comme ancestrales par les Mohawks suscite le blocage des accès et l'intervention des forces de l'ordre."
+    }
+   ],
+   "reponseAttendue": "La crise d'Oka en 1990 est déclenchée par un projet d'agrandissement d'un terrain de golf municipal sur des terres ancestrales revendiquées par la communauté mohawk de Kanesatake.",
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "à cause de",
+    "déclenché par"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Le conflit a été provoqué par la décision de la municipalité d'Oka d'étendre un terrain de golf sur le territoire ancestral de la pinède revendiqué par les Mohawks.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Validation des faits entourant la crise d'Oka en 1990."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "ad6effae728bbd8f",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "qcm",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Néolibéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Accords de libre-échange"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel objectif économique majeur poursuit la signature de l'Accord de libre-échange nord-américain (ALÉNA) en 1994 par le Canada, les États-Unis et le Mexique ?",
+   "documents": [
+    {
+     "titre": "L'ouverture des marchés nord-américains",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections et dossiers historiques",
+     "texte": "Dans les années 1990, la politique commerciale canadienne s'oriente vers la réduction des barrières douanières afin de stimuler les exportations et de favoriser l'intégration économique avec les partenaires nord-américains."
+    }
+   ],
+   "choix": [
+    "Augmenter les tarifs douaniers sur tous les produits importés d'Europe.",
+    "Éliminer progressivement les barrières douanières pour stimuler le commerce entre les trois pays membres.",
+    "Nationaliser les entreprises privées pour protéger les ressources naturelles du Québec.",
+    "Créer une monnaie unique partagée par le Canada et les États-Unis."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de"
+   ],
+   "criteresCorrection": [
+    "Identification de l'objectif économique du libre-échange"
+   ],
+   "explication": "L'ALÉNA visait la suppression des tarifs douaniers et la libre circulation des biens et services entre le Canada, les États-Unis et le Mexique.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Information sur les accords internationaux et l'ALÉNA."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "eb5c221e8b47c094",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "court",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Société civile"
+   ],
+   "connaissancesPfeq": [
+    "Équité salariale"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez l'objectif visé par l'adoption de la Loi sur l'équité salariale au Québec en 1996.",
+   "documents": [
+    {
+     "titre": "L'adoption de la Loi sur l'équité salariale",
+     "typeDoc": "Source secondaire",
+     "reference": "Gouvernement du Québec, Chronologie de l'histoire du Québec",
+     "texte": "En 1996, le gouvernement du Québec adopte la Loi sur l'équité salariale. Cette loi oblige les entreprises à accorder un salaire égal pour des travaux équivalents, éliminant ainsi les écarts de rémunération dus au genre dans des emplois traditionnellement féminins."
+    }
+   ],
+   "reponseAttendue": "La Loi sur l'équité salariale de 1996 vise à éliminer les écarts salariaux fondés sur le sexe en accordant une rémunération égale pour un travail de valeur équivalente.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de",
+    "pour"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Adoptée en 1996, cette loi correctionnelle vise à corriger les discriminations salariales systémiques touchant les emplois à prédominance féminine.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Validation de l'adoption de la Loi sur l'équité salariale en 1996."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "d4994b942e2ce34e",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "qcm",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Souverainisme"
+   ],
+   "connaissancesPfeq": [
+    "Accord du lac Meech"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel était l'objectif principal des négociations entourant l'Accord du lac Meech (1987-1990) ?",
+   "documents": [
+    {
+     "titre": "Les négociations du lac Meech",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "En 1987, les premiers ministres provinciaux et le premier ministre du Canada s'entendent au lac Meech sur un ensemble d'amendements constitutionnels visant à réintégrer le Québec dans le seing constitutionnel canadien après son refus d'adhérer à la Loi constitutionnelle de 1982."
+    }
+   ],
+   "choix": [
+    "Faire approuver l'indépendance immédiate du Québec par l'ensemble des provinces canadiennes.",
+    "Obtenir l'adhésion du Québec à la Loi constitutionnelle de 1982 en reconnaissant notamment son statut de société distincte.",
+    "Signer un accord commercial de libre-échange avec les États-Unis et le Mexique.",
+    "Transférer la gestion exclusive des affaires étrangères au gouvernement fédéral."
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "afin de",
+    "dans le but de"
+   ],
+   "criteresCorrection": [
+    "Identification de l'objectif de l'Accord du lac Meech"
+   ],
+   "explication": "L'Accord du lac Meech visait à répondre aux conditions posées par le Québec pour adhérer à la Constitution canadienne de 1982, notamment la reconnaissance du Québec comme société distincte.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Validation des événements liés à l'Accord du lac Meech."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "71584643c2425597",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "qcm",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Souverainisme"
+   ],
+   "connaissancesPfeq": [
+    "Référendum sur la souveraineté"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel événement politique majeur s'est déroulé au Québec le 30 octobre 1995 pour déterminer le statut politique de la province par rapport au reste du Canada ?",
+   "documents": [
+    {
+     "titre": "Déclaration sur l'avenir du Québec",
+     "typeDoc": "Source primaire",
+     "reference": "Gouvernement du Québec, 1995",
+     "texte": "Le 30 octobre 1995, les électeurs québécois sont invités à se prononcer sur la question : « Acceptez-vous que le Québec devienne souverain, après avoir fait une offre formelle au Canada pour un nouveau partenariat économique et politique... »"
+    }
+   ],
+   "choix": [
+    "Le rapatriement de la Constitution canadienne",
+    "Le référendum sur la souveraineté du Québec",
+    "La signature de l'Accord du lac Meech",
+    "La création de la Commission Bélanger-Campeau"
+   ],
+   "indexReponseCorrecte": 1,
+   "marqueursRelationAttendus": [
+    "en raison de",
+    "ainsi"
+   ],
+   "criteresCorrection": [
+    "Identification exacte du fait historique"
+   ],
+   "explication": "Le 30 octobre 1995 a eu lieu le second référendum sur la souveraineté du Québec, où le « Non » l'a emporté de très peu avec 50,58 % des voix.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Validation de la date et de l'intitulé du référendum de 1995."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "646de8700439cdca",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "qcm",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Néolibéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Accords de libre-échange"
+   ],
+   "format": "qcm",
+   "points": 1,
+   "question": "Quel accord de libre-échange, entré en vigueur en 1994, associe le Canada, les États-Unis et le Mexique afin d'éliminer progressivement les barrières douanières ?",
+   "documents": [
+    {
+     "titre": "La mondialisation des marchés",
+     "typeDoc": "Source secondaire",
+     "reference": "Bibliothèque et Archives Canada, Collections historiques",
+     "texte": "L'Accord de libre-échange nord-américain (ALÉNA) entre en vigueur le 1er janvier 1994. Cet accord élargit le traité bilatéral signé en 1989 entre le Canada et les États-Unis en y intégrant le Mexique pour constituer une vaste zone de libre-échange."
+    }
+   ],
+   "choix": [
+    "L'Accord de libre-échange nord-américain (ALÉNA)",
+    "L'Accord du lac Meech",
+    "Le Traité de libre-échange transpacifique",
+    "L'Accord de Charlottetown"
+   ],
+   "indexReponseCorrecte": 0,
+   "marqueursRelationAttendus": [
+    "par conséquent",
+    "en effet"
+   ],
+   "criteresCorrection": [
+    "Identification exacte du fait commercial historique"
+   ],
+   "explication": "L'ALÉNA est entré en vigueur en 1994 et regroupe le Canada, les États-Unis et le Mexique dans le cadre de la mondialisation économique.",
+   "sources": [
+    {
+     "institution": "Bibliothèque et Archives Canada",
+     "titre": "Collections et dossiers historiques",
+     "url": "https://www.bac-lac.gc.ca/",
+     "usage": "Information sur les traités commerciaux canadiens."
+    }
+   ],
+   "formatReponse": "qcm"
+  }
+ },
+ {
+  "id": "1ea8ca4359c2cc69",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "court",
+  "chrono": true,
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Souverainisme"
+   ],
+   "connaissancesPfeq": [
+    "Rapatriement de la Constitution",
+    "Accord du lac Meech",
+    "Accord de Charlottetown",
+    "Référendum sur la souveraineté"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Placez les événements suivants relatifs au statut politique du Québec et aux débats constitutionnels en ordre chronologique, du plus ancien au plus récent.",
+   "documents": [],
+   "elementsChronologiques": [
+    {
+     "label": "Rapatriement de la Constitution canadienne sans l'accord du Québec",
+     "annee": 1982
+    },
+    {
+     "label": "Échec de l'Accord du lac Meech",
+     "annee": 1990
+    },
+    {
+     "label": "Rejet de l'Accord de Charlottetown par référendum",
+     "annee": 1992
+    },
+    {
+     "label": "Second référendum sur la souveraineté du Québec",
+     "annee": 1995
+    }
+   ],
+   "marqueursRelationAttendus": [
+    "d'abord",
+    "ensuite",
+    "puis",
+    "enfin"
+   ],
+   "criteresCorrection": [
+    "Exactitude de l'ordre chronologique des événements historiques"
+   ],
+   "explication": "Le rapatriement a lieu en 1982, suivi de l'échec de Meech en 1990, du rejet de Charlottetown en 1992 et du second référendum en 1995.",
+   "sources": [
+    {
+     "institution": "Gouvernement du Québec",
+     "titre": "Chronologie de l'histoire du Québec",
+     "url": "https://www.quebec.ca/",
+     "usage": "Chronologie constitutionnelle du Québec contemporain."
+    }
+   ],
+   "formatReponse": "court",
+   "reponseAttendue": "Ordre chronologique : Rapatriement de la Constitution canadienne sans l'accord du Québec (1982) → Échec de l'Accord du lac Meech (1990) → Rejet de l'Accord de Charlottetown par référendum (1992) → Second référendum sur la souveraineté du Québec (1995)."
+  }
+ },
+ {
+  "id": "2064b0a70814e7ae",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "court",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Société civile"
+   ],
+   "connaissancesPfeq": [
+    "Crise d'Oka"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Nommez l'événement survenu durant l'été 1990 au Québec qui met en lumière les tensions territoriales entre les communautés autochtones et les gouvernements, menant à l'intervention de l'Armée canadienne à Oka et Kahnawake.",
+   "documents": [
+    {
+     "titre": "Les tensions territoriales à Oka",
+     "typeDoc": "Source secondaire",
+     "reference": "Musée de la civilisation, Ressources sur l'histoire du Québec",
+     "texte": "Au cours de l'été 1990, un projet d'agrandissement d'un terrain de golf sur des terres revendiquées par la communauté mohawk de Kanesatake provoque un affrontement armé de 78 jours avec la Sûreté du Québec, puis avec l'Armée canadienne."
+    }
+   ],
+   "reponseAttendue": "L'événement survenu durant l'été 1990 est la Crise d'Oka.",
+   "marqueursRelationAttendus": [
+    "qui",
+    "en raison de"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "La Crise d'Oka est un affrontement majeur de l'été 1990 portant sur la reconnaissance des droits territoriaux autochtones.",
+   "sources": [
+    {
+     "institution": "Musée de la civilisation",
+     "titre": "Ressources sur l'histoire du Québec",
+     "url": "https://www.mcq.org/",
+     "usage": "Synthèse sur la Crise d'Oka de 1990."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ },
+ {
+  "id": "3147fa7cd753e502",
+  "parcours": "reponses",
+  "periodeId": 8,
+  "format": "court",
+  "question": {
+   "periodeId": 8,
+   "periode": "Période 8 — De 1980 à nos jours : Les choix de société dans le Québec contemporain",
+   "conceptsPfeq": [
+    "Néolibéralisme"
+   ],
+   "connaissancesPfeq": [
+    "Équité salariale"
+   ],
+   "format": "court",
+   "points": 2,
+   "question": "Quelle loi importante est adoptée par le gouvernement du Québec en 1996 afin de corriger les écarts de rémunération subis par les femmes occupant des emplois traditionnellement féminins ?",
+   "documents": [
+    {
+     "titre": "Avancées du droit du travail au Québec",
+     "typeDoc": "Source secondaire",
+     "reference": "Université de Sherbrooke, Bilan du siècle",
+     "texte": "En 1996, l'Assemblée nationale du Québec adopte la Loi sur l'équité salariale. Cette législation proactive oblige les employeurs à accorder un salaire égal pour des travaux équivalents, cherchant ainsi à réduire les inégalités salariales entre les hommes et les femmes."
+    }
+   ],
+   "reponseAttendue": "La législation adoptée en 1996 par le gouvernement du Québec est la Loi sur l'équité salariale.",
+   "marqueursRelationAttendus": [
+    "afin de",
+    "qui"
+   ],
+   "criteresCorrection": [
+    "Exactitude du fait historique",
+    "Repère historique pertinent",
+    "Réponse directement liée à la question",
+    "Preuve documentaire pertinente lorsque le dossier en fournit une"
+   ],
+   "explication": "Adoptée en 1996, la Loi sur l'équité salariale vise à éliminer l'écart de salaire lié au genre pour des emplois de valeur équivalente.",
+   "sources": [
+    {
+     "institution": "Université de Sherbrooke",
+     "titre": "Bilan du siècle",
+     "url": "https://bilan.usherbrooke.ca/",
+     "usage": "Informations sur l'adoption de la Loi sur l'équité salariale en 1996."
+    }
+   ],
+   "formatReponse": "court"
+  }
+ }
+]

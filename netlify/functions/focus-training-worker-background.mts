@@ -5,7 +5,8 @@
  */
 import { randomUUID } from "node:crypto";
 import { buildEducationalContext } from "../lib/histoire-educational-context";
-import { executerGeminiAvecReparation, type GeminiResult } from "../lib/focusTrainingLogic";
+import { estLotDeDixQuestions, executerGeminiAvecReparation, type GeminiResult } from "../lib/focusTrainingLogic";
+import { enregistrerLot } from "../lib/banque";
 import { claimJob, finishJob, JOB_LEASE_MS, renewLease, updateProgress } from "../lib/jobs";
 import { logger } from "../lib/logger";
 import { lireEnv } from "../lib/focus-service";
@@ -61,6 +62,16 @@ export default async (req: Request): Promise<void> => {
     );
     clearInterval(heartbeat);
     await enfiler(() => finishJob(job.id, workerId, result, progress));
+    // Un lot de 10 questions accepté alimente la réserve (utilisée si une
+    // génération future échoue). Une erreur ici n'affecte pas l'élève.
+    if (result.ok && estLotDeDixQuestions(job.prompt)) {
+      try {
+        const ajoutees = await enregistrerLot(job.prompt, result.text);
+        logger.info({ jobId: job.id, ajoutees }, "Questions versées dans la réserve");
+      } catch (error) {
+        logger.warn({ jobId: job.id, message: error instanceof Error ? error.message : "Erreur inconnue" }, "Réserve non mise à jour");
+      }
+    }
   } catch (error) {
     logger.error({ jobId: job.id, message: error instanceof Error ? error.message : "Erreur inconnue" }, "Échec inattendu du job");
     const failure: GeminiResult = {

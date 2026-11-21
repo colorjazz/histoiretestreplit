@@ -7323,3 +7323,20 @@ html[data-theme="dark"] .focus-hero {
   }
   .focus-status-score { min-width: 110px; }
 }
+
+/* Correction automatique indisponible (Section A) */
+.correction-indisponible {
+  margin: 16px 0;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--warning) 45%, var(--line));
+  border-left: 4px solid var(--warning);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--warning) 8%, var(--bg-surface));
+  color: var(--text-main);
+}
+.correction-indisponible p { margin: 6px 0 0; }
+.correction-indisponible summary { margin-top: 8px; cursor: pointer; font-weight: 700; }
+.correction-indisponible ol,
+.correction-indisponible ul { margin: 6px 0 0 18px; padding: 0; }
+.correction-indisponible ul { list-style: disc; }
+.correction-indisponible ol { list-style: decimal; }

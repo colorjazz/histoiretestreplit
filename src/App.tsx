@@ -800,6 +800,12 @@ function DashboardAdmin({ surDeconnexion, onImpersonate }: { surDeconnexion: () 
             <div>
               <h2 className="text-xl font-bold mb-2 text-espresso flex items-center gap-2"><FileText className="h-6 w-6 text-brand-red"/> Dossier complet de {eleveActif.nom}</h2>
               <p className="text-stone mb-6 font-mono text-sm">Code : {eleveActif.code}</p>
+              {resultatsEleve.some((r: any) => r.sourceQuestion === 'reserve') && (
+                <p className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+                  <strong>{resultatsEleve.filter((r: any) => r.sourceQuestion === 'reserve').length} réponse(s) sur des questions de réserve.</strong>{' '}
+                  La génération automatique avait échoué; l’élève a reçu un lot déjà validé, sans message d’erreur.
+                </p>
+              )}
               
               <div className="space-y-4">
                 {resultatsEleve.map((r, i) => {
@@ -812,6 +818,7 @@ function DashboardAdmin({ surDeconnexion, onImpersonate }: { surDeconnexion: () 
                            <div className="flex items-center gap-2 mb-1">
                               <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${isReussi ? 'bg-brand-pine-soft text-brand-pine' : 'bg-brand-navy-soft text-brand-navy'}`}>{r.section}</span>
                              <span className="text-sm font-bold text-espresso">{r.operation}</span>
+                             {r.sourceQuestion === 'reserve' && <span className="text-xs font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900">Question de réserve</span>}
                            </div>
                            <div className="text-xs text-stone">{dateFormatee}</div>
                          </div>
