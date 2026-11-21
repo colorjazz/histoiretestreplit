@@ -1,0 +1,24 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
+
+# Routes /api pas encore réimplémentées (visuels, push, migration, auth/me) :
+# réponse JSON 404, l'application a déjà un repli pour chacune.
+# Les fonctions déclarées avec `config.path` passent avant ces règles.
+[[redirects]]
+  from = "/api/*"
+  to = "/api-404.json"
+  status = 404
+  force = true
+
+# Application monopage : toutes les routes (/app, /admin, /super-admin…) servent index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
