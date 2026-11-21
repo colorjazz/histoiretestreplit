@@ -1898,29 +1898,90 @@ function construireAnalyseFocus(resultats: any[], niveauScolaire: 3 | 4 | null, 
   return { groupes, priorites, forces, tentatives, progression, operations, formats, periodeScope, ciblesPrioritaires };
 }
 
+// Ordre d'affichage : ce qui demande du travail d'abord.
+const ORDRE_PRIORITE_STATUTS = ["travail", "partiel", "non-evalue", "reussi"];
+
 function FocusStatusBoard({ title, description, items }: { title: string; description: string; items: Array<{ label: string; score: number | null; total?: number; statut: typeof FOCUS_STATUTS[number]; criteresTotal?: number; criteresEvalues?: number }> }) {
+  const titreId = `focus-status-${title.replace(/\W+/g, "-").toLowerCase()}`;
+  const [filtre, setFiltre] = useState<string>("tous");
+  const statutsOrdonnes = ORDRE_PRIORITE_STATUTS
+    .map((id) => FOCUS_STATUTS.find((statut) => statut.id === id))
+    .filter((statut): statut is typeof FOCUS_STATUTS[number] => Boolean(statut));
+  const compte = (id: string) => items.filter((item) => item.statut.id === id).length;
+  const filtreActif = filtre !== "tous" && compte(filtre) === 0 ? "tous" : filtre;
+  const visibles = items
+    .filter((item) => filtreActif === "tous" || item.statut.id === filtreActif)
+    .slice()
+    .sort((a, b) => ORDRE_PRIORITE_STATUTS.indexOf(a.statut.id) - ORDRE_PRIORITE_STATUTS.indexOf(b.statut.id)
+      || (a.score ?? 101) - (b.score ?? 101)
+      || a.label.localeCompare(b.label, "fr"));
+  const resume = statutsOrdonnes
+    .filter((statut) => compte(statut.id) > 0)
+    .map((statut) => `${compte(statut.id)} ${statut.label.toLowerCase()}`)
+    .join(", ");
+
   return (
-    <section className="focus-status-board" aria-labelledby={`focus-status-${title.replace(/\W+/g, "-").toLowerCase()}`}>
+    <section className="focus-status-board" aria-labelledby={titreId}>
       <div className="focus-status-heading">
-        <div><h4 id={`focus-status-${title.replace(/\W+/g, "-").toLowerCase()}`}>{title}</h4><p>{description}</p></div>
+        <div><h4 id={titreId}>{title}</h4><p>{description}</p></div>
         <span>{items.length} cible{items.length > 1 ? "s" : ""}</span>
       </div>
-      <div className="focus-status-columns">
-        {FOCUS_STATUTS.map((statut) => {
-          const cibles = items.filter((item) => item.statut.id === statut.id);
-          return (
-            <div className={`focus-status-column ${statut.classe}`} key={statut.id}>
-              <div className="focus-status-column-heading"><strong>{statut.label}</strong><b>{cibles.length}</b></div>
-              <p>{statut.description}</p>
-              {cibles.length > 0 ? (
-                <ul>
-                   {cibles.map((item) => <li key={item.label}><span>{item.label}</span><small>{item.score === null ? "—" : `${item.score}%`}{item.total ? ` · ${item.total} résultat${item.total > 1 ? "s" : ""}` : ""}{item.criteresTotal ? ` · Critères évalués : ${item.criteresEvalues || 0}/${item.criteresTotal}` : ""}</small></li>)}
-                </ul>
-              ) : <span className="focus-status-empty">Aucune cible dans cette catégorie.</span>}
-            </div>
-          );
-        })}
+
+      {items.length > 0 && (
+        <div className="focus-status-summary" role="img" aria-label={`Répartition : ${resume}.`}>
+          {statutsOrdonnes.filter((statut) => compte(statut.id) > 0).map((statut) => (
+            <span key={statut.id} className={`focus-status-summary-part ${statut.classe}`} style={{ flexGrow: compte(statut.id) }}>
+              {compte(statut.id)}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div className="focus-status-filters" role="group" aria-label={`Filtrer les cibles : ${title}`}>
+        <button type="button" aria-pressed={filtreActif === "tous"} onClick={() => setFiltre("tous")}>
+          Tous <b>{items.length}</b>
+        </button>
+        {statutsOrdonnes.map((statut) => (
+          <button
+            type="button"
+            key={statut.id}
+            className={statut.classe}
+            aria-pressed={filtreActif === statut.id}
+            disabled={compte(statut.id) === 0}
+            onClick={() => setFiltre(statut.id)}
+          >
+            <i aria-hidden="true" />{statut.label} <b>{compte(statut.id)}</b>
+          </button>
+        ))}
       </div>
+
+      {visibles.length > 0 ? (
+        <ul className="focus-status-list">
+          {visibles.map((item) => (
+            <li className={`focus-status-row ${item.statut.classe}`} key={`${item.statut.id}-${item.label}`}>
+              <span className="focus-status-pill">{item.statut.label}</span>
+              <span className="focus-status-name">{item.label}</span>
+              <span className="focus-status-score" aria-label={item.score === null ? "Score non disponible" : `Score : ${item.score} %`}>
+                <span className="focus-status-meter" aria-hidden="true"><span style={{ width: `${item.score ?? 0}%` }} /></span>
+                <b>{item.score === null ? "—" : `${item.score} %`}</b>
+              </span>
+              <small className="focus-status-details">
+                {item.total ? `${item.total} résultat${item.total > 1 ? "s" : ""}` : "Aucun résultat"}
+                {item.criteresTotal ? ` · Critères évalués : ${item.criteresEvalues || 0}/${item.criteresTotal}` : ""}
+              </small>
+            </li>
+          ))}
+        </ul>
+      ) : <p className="focus-status-empty">Aucune cible pour l’instant.</p>}
+
+      <details className="focus-status-legend">
+        <summary>Que signifient les statuts ?</summary>
+        <dl>
+          {statutsOrdonnes.map((statut) => (
+            <div key={statut.id} className={statut.classe}><dt><i aria-hidden="true" />{statut.label}</dt><dd>{statut.description}</dd></div>
+          ))}
+        </dl>
+      </details>
     </section>
   );
 }
