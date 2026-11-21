@@ -12,3 +12,7 @@ Cartes tirées de Wikimedia Commons et adaptées pour Corrige.moi.
 Les cartes de la Province de Québec, dérivées d'une œuvre CC BY-SA 3.0, sont
 elles aussi diffusées sous CC BY-SA 3.0. Le crédit est affiché sous chaque carte
 dans l'application (`CARTES_FIXES`, `src/histoire/App.tsx`).
+
+`carte-canada.png` et `carte-quebec.png` sont des copies de `canada-aujourdhui.png`
+et `province-quebec-1774.png`, gardées sous les anciens noms pour les onglets
+encore ouverts sur une version précédente de l'application.
