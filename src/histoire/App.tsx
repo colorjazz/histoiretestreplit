@@ -6,7 +6,7 @@ import { collection, addDoc, serverTimestamp, getDocs, query, where } from 'fire
 import { signOut } from 'firebase/auth';
 import { PERIODES_HISTORIQUES } from './periodes';
 import { contextePFEQ, normaliserRattachementPFEQ, trouverRealitePFEQ } from './pfeqReferentiel';
-import { chargerCarteHistoriqueLibre, compterDocumentsIconographiques, documentsIconographiquesComplets, enrichirDocumentsAvecVisuels, getFallbackWikimediaImageSource, getWikimediaImageProxySource, getWikimediaImageSource, imageWikimediaAutorisee, resoudrePeriodeId } from './historicalVisuals';
+import { compterDocumentsIconographiques, documentsIconographiquesComplets, enrichirDocumentsAvecVisuels, getFallbackWikimediaImageSource, getWikimediaImageProxySource, getWikimediaImageSource, imageWikimediaAutorisee, resoudrePeriodeId } from './historicalVisuals';
 import { appelerFocusTraining, FocusTrainingError } from './focusTrainingClient';
 import { ajouterResultatLocal, preparerResultatPourSauvegarde } from './resultPersistence';
 import { ecrireResultatSupabase } from '../supabaseResultsClient';
@@ -972,10 +972,10 @@ function SchemaConceptuel({
   );
 }
 
-const ERAS_HISTORIQUES: Record<string, { label: string; image: string; regions: { nom: string; x: number; y: number }[] }> = {
-  "1867": { label: "Canada le 1er juillet 1867 (Confédération)", image: "/maps/carte-canada.svg", regions: [{ nom: "Ontario", x: 68, y: 86 }, { nom: "Québec", x: 78, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.1, y: 74.8 }, { nom: "Nouvelle-Écosse", x: 87.0, y: 76.2 }] },
-  "1870-71": { label: "Canada en 1870-1871", image: "/maps/carte-canada.svg", regions: [{ nom: "Colombie-Britannique", x: 29, y: 56 }, { nom: "Manitoba", x: 51.3, y: 80.7 }, { nom: "Ontario", x: 65, y: 88.5 }, { nom: "Québec", x: 76, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.2, y: 77.7 }, { nom: "Nouvelle-Écosse", x: 86.9, y: 78.7 }] },
-  "1999": { label: "Canada aujourd'hui", image: "/maps/carte-canada.svg", regions: [{ nom: "Yukon", x: 20, y: 24 }, { nom: "Territoires du Nord-Ouest", x: 33, y: 32 }, { nom: "Nunavut", x: 53, y: 24 }, { nom: "Colombie-Britannique", x: 19, y: 57 }, { nom: "Alberta", x: 29, y: 61 }, { nom: "Saskatchewan", x: 38, y: 65 }, { nom: "Manitoba", x: 45.5, y: 68 }, { nom: "Ontario", x: 58, y: 79 }, { nom: "Québec", x: 73.5, y: 63 }, { nom: "Terre-Neuve", x: 85.5, y: 55 }, { nom: "Nouveau-Brunswick", x: 82.3, y: 78.7 }, { nom: "Île-du-Prince-Édouard", x: 85.5, y: 68.5 }, { nom: "Nouvelle-Écosse", x: 86.8, y: 80.0 }] }
+const ERAS_HISTORIQUES: Record<string, { label: string; regions: { nom: string; x: number; y: number }[] }> = {
+  "1867": { label: "Canada le 1er juillet 1867 (Confédération)", regions: [{ nom: "Ontario", x: 68, y: 86 }, { nom: "Québec", x: 78, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.1, y: 74.8 }, { nom: "Nouvelle-Écosse", x: 87.0, y: 76.2 }] },
+  "1870-71": { label: "Canada en 1870-1871", regions: [{ nom: "Colombie-Britannique", x: 29, y: 56 }, { nom: "Manitoba", x: 51.3, y: 80.7 }, { nom: "Ontario", x: 65, y: 88.5 }, { nom: "Québec", x: 76, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.2, y: 77.7 }, { nom: "Nouvelle-Écosse", x: 86.9, y: 78.7 }] },
+  "1999": { label: "Canada aujourd'hui", regions: [{ nom: "Yukon", x: 20, y: 24 }, { nom: "Territoires du Nord-Ouest", x: 33, y: 32 }, { nom: "Nunavut", x: 53, y: 24 }, { nom: "Colombie-Britannique", x: 19, y: 57 }, { nom: "Alberta", x: 29, y: 61 }, { nom: "Saskatchewan", x: 38, y: 65 }, { nom: "Manitoba", x: 45.5, y: 68 }, { nom: "Ontario", x: 58, y: 79 }, { nom: "Québec", x: 73.5, y: 63 }, { nom: "Terre-Neuve", x: 85.5, y: 55 }, { nom: "Nouveau-Brunswick", x: 82.3, y: 78.7 }, { nom: "Île-du-Prince-Édouard", x: 85.5, y: 68.5 }, { nom: "Nouvelle-Écosse", x: 86.8, y: 80.0 }] }
 };
 
 function CarteHistorique({ era, lieuSelectionne, setLieuSelectionne }: any) {
@@ -990,58 +990,35 @@ function CarteHistorique({ era, lieuSelectionne, setLieuSelectionne }: any) {
   );
 }
 
+// Cartes fixes, tirées de Wikimedia Commons et adaptées pour l'appli
+// (étiquettes traduites en français, année retirée des cartes de la Province de
+// Québec). Les licences exigent de mentionner l'auteur et la licence.
+const CREDIT_GOLBEZ = "Carte : Golbez, Wikimedia Commons, CC BY 2.5 — étiquettes traduites en français.";
+const CREDIT_PROVINCE_QUEBEC = "Carte : Judicieux, Wikimedia Commons, CC BY-SA 3.0 — année retirée.";
+const CARTES_FIXES: Record<string, { image: string; credit: string }> = {
+  "1867": { image: "/maps/canada-1867.png", credit: CREDIT_GOLBEZ },
+  "1870-71": { image: "/maps/canada-1870-71.png", credit: CREDIT_GOLBEZ },
+  "1999": { image: "/maps/canada-aujourdhui.png", credit: "Carte : Golbez, Wikimedia Commons, CC BY 2.5." },
+  "province-quebec-1763": { image: "/maps/province-quebec-1763.png", credit: CREDIT_PROVINCE_QUEBEC },
+  "province-quebec-1774": { image: "/maps/province-quebec-1774.png", credit: CREDIT_PROVINCE_QUEBEC },
+  "province-quebec-1783": { image: "/maps/province-quebec-1783.png", credit: CREDIT_PROVINCE_QUEBEC },
+};
+
 function CarteImageLibre({ era, alt }: { era: string; alt: string }) {
-  const [visual, setVisual] = useState<any>(null);
-  const [sourceEnErreur, setSourceEnErreur] = useState(false);
-  const carteLocale = era.startsWith("province-quebec")
-    ? "/maps/carte-quebec.png"
-    : "/maps/carte-canada.png";
-
-  useEffect(() => {
-    let active = true;
-    setVisual(null);
-    setSourceEnErreur(false);
-    void chargerCarteHistoriqueLibre(era).then((carte) => {
-      if (active) setVisual(carte);
-    });
-    return () => { active = false; };
-  }, [era]);
-
-  const descriptionCarte = `${visual?.titre || ""} ${visual?.imageAlt || ""}`;
-  const carteDistanteFrancaise = Boolean(
-    visual
-      && /\b(?:carte|québec|province|territoire|canada français)\b/i.test(descriptionCarte),
-  );
-  const afficherCarteDistante = carteDistanteFrancaise && !sourceEnErreur;
-
+  const carte = CARTES_FIXES[era] || CARTES_FIXES["1999"];
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   return (
     <figure className="carte-figure">
-      {afficherCarteDistante ? (
-        <>
-          <img
-            src={getWikimediaImageProxySource(visual.imageUrl)}
-            alt={visual.imageAlt || alt}
-            className="carte-image"
-            onError={() => setSourceEnErreur(true)}
-          />
-          <figcaption className="carte-source-note">
-            Carte libre de droits — {visual.reference || "Wikimedia Commons"} · {visual.imageLicense}.
-          </figcaption>
-        </>
-      ) : (
-        <>
-          <img src={carteLocale} alt={alt} className="carte-image" />
-          <figcaption className="carte-source-note">Carte schématique en français — support de localisation.</figcaption>
-        </>
-      )}
+      <img src={`${base}${carte.image}`} alt={alt} className="carte-image" />
+      <figcaption className="carte-source-note">{carte.credit}</figcaption>
     </figure>
   );
 }
 
-const CARTES_PROVINCE_QUEBEC: Record<string, { label: string; image: string }> = {
-  "1763": { label: "1763 (Proclamation royale)", image: "/maps/carte-quebec.svg" },
-  "1774": { label: "1774 (Acte de Québec)", image: "/maps/carte-quebec.svg" },
-  "1783": { label: "1783 (Traité de Paris)", image: "/maps/carte-quebec.svg" }
+const CARTES_PROVINCE_QUEBEC: Record<string, { label: string }> = {
+  "1763": { label: "1763 (Proclamation royale)" },
+  "1774": { label: "1774 (Acte de Québec)" },
+  "1783": { label: "1783 (Traité de Paris)" }
 };
 
 function CarteComparaisonProvinceQuebec({ mode, annees, lieuCorrect, lieuSelectionne, setLieuSelectionne }: any) {
