@@ -7047,3 +7047,65 @@ html[data-theme="dark"] .focus-hero {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- SCHÉMA : MISE EN PAGE ORDINATEUR ----------
+   Documents à gauche; à droite, les notes puis le schéma. Chaque colonne a sa
+   propre barre de défilement pour garder les documents visibles pendant que
+   l'élève complète le schéma. Sous 1100 px, tout reste empilé. */
+.schema-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* Les notes et le schéma gardent leur hauteur naturelle : c'est la colonne
+   qui défile, pas eux qui rétrécissent. */
+.schema-workspace > * {
+  flex-shrink: 0;
+}
+
+/* Une URL de source sans espace ne doit pas élargir la colonne. */
+.schema-document-list {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.schema-document-list .document-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Les mots longs (« Déconfessionnalisation ») restent dans leur case. */
+.schema-diagram .schema-node strong {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (min-width: 1100px) {
+  .schema-conceptuel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    align-items: stretch;
+    gap: 20px;
+    height: calc(100vh - 110px);
+    min-height: 560px;
+  }
+
+  .schema-conceptuel > .schema-document-list,
+  .schema-conceptuel > .schema-workspace {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    /* Laisse de la place à la barre de navigation flottante du bas. */
+    padding-bottom: 110px;
+  }
+
+  .schema-conceptuel > .schema-document-list {
+    align-content: start;
+  }
+
+  .schema-conceptuel > .schema-workspace {
+    padding-right: 6px;
+  }
+}

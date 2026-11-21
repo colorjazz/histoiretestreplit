@@ -404,7 +404,7 @@ function NotesDocumentsPanel({ documents, notes, setNotes, accent = "var(--accen
                 <textarea
                   value={notes[index] || ""}
                   onChange={(event) => setNotes((previous: Record<number, string>) => ({ ...previous, [index]: event.target.value }))}
-                  placeholder="Les notes saisies sous ce document apparaîtront ici."
+                  placeholder="Écris ici tes notes sur ce document : un fait, une preuve, un lien…"
                   aria-label={`Notes du tableau pour ${formatDocumentLabel(index)} — ${document.titre || "sans titre"}`}
                 />
               )}
@@ -878,12 +878,13 @@ function SchemaConceptuel({
             document={document}
             index={index}
             accent="var(--card-teal)"
-            note={notes[index] || ""}
-            onNoteChange={(value) => setNotes((previous: Record<number, string>) => ({ ...previous, [index]: value }))}
             referenceUniversitaire
           />
         ))}
       </div>
+      {/* Sur ordinateur : colonne de droite (notes, puis schéma) qui défile
+          indépendamment des documents, pour les garder visibles en travaillant. */}
+      <div className="schema-workspace">
       <NotesDocumentsPanel documents={documents} notes={notes} setNotes={setNotes} accent="var(--card-teal)" />
       <div className="schema-diagram" aria-label="Schéma conceptuel à compléter">
         <div className="schema-central-zone">
@@ -967,6 +968,7 @@ function SchemaConceptuel({
             );
           })}
         </div>
+      </div>
       </div>
     </div>
   );
