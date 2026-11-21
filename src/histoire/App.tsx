@@ -8,6 +8,7 @@ import { PERIODES_HISTORIQUES } from './periodes';
 import { contextePFEQ, normaliserRattachementPFEQ, trouverRealitePFEQ } from './pfeqReferentiel';
 import { compterDocumentsIconographiques, documentsIconographiquesComplets, enrichirDocumentsAvecVisuels, getFallbackWikimediaImageSource, getWikimediaImageProxySource, getWikimediaImageSource, imageWikimediaAutorisee, resoudrePeriodeId } from './historicalVisuals';
 import { appelerFocusTraining, FocusTrainingError } from './focusTrainingClient';
+import AttenteHistorique from './AttenteHistorique';
 import { ajouterResultatLocal, preparerResultatPourSauvegarde } from './resultPersistence';
 import { ecrireResultatSupabase } from '../supabaseResultsClient';
 import { enablePushNotifications, getPushAvailability, postponePushPrompt, reportPushActivity, shouldPromptForPush } from './pushNotifications';
@@ -4771,22 +4772,16 @@ Réponds UNIQUEMENT en format JSON valide:
                 {erreurGlobal && <div className="app-error-banner" role="alert" aria-live="assertive"><strong>Oups!</strong> {erreurGlobal}</div>}
 
                 {loadingQuestionA ? (
-                   <div className="loading section-a-generation-loading" role="status" aria-live="polite">
-                     <div className="spinner" aria-hidden="true"></div>
-                     <strong>
-                       {generationProgressA.stage === "queued"
-                         ? "Préparation du lot de 10 questions..."
-                         : generationProgressA.stage === "generating"
-                           ? "Génération des deux sous-lots en cours..."
-                           : generationProgressA.stage === "validating"
-                             ? "Vérification des 10 questions et du rattachement PFEQ..."
-                             : "Lot de questions prêt..."}
-                     </strong>
-                     <div className="generation-progress" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={generationProgressA.percent} aria-label={`Progression de la génération : ${generationProgressA.percent}%`}>
-                       <div className="generation-progress-bar" style={{ width: `${generationProgressA.percent}%` }}></div>
-                     </div>
-                     <span>{generationProgressA.percent}% — Ne relance pas : une reprise utilise la même demande et évite un doublon.</span>
-                   </div>
+                   <AttenteHistorique
+                     titre={generationProgressA.stage === "queued"
+                       ? "Préparation de ton lot de 10 questions"
+                       : generationProgressA.stage === "generating"
+                         ? "Rédaction des questions"
+                         : generationProgressA.stage === "validating"
+                           ? "Vérification des 10 questions et du rattachement au programme"
+                           : "Ton lot de questions est prêt"}
+                     detail={`${generationProgressA.percent} % — Ne relance pas : la génération continue même si tu attends.`}
+                   />
                 ) : banqueQuestionsA.length === 0 ? (
                     <button className="btn-generer" onClick={relancerLotQuestionsA} style={{backgroundColor: 'var(--card-blue)'}}><i className="ti ti-rotate-clockwise"></i> {generationAJobExpire ? "Relancer la génération" : "Charger un nouveau lot de 10 questions"}</button>
                 ) : questionA && (
@@ -4961,7 +4956,7 @@ Réponds UNIQUEMENT en format JSON valide:
                      {renderPeriodesActives("var(--card-teal)")}
                     {erreurGlobal && <div className="app-error-banner" role="alert" aria-live="assertive"><strong>Oups!</strong> {erreurGlobal}</div>}
                     {loadingSchemaB ? (
-                      <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>Construction du schéma conceptuel...</div>
+                      <AttenteHistorique titre="Construction du schéma conceptuel" />
                     ) : !questionSchemaB ? (
                       <button className="btn-generer" onClick={genererSchemaB} style={{backgroundColor: 'var(--card-teal)'}}><i className="ti ti-sitemap"></i> Générer un schéma conceptuel</button>
                     ) : (
@@ -5012,16 +5007,13 @@ Réponds UNIQUEMENT en format JSON valide:
                     )}
 
                     {loadingQuestionB && !questionB ? (
-                      <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>Recherche dans les archives...</div>
+                      <AttenteHistorique titre="Recherche dans les archives" />
                     ) : !questionB ? (
                        <button className="btn-generer" onClick={genererQuestionsB} style={{backgroundColor: 'var(--card-teal)'}}><i className="ti ti-sparkles"></i> Générer les questions sélectionnées</button>
                     ) : (
                       <div>
                         {loadingQuestionB && (
-                          <div className="operation-dossier-loading" role="status" aria-live="polite">
-                            <div className="spinner" aria-hidden="true"></div>
-                            Génération d’un nouveau dossier… Ton dossier actif reste disponible.
-                          </div>
+                          <AttenteHistorique compact titre="Génération d’un nouveau dossier" detail="Ton dossier actif reste disponible pendant ce temps." />
                         )}
                          <div className="catalog-num" style={{marginTop: '16px'}}>{afficherDatesPeriode(questionB.periode, questionB.periodeId)}</div>
                          <div className="operation-question-heading" aria-label={`Opération intellectuelle : ${currentOp.nom}`}>
@@ -5163,7 +5155,7 @@ Réponds UNIQUEMENT en format JSON valide:
                             <div className="actions">
                                 <button className="btn-generer" onClick={corrigerReponseB} disabled={loadingCorrectionB} style={{backgroundColor: 'var(--card-teal)'}}>corrige.moi</button>
                             </div>
-                            {loadingCorrectionB && <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>corrige.moi examine ta réponse...</div>}
+                            {loadingCorrectionB && <AttenteHistorique titre="corrige.moi examine ta réponse" compact />}
                              {feedbackB && (
                               <div className="verdict" style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '24px' }}>
                                  <div><div className="feedback-step-label">1. Résultat</div><div className={`stamp ${feedbackB.niveau?.toLowerCase().includes('réussi') ? 'reussi' : ''}`} style={{ display: 'inline-block', margin: 0 }}>{feedbackB.niveau || 'Évalué'} • {feedbackB.note || ''}</div></div>
@@ -5205,7 +5197,7 @@ Réponds UNIQUEMENT en format JSON valide:
                 {erreurGlobal && <div className="app-error-banner" role="alert" aria-live="assertive"><strong>Oups!</strong> {erreurGlobal}</div>}
 
                 {loadingQuestionC ? (
-                  <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>Compilation du dossier ministériel (textes et statistiques)...</div>
+                  <AttenteHistorique titre="Compilation du dossier ministériel (textes et statistiques)" />
                 ) : !questionC ? (
                    <button className="btn-generer" onClick={genererQuestionC} style={{backgroundColor: 'var(--question-elab)'}}><i className="ti ti-folder-open"></i> Ouvrir le dossier documentaire de l’épreuve</button>
                 ) : (
@@ -5245,7 +5237,7 @@ Réponds UNIQUEMENT en format JSON valide:
                         <button className="btn-generer" onClick={corrigerReponseC} disabled={loadingCorrectionC} style={{backgroundColor: 'var(--question-elab)'}}>corrige.moi</button>
                          <button className="link-btn" onClick={passerQuestionSuivanteC} disabled={loadingQuestionC || loadingCorrectionC} style={{color: 'var(--question-elab)'}}>Question suivante →</button>
                     </div>
-                    {loadingCorrectionC && <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>corrige.moi évalue votre utilisation des documents et applique la grille sur 8 points...</div>}
+                    {loadingCorrectionC && <AttenteHistorique titre="corrige.moi évalue votre utilisation des documents et applique la grille sur 8 points" compact />}
                     
                     {feedbackC && (
                        <div className="verdict" style={{borderTopColor: 'var(--question-elab)'}}>
