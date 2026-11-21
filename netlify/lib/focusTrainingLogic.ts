@@ -720,7 +720,7 @@ function sousLotSectionAUtilisable(questions: any[], prompt: string): boolean {
 }
 
 function messageErreurGemini(status: number): string {
-  if (status === 401 || status === 403) return "La configuration de l'API Gemini est invalide. Vérifie la clé dans les Secrets Replit.";
+  if (status === 401 || status === 403) return "La configuration de l'API Gemini est invalide. Vérifie la clé GEMINI_API_KEY dans les variables d'environnement Netlify.";
   if (status === 404) return "Le modèle Gemini configuré n'est pas disponible pour cette clé API.";
   if (status === 429) return "Le quota Gemini est temporairement dépassé. Réessaie dans quelques instants.";
   return "Le service Gemini est temporairement indisponible. Réessaie dans quelques instants.";

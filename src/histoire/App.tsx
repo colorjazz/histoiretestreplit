@@ -2709,7 +2709,7 @@ ${dejaVues.length ? dejaVues.map((item) => `- ${item}`).join("\n") : "- aucune a
     if (error instanceof FocusTrainingError && error.code === "GEMINI_NOT_CONFIGURED") {
       if (parcours === "section-a") setGenerationAConfigGemini(true);
       setErreurGlobal(
-        "La génération est arrêtée parce que le service Gemini n’est pas configuré. Demande à un administrateur d’ajouter GEMINI_API_KEY dans les Secrets Replit, puis lance une nouvelle génération. Aucune demande n’est relancée automatiquement.",
+        "La génération est arrêtée parce que le service Gemini n’est pas configuré. Demande à un administrateur d’ajouter GEMINI_API_KEY dans les variables d’environnement Netlify, puis de redéployer le site avant de lancer une nouvelle génération. Aucune demande n’est relancée automatiquement.",
       );
       return;
     }
