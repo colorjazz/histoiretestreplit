@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">Carte schématique du Canada</title>
+  <desc id="desc">Silhouette simplifiée du Canada utilisée pour localiser les provinces et territoires.</desc>
+  <rect width="1000" height="560" fill="#eef6f2"/>
+  <path d="M80 180 150 90l90 20 75-55 75 45 95-58 90 48 80-28 62 70 112 5 72 85-48 77 45 62-95 28-40 92-108-26-76 48-102-36-88 30-77-63-122 18-42-86 44-60-35-59Z" fill="#c9e4d8" stroke="#26765b" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M145 290h700M255 145v260M385 112v330M510 92v360M640 105v310M760 145v245" stroke="#79aa95" stroke-width="4" stroke-dasharray="10 10" opacity=".7"/>
+  <circle cx="485" cy="470" r="10" fill="#26765b"/><circle cx="690" cy="420" r="10" fill="#26765b"/>
+  <text x="500" y="525" text-anchor="middle" font-family="system-ui,sans-serif" font-size="28" font-weight="700" fill="#123e31">Canada — carte de localisation</text>
+</svg>
