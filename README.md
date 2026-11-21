@@ -62,6 +62,9 @@ ces correctifs :
   les phrases attendues, catégorie de fait ramenée à la valeur permise, `faitsRelier` = `propositions`,
   documents mélangés si les associations restaient dans l'ordre `[0,1,2]`.
 - **Relance ciblée** : la régénération d'un sous-lot indique à Gemini les problèmes précis détectés.
+- **Plus rapide** : plus de tentative initiale « 10 questions d'un coup » (elle échouait presque
+  toujours); les deux sous-lots de 5 questions sont générés directement en parallèle.
+  Durée typique d'un lot : 45 s à 1 min 30 dans l'appli.
 - **Appli** : la consigne du lot demande `ordreCorrect` pour le classement; l'exigence
   d'un `elementsChronologiques` ne s'applique plus qu'au module « Réponses courtes ».
 - La clé Gemini passe dans un en-tête (`x-goog-api-key`), jamais dans l'URL.

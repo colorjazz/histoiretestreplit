@@ -64,7 +64,6 @@ function thinkingConfig(): { thinkingConfig?: { thinkingLevel: string } } {
   return { thinkingConfig: { thinkingLevel: GEMINI_THINKING_LEVEL } };
 }
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models";
-const SECTION_A_PRIMARY_MAX_OUTPUT_TOKENS = 24000;
 const SECTION_A_FALLBACK_MAX_OUTPUT_TOKENS = 16000;
 const STRUCTURED_BATCH_RETRY_ATTEMPTS = 2;
 const SECTION_A_SUBLOT_RETRY_ATTEMPTS = 4;
@@ -1030,76 +1029,9 @@ async function genererSousLotSectionA(
   }
 }
 
-async function executerLotSectionAHybride(
-  apiKey: string,
-  stableContext: string,
-  prompt: string,
-  action: "generate" | "correct",
-  fetcher: typeof fetch,
-  logger: GeminiLogger,
-  signal?: AbortSignal,
-  onProgress?: FocusTrainingProgressReporter,
-): Promise<GeminiResult> {
-  onProgress?.({ stage: "generating", completedParts: 0, totalParts: 2, percent: 10 });
-  const startedAt = Date.now();
-  let upstream: Response;
-  try {
-    upstream = await appelerGeminiGenerateContent({
-      apiKey,
-      stableContext,
-      variablePrompt: prompt,
-      action,
-      useGrounding: false,
-      fetcher,
-      logger,
-      signal,
-      phase: "section_a_primary",
-      generationConfig: {
-        maxOutputTokens: SECTION_A_PRIMARY_MAX_OUTPUT_TOKENS,
-        responseMimeType: "application/json",
-      },
-    });
-  } catch {
-    journaliserErreurFournisseur(logger, "section_a_primary", "network_error", "Erreur réseau pendant la génération Section A");
-    return { ok: false, status: 502, error: "La connexion au service Gemini a échoué. Réessaie dans quelques instants." };
-  }
-  if (!upstream.ok) {
-    journaliserErreurFournisseur(logger, "section_a_primary", upstream.status, "Échec de la génération principale Section A");
-    return { ok: false, status: statutPublicGemini(upstream.status), error: messageErreurGemini(upstream.status) };
-  }
-
-  const data = await upstream.json() as GeminiResponse;
-  journaliserAppelGemini(logger, "section_a_primary", startedAt, data);
-  const text = extraireTexteGemini(data);
-  const jsonNormalise = text ? normaliserJsonComplet(text) : null;
-  if (jsonNormalise) {
-    try {
-      const parsed = JSON.parse(jsonNormalise);
-      const questionsBrutes = extraireTableauQuestions(parsed) ?? parsed;
-      const questions = Array.isArray(questionsBrutes)
-        ? normaliserQuestionsSectionA(questionsBrutes)
-        : questionsBrutes;
-      if (lotSectionAUtilisable(questions, prompt)) {
-        onProgress?.({ stage: "generating", completedParts: 1, totalParts: 2, percent: 55 });
-        onProgress?.({ stage: "validating", completedParts: 2, totalParts: 2, percent: 85 });
-        return { ok: true, text: JSON.stringify(questions) };
-      }
-    } catch {
-      // Le normaliseur a déjà tenté les structures JSON locales sûres.
-    }
-  }
-
-  logger.warn?.(
-    {
-      model: GEMINI_MODEL,
-      finishReason: data.candidates?.[0]?.finishReason,
-      fallback: "two_parallel_batches",
-    },
-    "Lot Section A principal incomplet; recours aux deux sous-lots",
-  );
-  return executerLotSectionAEnDeuxLots(apiKey, stableContext, prompt, action, fetcher, logger, signal, onProgress);
-}
-
+// La tentative initiale « 10 questions d'un coup » (25 à 35 s) ne respectait presque
+// jamais le contrat structurel et finissait de toute façon en deux sous-lots :
+// on génère directement les deux sous-lots en parallèle.
 async function executerLotSectionAEnDeuxLots(
   apiKey: string,
   stableContext: string,
@@ -1183,7 +1115,7 @@ export async function executerGeminiAvecReparation({
   const effectiveAction = action ?? (useGrounding ? "generate" : "correct");
   try {
     if (useGrounding && estLotDeDixQuestions(prompt)) {
-      const result = await executerLotSectionAHybride(apiKey, context, prompt, effectiveAction, fetcher, logger, signal, onProgress);
+      const result = await executerLotSectionAEnDeuxLots(apiKey, context, prompt, effectiveAction, fetcher, logger, signal, onProgress);
       if (result.ok) onProgress?.({ stage: "completed", completedParts: 2, totalParts: 2, percent: 100 });
       return result;
     }
