@@ -8,11 +8,23 @@
 [functions]
   directory = "netlify/functions"
 
-# Routes /api pas encore réimplémentées (visuels, push, migration, auth/me) :
-# réponse JSON 404, l'application a déjà un repli pour chacune.
-# Les fonctions déclarées avec `config.path` passent avant ces règles.
+# Routes /api pas encore réimplémentées : réponse JSON 404 (l'appli a un repli pour
+# chacune). Ces règles visent seulement ces routes : une règle forcée sur /api/*
+# masquait aussi les fonctions (/api/focus-training renvoyait 404).
 [[redirects]]
-  from = "/api/*"
+  from = "/api/auth/*"
+  to = "/api-404.json"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/api/push-notifications/*"
+  to = "/api-404.json"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/api/migration/*"
   to = "/api-404.json"
   status = 404
   force = true
