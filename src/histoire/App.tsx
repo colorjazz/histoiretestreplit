@@ -33,6 +33,7 @@ import {
   validerFeedbackOperation,
   validerContenuOperation,
   validerLotSectionA,
+  harmoniserDossierOperation,
   validerQuestionB,
   validerQuestionC,
   validerRattachementPFEQ,
@@ -3645,6 +3646,7 @@ ${genererConsigneDifficulte()}
           };
           const validerDossier = (dossier: any) => {
             normaliserMetadonneesOperation(dossier);
+            harmoniserDossierOperation(dossier);
            if (!periodeAutorisee(periodeIdQuestionB)) throw new Error("Le dossier généré utilise une période désactivée.");
            validerQuestionB(dossier, operation.id, periodesSelectionnees, expectedDocumentCount);
            if (dossier.type === "temps" && dossier.documents.length !== 4) {
@@ -3663,6 +3665,10 @@ La sortie JSON suivante est presque conforme, mais elle a échoué au contrat de
 ${JSON.stringify(parsed)}
 
 Erreur de validation : ${validationError instanceof Error ? validationError.message : String(validationError)}
+${(operation.marqueursRecommandes || []).length
+  ? `Marqueurs de relation autorisés pour cette opération (à employer mot pour mot dans les réponses attendues et à inscrire dans "marqueursRelationAttendus") : ${(operation.marqueursRecommandes || []).map((groupe: any) => `${groupe.typeLien} : ${groupe.marqueurs}`).join(" ; ")}.`
+  : ""}
+La consigne doit rester une question qui nomme explicitement les documents et se termine par un point d’interrogation, sans verbe directif.
 
 Répare uniquement les champs nécessaires. Conserve le thème historique, la période imposée et les documents vérifiables. Retourne un seul objet JSON complet, sans Markdown, avec tous les champs exigés par le schéma initial. Pour un exercice spatial, retourne une carte compatible et aucun document; pour un exercice temporel, retourne exactement quatre documents et les métadonnées de classement requises.`,
            });
@@ -3698,7 +3704,7 @@ Répare uniquement les champs nécessaires. Conserve le thème historique, la p�
          if (parsed.type === 'espace' && parsed.carteEra === 'province-quebec') { setModeCarteComparaison(Math.random() < 0.5 ? 'identifier' : 'comparer'); }
           memoriserQuestionsGenerees([parsed], operation.id);
           return parsed;
-       });
+       }, 3);
      } catch(err) {
         // Le détail reste dans la console pour le diagnostic développeur; la
         // couche appelante affiche un message sûr et actionnable à l'élève.
