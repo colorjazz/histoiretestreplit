@@ -2389,6 +2389,11 @@ function ReglesEtConfidentialite() {
 }
 
 
+/** Échec d'enregistrement d'un résultat déjà corrigé : son message est déjà affiché. */
+class ErreurEnregistrement extends Error {
+  constructor(public cause: unknown) { super("Enregistrement du résultat impossible"); }
+}
+
 export default function App({ niveauInitial }: { niveauInitial?: 3 | 4 }) {
   const [showSplash, setShowSplash] = useState(true);
   const [isFading, setIsFading] = useState(false);
@@ -2837,7 +2842,7 @@ ${dejaVues.length ? dejaVues.map((item) => `- ${item}`).join("\n") : "- aucune a
     } catch (erreur) {
       console.error("Erreur ajout document : ", erreur);
       setErreurGlobal("La correction est prête, mais son enregistrement a échoué. Réessaie avant de poursuivre afin de conserver ta progression.");
-      throw erreur;
+      throw new ErreurEnregistrement(erreur);
     }
   }
 
@@ -3588,6 +3593,7 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
        });
     } catch (err) {
       console.error(err);
+      if (err instanceof ErreurEnregistrement) return;
       // Pas d'« Oups! » : on invite à réessayer et on montre la réponse attendue.
       setCorrectionIndisponibleA({
         ...(estQcm && Array.isArray(questionA.choix) ? { bonneReponse: String(questionA.choix[questionA.indexReponseCorrecte] ?? "") } : {}),
@@ -4025,7 +4031,7 @@ Réponds UNIQUEMENT en JSON valide : {"noteGlobale":"X/8","commentaireGlobal":"P
       });
     } catch (err) {
       console.error(err);
-      setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      if (!(err instanceof ErreurEnregistrement)) setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
     } finally { setLoadingSchemaB(false); }
   }
 
@@ -4064,7 +4070,7 @@ Réponds UNIQUEMENT en JSON valide : {"noteGlobale":"X/8","commentaireGlobal":"P
        });
     } catch(err) { 
       console.error(err); 
-      setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      if (!(err instanceof ErreurEnregistrement)) setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
     } finally { setLoadingCorrectionB(false); }
   }
 
@@ -4164,7 +4170,7 @@ Réponds UNIQUEMENT en format JSON valide:
         eleve: studentName || "Anonyme", niveau: `Sec ${nivCalcul}`, section: "Section C", periodeId: questionC.periodeId, periode: questionC.periode, conceptsPfeq: questionC.conceptsPfeq, connaissancesPfeq: questionC.connaissancesPfeq, operation: `Section C (${questionC.typeTache})`, consigne: questionC.consigne, reponse: reponseC, notesDocuments: notesDocumentsC, plan: planReponseC, planStructure: planStructureC, diagnosticPlan: parsed.diagnosticPlan || null, associationsDocuments: parsed.associationsDocuments || [], resultat: parsed.noteGlobale || 'Non évalué', note: parsed.noteGlobale || '-', commentaire: parsed.commentaireGlobal || '-', detailCorrection: parsed
       });
     } catch(err: any) { 
-      setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      if (!(err instanceof ErreurEnregistrement)) setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
     } finally { setLoadingCorrectionC(false); }
   }
 
