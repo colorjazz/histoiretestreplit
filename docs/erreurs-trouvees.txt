@@ -1,0 +1,96 @@
+CORRIGE.MOI — LISTE DES ERREURS TROUVÉES
+========================================
+Légende : [CORRIGÉ] réglé et poussé · [OUVERT] reste à faire · [À VÉRIFIER] à tester sur le site en ligne
+Les corrections sont sur la branche claude/ecstatic-allen-kyixom (pull request no 1).
+
+
+1. INSTALLATION ET DÉPLOIEMENT
+------------------------------
+1.1 [CORRIGÉ] Le projet ne pouvait pas être construit hors de Replit
+    (dépendances « catalog: » et « workspace: », plugins Replit).
+1.2 [CORRIGÉ] Le serveur (API) n'existait que sur Replit : porté en fonctions Netlify.
+1.3 [CORRIGÉ] Erreur 404 sur /api/focus-training : une redirection de netlify.toml
+    cachait toutes les fonctions sous /api.
+1.4 [CORRIGÉ] « Gemini n'est pas configuré » : variable GEMINI_API_KEY vide selon le
+    contexte Netlify (réglé dans les variables d'environnement).
+1.5 [CORRIGÉ] Messages d'erreur renvoyant aux « Secrets Replit » au lieu de Netlify.
+1.6 [CORRIGÉ] Un ancien dist/ et tsconfig.tsbuildinfo étaient versionnés dans le dépôt.
+
+
+2. SECTION A (LOT DE 10 QUESTIONS)
+----------------------------------
+2.1 [CORRIGÉ] Lot bloqué à 0 % : la logique serveur réelle manquait.
+2.2 [CORRIGÉ] Génération trop longue : tentative initiale à 10 questions supprimée,
+    le lot est produit directement en deux sous-lots (environ 35 à 40 s).
+2.3 [CORRIGÉ] Réponses tronquées (MAX_TOKENS) : la « réflexion » de Gemini consommait
+    la limite de sortie.
+2.4 [CORRIGÉ] Règles du serveur différentes de celles de l'appli : des questions
+    valides d'un côté étaient refusées de l'autre.
+2.5 [CORRIGÉ] « Le parcours de réponses doit contenir exactement 5 QCM et 5 réponses
+    courtes » à chaque essai : Gemini ajoutait un operationId qui changeait le format.
+2.6 [CORRIGÉ] Une nouvelle tentative réutilisait la même clé et recevait le même lot invalide.
+2.7 [CORRIGÉ] Aucune solution de secours en cas d'échec : réserve de questions ajoutée.
+2.8 [CORRIGÉ] Si la correction échouait, l'élève voyait « Oups » : maintenant un message
+    pour réessayer et la réponse attendue.
+2.9 [OUVERT] Le module « Opérations » de la Section A n'est accessible qu'en mode démo.
+    Est-ce voulu?
+
+
+3. SECTION B (OPÉRATIONS INTELLECTUELLES)
+-----------------------------------------
+3.1 [CORRIGÉ] Texte blanc sur fond blanc dans les étiquettes d'opération.
+3.2 [CORRIGÉ] « Dossier indisponible » : consignes sans mention des documents,
+    marqueurs mal alignés.
+3.3 [CORRIGÉ] La correction échouait environ 1 fois sur 4 (Gemini oubliait un critère
+    obligatoire) : relance automatique, jusqu'à 3 essais.
+
+
+4. CORRECTIONS (TOUTES SECTIONS)
+--------------------------------
+4.1 [CORRIGÉ] Un échec d'enregistrement du résultat affichait « problème technique »
+    et cachait une correction pourtant réussie.
+4.2 [À VÉRIFIER] Enregistrement des résultats dans Firebase avec un vrai compte élève
+    (impossible à tester en mode démo).
+
+
+5. CARTES, SCHÉMA, INTERFACE
+----------------------------
+5.1 [CORRIGÉ] Cartes schématiques de mauvaise qualité : remplacées par de vraies cartes
+    (Wikimedia Commons, crédits dans public/maps/CREDITS.md).
+5.2 [CORRIGÉ] Image de carte brisée dans les onglets déjà ouverts (ancien nom de fichier).
+5.3 [CORRIGÉ] Page du schéma : documents et notes côte à côte, défilement indépendant.
+5.4 [CORRIGÉ] « Analyse ta progression » : longs rectangles inutilisables, remplacés par
+    un résumé et une liste filtrable.
+5.5 [CORRIGÉ] Écrans d'attente tous différents : un indicateur sobre et uniforme.
+5.6 [OUVERT] Le schéma conceptuel est le plus lent (60 à 70 s).
+5.7 [OUVERT] Les questions de carte mentionnent parfois des documents qui n'existent pas.
+
+
+6. CÔTÉ ENSEIGNANT
+------------------
+6.1 [CORRIGÉ] Le « bilan » d'un élève échouait toujours (déjà sur Replit) et aurait
+    affiché du JSON brut.
+6.2 [OUVERT] Notifications push à l'enseignant : non portées depuis Replit, inactives (404).
+
+
+7. SÉCURITÉ
+-----------
+7.1 [CORRIGÉ] Le service Gemini était ouvert à tous, sans connexion ni limite
+    (déjà sur Replit) : connexion Firebase obligatoire et quotas ajoutés.
+7.2 [À VÉRIFIER] Avec un vrai compte : générer un lot, corriger une réponse, demander
+    un bilan d'élève.
+7.3 [OUVERT] Les règles de sécurité Firestore ne sont pas dans le dépôt : impossible de
+    vérifier qui peut lire les résultats des élèves.
+
+
+8. DIVERS
+---------
+8.1 [OUVERT] Les 80 questions de réserve n'ont pas été relues par une personne
+    (netlify/lib/banque-initiale.json).
+8.2 [OUVERT] Fichier JavaScript principal volumineux (plus de 500 ko) : premier
+    chargement plus lent sur mobile.
+8.3 [OUVERT] Code de migration Supabase et routes /api/auth de Replit : inactifs,
+    à retirer si on ne s'en sert pas.
+8.4 [OUVERT] Anciennes cartes gardées en double (carte-canada.png, carte-quebec.png) :
+    à supprimer dans quelques semaines.
+8.5 [À FAIRE] Après la fusion : remettre « main » comme branche de production dans Netlify.
