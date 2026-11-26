@@ -48,6 +48,7 @@ interface ProfProfil {
   id: string; uid: string; email: string; codeUtilise: string; ecoleId: string; dateInscription: any;
 }
 
+import { appelerFocusTraining } from "./histoire/focusTrainingClient";
 const HistoireApp = lazy(() => import('./histoire/App'));
 
 type AppRole = 'superadmin' | 'adminEcole' | 'prof' | 'eleve';
@@ -153,21 +154,9 @@ function genererCodesProfs(prefixe: string, nombre: number): string[] {
   return Array.from({ length: nombre }, (_, i) => `${prefixe}-PROF-${(i + 1).toString().padStart(2, '0')}`);
 }
 
+/** Appel à Gemini par le serveur : suit la tâche de génération et envoie le jeton de l'enseignant. */
 async function callGenerationService(action: string, payload: any) {
-  try {
-    const response = await fetch("/api/focus-training", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: action === "generer" ? "generate" : "correct",
-        prompt: payload.prompt,
-      }),
-    });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || `Erreur réseau: ${response.status}`);
-    if (data.error) throw new Error(data.error);
-    return data;
-  } catch (error) { console.error("Fetch error:", error); throw error; }
+  return appelerFocusTraining(action === "generer" ? "generate" : "correct", payload.prompt);
 }
 
 // --- COMPOSANT PIED DE PAGE (Mentions légales) ---
@@ -800,6 +789,12 @@ function DashboardAdmin({ surDeconnexion, onImpersonate }: { surDeconnexion: () 
             <div>
               <h2 className="text-xl font-bold mb-2 text-espresso flex items-center gap-2"><FileText className="h-6 w-6 text-brand-red"/> Dossier complet de {eleveActif.nom}</h2>
               <p className="text-stone mb-6 font-mono text-sm">Code : {eleveActif.code}</p>
+              {resultatsEleve.some((r: any) => r.sourceQuestion === 'reserve') && (
+                <p className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+                  <strong>{resultatsEleve.filter((r: any) => r.sourceQuestion === 'reserve').length} réponse(s) sur des questions de réserve.</strong>{' '}
+                  La génération automatique avait échoué; l’élève a reçu un lot déjà validé, sans message d’erreur.
+                </p>
+              )}
               
               <div className="space-y-4">
                 {resultatsEleve.map((r, i) => {
@@ -812,6 +807,7 @@ function DashboardAdmin({ surDeconnexion, onImpersonate }: { surDeconnexion: () 
                            <div className="flex items-center gap-2 mb-1">
                               <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded ${isReussi ? 'bg-brand-pine-soft text-brand-pine' : 'bg-brand-navy-soft text-brand-navy'}`}>{r.section}</span>
                              <span className="text-sm font-bold text-espresso">{r.operation}</span>
+                             {r.sourceQuestion === 'reserve' && <span className="text-xs font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900">Question de réserve</span>}
                            </div>
                            <div className="text-xs text-stone">{dateFormatee}</div>
                          </div>
@@ -1405,6 +1401,12 @@ function DashboardProf({ user, surDeconnexion, modeImpersonation = false }: { us
     try {
       const resp = await callGenerationService('generer', { prompt });
       let texte = resp.text.replace(/```json/gi, "").replace(/```/g, "").trim();
+      // Le service répond en JSON (ex. {"feedback": "…"}) : on garde le texte du bilan.
+      try {
+        const objet = JSON.parse(texte);
+        const valeur = typeof objet === "string" ? objet : Object.values(objet ?? {}).find((v) => typeof v === "string" && v.trim());
+        if (typeof valeur === "string") texte = valeur.trim();
+      } catch { /* texte brut : on le garde tel quel */ }
       setEleveBilanDetail(prev => prev ? {...prev, loading: false, bilan: texte} : null);
     } catch(e) {
       setEleveBilanDetail(prev => prev ? {...prev, loading: false, bilan: "Erreur lors de la génération du bilan. Veuillez réessayer."} : null);

@@ -70,6 +70,63 @@ export function consigneEstQuestionDocumentaire(value: unknown): boolean {
   return !VERBES_CONSIGNE_PROCEDURALE.test(lignesPrincipales);
 }
 
+const CHAMPS_AVEC_MARQUEURS: Record<string, string[]> = {
+  "causes-consequences": ["elementAttendu"],
+  "liens-causalite": ["liensAttendus"],
+  comparaisons: ["positionCommuneAttendue", "positionDissidenteAttendue"],
+  "continuite-changement": ["changementAttendu", "continuiteAttendue"],
+};
+
+const DEBUTS_INTERROGATIFS = /^(?:quel|quelle|quels|quelles|comment|pourquoi|en|dans|de|du|des|qu[’']|que|qui|lequel|laquelle|lesquels|lesquelles|combien|à|où|par|pour|sur)\b/i;
+
+/**
+ * Corrige les écarts de forme fréquents de Gemini avant la validation d'un dossier,
+ * sans changer le sens de la tâche :
+ * - une question valide qui ne nomme pas les documents reçoit « D’après les documents, »;
+ * - « marqueursRelationAttendus » est ramené à une liste de marqueurs autorisés,
+ *   complétée par ceux qu'emploient réellement les réponses attendues.
+ */
+export function harmoniserDossierOperation(question: any): void {
+  if (!question || typeof question !== "object") return;
+
+  const consigne = String(question.consigne || "");
+  if (consigne.trim() && !consigneEstQuestionDocumentaire(consigne)) {
+    const lignes = consigne.split(/\r?\n/);
+    const index = lignes.findIndex((ligne) => ligne.trim() && !/^(?:[-–—•·*]|\d+[.)])\s+/.test(ligne.trim()));
+    if (index >= 0) {
+      const ligne = lignes[index].trim();
+      const debut = DEBUTS_INTERROGATIFS.test(ligne) ? ligne.charAt(0).toLowerCase() + ligne.slice(1) : ligne;
+      lignes[index] = `D’après les documents, ${debut}`;
+      const candidate = lignes.join("\n");
+      // On ne garde l'ajout que s'il suffit : une procédure reste refusée.
+      if (consigneEstQuestionDocumentaire(candidate)) question.consigne = candidate;
+    }
+  }
+
+  const groupes = marqueursParType(String(question.operationId || ""));
+  if (groupes.length === 0) return;
+  const autorises = groupes.flatMap((groupe) => groupe.marqueurs);
+  const estAutorise = (marqueur: string) =>
+    autorises.some((autorise) => normaliserExpression(autorise) === normaliserExpression(marqueur));
+  const bruts = Array.isArray(question.marqueursRelationAttendus) ? question.marqueursRelationAttendus : [];
+  // Gemini renvoie parfois des objets { typeLien, marqueurs: "a, b" } au lieu de chaînes.
+  const actuels = bruts.flatMap((item: any) => typeof item === "string"
+    ? [item]
+    : String(item?.marqueurs || "").split(","))
+    .map((item: string) => item.trim())
+    .filter((item: string) => item && estAutorise(item));
+  const champs = CHAMPS_AVEC_MARQUEURS[question.operationId] || [];
+  const textes = champs.flatMap((champ) => Array.isArray(question[champ]) ? question[champ] : [question[champ]])
+    .map(normaliserExpression)
+    .filter(Boolean);
+  const employes = autorises.filter((marqueur) => textes.some((texte) => texte.includes(normaliserExpression(marqueur))));
+  const fusion = [...actuels];
+  for (const marqueur of employes) {
+    if (!fusion.some((actuel) => normaliserExpression(actuel) === normaliserExpression(marqueur))) fusion.push(marqueur);
+  }
+  if (fusion.length > 0) question.marqueursRelationAttendus = fusion;
+}
+
 export function validerConsigneQuestionDocumentaire(value: unknown): void {
   if (!consigneEstQuestionDocumentaire(value)) {
     throw new Error("La tâche à réaliser doit être une question liée aux documents, sans décrire une procédure.");

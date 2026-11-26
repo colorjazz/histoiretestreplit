@@ -489,7 +489,7 @@ export const OPERATIONS = OPERATIONS_BASE
   .map((operation) => ({
     ...operation,
     ...CADRES_OPERATION_INTELLECTUELLE[operation.id],
-    consigneType: `${CADRES_OPERATION_INTELLECTUELLE[operation.id]?.consigneType || operation.consigneType || ""}\n\nCONTRAT DE LA TÂCHE À RÉALISER : formule une seule question historique directement liée aux documents (ou à la carte et aux documents pour une activité spatiale), avec un point d’interrogation. Ne décris pas la procédure à suivre et n’emploie pas de verbe directif dans cette question.`,
+    consigneType: `${CADRES_OPERATION_INTELLECTUELLE[operation.id]?.consigneType || operation.consigneType || ""}\n\nCONTRAT DE LA TÂCHE À RÉALISER : formule une seule question historique directement liée aux documents (ou à la carte et aux documents pour une activité spatiale), avec un point d’interrogation. La question doit nommer explicitement les documents (par exemple « D’après les documents, … ? »). Ne décris pas la procédure à suivre et n’emploie pas de verbe directif dans cette question.`,
   }))
   .sort((operationA, operationB) => Number(operationA.num) - Number(operationB.num));
 

@@ -1,0 +1,36 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
+
+# Routes /api pas encore réimplémentées : réponse JSON 404 (l'appli a un repli pour
+# chacune). Ces règles visent seulement ces routes : une règle forcée sur /api/*
+# masquait aussi les fonctions (/api/focus-training renvoyait 404).
+[[redirects]]
+  from = "/api/auth/*"
+  to = "/api-404.json"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/api/push-notifications/*"
+  to = "/api-404.json"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/api/migration/*"
+  to = "/api-404.json"
+  status = 404
+  force = true
+
+# Application monopage : toutes les routes (/app, /admin, /super-admin…) servent index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

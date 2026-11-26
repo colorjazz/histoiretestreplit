@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-labelledby="title desc">
-  <title id="title">Carte schématique du territoire québécois</title>
-  <desc id="desc">Silhouette simplifiée du territoire québécois destinée aux exercices comparatifs.</desc>
-  <rect width="760" height="520" fill="#eef6f2"/>
-  <path d="M325 40 470 85l48 108-55 66 32 95-87 122-91-21-44-105-91-41 46-98-14-85Z" fill="#c9e4d8" stroke="#26765b" stroke-width="9" stroke-linejoin="round"/>
-  <path d="M391 248c-56 35-91 72-112 119" fill="none" stroke="#78abc0" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="353" cy="321" r="10" fill="#26765b"/>
-  <text x="380" y="494" text-anchor="middle" font-family="system-ui,sans-serif" font-size="26" font-weight="700" fill="#123e31">Province de Québec — repère territorial</text>
-</svg>

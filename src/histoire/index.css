@@ -25,6 +25,7 @@
   --success: #247b59;
   --success-soft: #e9f7ef;
   --danger: #c6514d;
+  --warning: #9a6200;
   --danger-soft: #fff0ee;
 
   /* Cartes de module en aplats monochromes */
@@ -93,6 +94,7 @@ html[data-theme="dark"] {
   --success: #73d09c;
   --success-soft: #173b2d;
   --danger: #f28c85;
+  --warning: #f0b45c;
   --danger-soft: #482625;
   --card-blue: #8171d7;
   --card-teal: #3aa295;
@@ -714,7 +716,7 @@ header p {
 }
 
 .operation-focus-period strong {
-  color: var(--card-teal-text);
+  color: color-mix(in srgb, var(--sec-b) 75%, var(--text-main));
   font-family: "Source Serif 4", Georgia, serif;
   font-size: clamp(1.35rem, 2.4vw, 1.85rem);
   line-height: 1.1;
@@ -736,7 +738,7 @@ header p {
 }
 
 .operation-focus-label {
-  color: var(--card-teal-text);
+  color: color-mix(in srgb, var(--sec-b) 75%, var(--text-main));
   font-size: .72rem;
   font-weight: 850;
   letter-spacing: .07em;
@@ -7047,3 +7049,270 @@ html[data-theme="dark"] .focus-hero {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- SCHÉMA : MISE EN PAGE ORDINATEUR ----------
+   Documents à gauche; à droite, les notes puis le schéma. Chaque colonne a sa
+   propre barre de défilement pour garder les documents visibles pendant que
+   l'élève complète le schéma. Sous 1100 px, tout reste empilé. */
+.schema-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* Les notes et le schéma gardent leur hauteur naturelle : c'est la colonne
+   qui défile, pas eux qui rétrécissent. */
+.schema-workspace > * {
+  flex-shrink: 0;
+}
+
+/* Une URL de source sans espace ne doit pas élargir la colonne. */
+.schema-document-list {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.schema-document-list .document-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Les mots longs (« Déconfessionnalisation ») restent dans leur case. */
+.schema-diagram .schema-node strong {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+@media (min-width: 1100px) {
+  .schema-conceptuel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    align-items: stretch;
+    gap: 20px;
+    height: calc(100vh - 110px);
+    min-height: 560px;
+  }
+
+  .schema-conceptuel > .schema-document-list,
+  .schema-conceptuel > .schema-workspace {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    /* Laisse de la place à la barre de navigation flottante du bas. */
+    padding-bottom: 110px;
+  }
+
+  .schema-conceptuel > .schema-document-list {
+    align-content: start;
+  }
+
+  .schema-conceptuel > .schema-workspace {
+    padding-right: 6px;
+  }
+}
+
+/* ---------- ATTENTE (indicateur commun, sobre) ---------- */
+.attente-historique {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
+  margin: 12px auto;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.attente-historique-anneau {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 3px solid color-mix(in srgb, var(--text-main) 14%, transparent);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: attente-rotation 0.9s linear infinite;
+}
+
+.attente-historique-texte {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.attente-historique-titre {
+  color: var(--text-main);
+  font-size: .98rem;
+}
+
+.attente-historique-detail {
+  color: var(--text-muted);
+  font-size: .8rem;
+}
+
+.attente-historique--compact {
+  max-width: 420px;
+  padding: 10px 14px;
+  gap: 10px;
+}
+
+.attente-historique--compact .attente-historique-anneau {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+@keyframes attente-rotation {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attente-historique-anneau { animation-duration: 2.4s; }
+}
+
+/* ---------- ANALYSE DE PROGRESSION : RÉSUMÉ + LISTE ---------- */
+.focus-status-board { container-type: inline-size; }
+.focus-status-board .is-success { --statut: var(--success); }
+.focus-status-board .is-partial { --statut: var(--warning); }
+.focus-status-board .is-work { --statut: var(--danger); }
+.focus-status-board .is-unassessed { --statut: var(--text-muted); }
+
+.focus-status-summary {
+  display: flex;
+  gap: 3px;
+  height: 22px;
+  margin: 12px 0 10px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.focus-status-summary-part {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  color: #fff;
+  background: var(--statut);
+  font-size: .72rem;
+  font-weight: 800;
+}
+.focus-status-summary-part.is-unassessed {
+  color: var(--text-main);
+  background: color-mix(in srgb, var(--text-muted) 30%, transparent);
+}
+
+.focus-status-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.focus-status-filters button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.focus-status-filters button b { color: var(--text-muted); }
+.focus-status-filters button[aria-pressed="true"] {
+  border-color: var(--text-main);
+  background: var(--bg-surface-soft);
+}
+.focus-status-filters button:disabled { opacity: .45; cursor: default; }
+.focus-status-filters i,
+.focus-status-legend i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--statut);
+}
+
+.focus-status-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.focus-status-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 130px;
+  grid-template-areas:
+    "pill name score"
+    "pill details score";
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 2px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--statut);
+  border-radius: 10px;
+  background: var(--bg-surface);
+}
+.focus-status-pill {
+  grid-area: pill;
+  justify-self: start;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: var(--statut);
+  background: color-mix(in srgb, var(--statut) 13%, transparent);
+  font-size: .72rem;
+  font-weight: 800;
+}
+.focus-status-name { grid-area: name; color: var(--text-main); font-weight: 700; line-height: 1.3; }
+.focus-status-details { grid-area: details; color: var(--text-muted); font-size: .75rem; }
+.focus-status-score { grid-area: score; display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.focus-status-score b { min-width: 42px; text-align: right; font-size: .85rem; }
+.focus-status-meter {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-main) 10%, transparent);
+  overflow: hidden;
+}
+.focus-status-meter > span { display: block; height: 100%; background: var(--statut); }
+
+.focus-status-legend { margin-top: 10px; color: var(--text-muted); font-size: .8rem; }
+.focus-status-legend summary { cursor: pointer; font-weight: 700; }
+.focus-status-legend dl { display: grid; gap: 6px; margin: 8px 0 0; }
+.focus-status-legend dt { display: inline-flex; align-items: center; gap: 6px; color: var(--text-main); font-weight: 700; }
+.focus-status-legend dd { margin: 0 0 0 15px; }
+
+/* Tableau étroit (téléphone ou colonne) : la ligne passe sur deux niveaux. */
+@container (max-width: 520px) {
+  .focus-status-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "pill score"
+      "name name"
+      "details details";
+  }
+  .focus-status-score { min-width: 110px; }
+}
+
+/* Correction automatique indisponible (Section A) */
+.correction-indisponible {
+  margin: 16px 0;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--warning) 45%, var(--line));
+  border-left: 4px solid var(--warning);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--warning) 8%, var(--bg-surface));
+  color: var(--text-main);
+}
+.correction-indisponible p { margin: 6px 0 0; }
+.correction-indisponible summary { margin-top: 8px; cursor: pointer; font-weight: 700; }
+.correction-indisponible ol,
+.correction-indisponible ul { margin: 6px 0 0 18px; padding: 0; }
+.correction-indisponible ul { list-style: disc; }
+.correction-indisponible ol { list-style: decimal; }

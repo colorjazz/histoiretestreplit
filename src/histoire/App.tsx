@@ -6,8 +6,9 @@ import { collection, addDoc, serverTimestamp, getDocs, query, where } from 'fire
 import { signOut } from 'firebase/auth';
 import { PERIODES_HISTORIQUES } from './periodes';
 import { contextePFEQ, normaliserRattachementPFEQ, trouverRealitePFEQ } from './pfeqReferentiel';
-import { chargerCarteHistoriqueLibre, compterDocumentsIconographiques, documentsIconographiquesComplets, enrichirDocumentsAvecVisuels, getFallbackWikimediaImageSource, getWikimediaImageProxySource, getWikimediaImageSource, imageWikimediaAutorisee, resoudrePeriodeId } from './historicalVisuals';
+import { compterDocumentsIconographiques, documentsIconographiquesComplets, enrichirDocumentsAvecVisuels, getFallbackWikimediaImageSource, getWikimediaImageProxySource, getWikimediaImageSource, imageWikimediaAutorisee, resoudrePeriodeId } from './historicalVisuals';
 import { appelerFocusTraining, FocusTrainingError } from './focusTrainingClient';
+import AttenteHistorique from './AttenteHistorique';
 import { ajouterResultatLocal, preparerResultatPourSauvegarde } from './resultPersistence';
 import { ecrireResultatSupabase } from '../supabaseResultsClient';
 import { enablePushNotifications, getPushAvailability, postponePushPrompt, reportPushActivity, shouldPromptForPush } from './pushNotifications';
@@ -33,6 +34,7 @@ import {
   validerFeedbackOperation,
   validerContenuOperation,
   validerLotSectionA,
+  harmoniserDossierOperation,
   validerQuestionB,
   validerQuestionC,
   validerRattachementPFEQ,
@@ -403,7 +405,7 @@ function NotesDocumentsPanel({ documents, notes, setNotes, accent = "var(--accen
                 <textarea
                   value={notes[index] || ""}
                   onChange={(event) => setNotes((previous: Record<number, string>) => ({ ...previous, [index]: event.target.value }))}
-                  placeholder="Les notes saisies sous ce document apparaîtront ici."
+                  placeholder="Écris ici tes notes sur ce document : un fait, une preuve, un lien…"
                   aria-label={`Notes du tableau pour ${formatDocumentLabel(index)} — ${document.titre || "sans titre"}`}
                 />
               )}
@@ -877,12 +879,13 @@ function SchemaConceptuel({
             document={document}
             index={index}
             accent="var(--card-teal)"
-            note={notes[index] || ""}
-            onNoteChange={(value) => setNotes((previous: Record<number, string>) => ({ ...previous, [index]: value }))}
             referenceUniversitaire
           />
         ))}
       </div>
+      {/* Sur ordinateur : colonne de droite (notes, puis schéma) qui défile
+          indépendamment des documents, pour les garder visibles en travaillant. */}
+      <div className="schema-workspace">
       <NotesDocumentsPanel documents={documents} notes={notes} setNotes={setNotes} accent="var(--card-teal)" />
       <div className="schema-diagram" aria-label="Schéma conceptuel à compléter">
         <div className="schema-central-zone">
@@ -967,14 +970,15 @@ function SchemaConceptuel({
           })}
         </div>
       </div>
+      </div>
     </div>
   );
 }
 
-const ERAS_HISTORIQUES: Record<string, { label: string; image: string; regions: { nom: string; x: number; y: number }[] }> = {
-  "1867": { label: "Canada le 1er juillet 1867 (Confédération)", image: "/maps/carte-canada.svg", regions: [{ nom: "Ontario", x: 68, y: 86 }, { nom: "Québec", x: 78, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.1, y: 74.8 }, { nom: "Nouvelle-Écosse", x: 87.0, y: 76.2 }] },
-  "1870-71": { label: "Canada en 1870-1871", image: "/maps/carte-canada.svg", regions: [{ nom: "Colombie-Britannique", x: 29, y: 56 }, { nom: "Manitoba", x: 51.3, y: 80.7 }, { nom: "Ontario", x: 65, y: 88.5 }, { nom: "Québec", x: 76, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.2, y: 77.7 }, { nom: "Nouvelle-Écosse", x: 86.9, y: 78.7 }] },
-  "1999": { label: "Canada aujourd'hui", image: "/maps/carte-canada.svg", regions: [{ nom: "Yukon", x: 20, y: 24 }, { nom: "Territoires du Nord-Ouest", x: 33, y: 32 }, { nom: "Nunavut", x: 53, y: 24 }, { nom: "Colombie-Britannique", x: 19, y: 57 }, { nom: "Alberta", x: 29, y: 61 }, { nom: "Saskatchewan", x: 38, y: 65 }, { nom: "Manitoba", x: 45.5, y: 68 }, { nom: "Ontario", x: 58, y: 79 }, { nom: "Québec", x: 73.5, y: 63 }, { nom: "Terre-Neuve", x: 85.5, y: 55 }, { nom: "Nouveau-Brunswick", x: 82.3, y: 78.7 }, { nom: "Île-du-Prince-Édouard", x: 85.5, y: 68.5 }, { nom: "Nouvelle-Écosse", x: 86.8, y: 80.0 }] }
+const ERAS_HISTORIQUES: Record<string, { label: string; regions: { nom: string; x: number; y: number }[] }> = {
+  "1867": { label: "Canada le 1er juillet 1867 (Confédération)", regions: [{ nom: "Ontario", x: 68, y: 86 }, { nom: "Québec", x: 78, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.1, y: 74.8 }, { nom: "Nouvelle-Écosse", x: 87.0, y: 76.2 }] },
+  "1870-71": { label: "Canada en 1870-1871", regions: [{ nom: "Colombie-Britannique", x: 29, y: 56 }, { nom: "Manitoba", x: 51.3, y: 80.7 }, { nom: "Ontario", x: 65, y: 88.5 }, { nom: "Québec", x: 76, y: 62 }, { nom: "Nouveau-Brunswick", x: 83.2, y: 77.7 }, { nom: "Nouvelle-Écosse", x: 86.9, y: 78.7 }] },
+  "1999": { label: "Canada aujourd'hui", regions: [{ nom: "Yukon", x: 20, y: 24 }, { nom: "Territoires du Nord-Ouest", x: 33, y: 32 }, { nom: "Nunavut", x: 53, y: 24 }, { nom: "Colombie-Britannique", x: 19, y: 57 }, { nom: "Alberta", x: 29, y: 61 }, { nom: "Saskatchewan", x: 38, y: 65 }, { nom: "Manitoba", x: 45.5, y: 68 }, { nom: "Ontario", x: 58, y: 79 }, { nom: "Québec", x: 73.5, y: 63 }, { nom: "Terre-Neuve", x: 85.5, y: 55 }, { nom: "Nouveau-Brunswick", x: 82.3, y: 78.7 }, { nom: "Île-du-Prince-Édouard", x: 85.5, y: 68.5 }, { nom: "Nouvelle-Écosse", x: 86.8, y: 80.0 }] }
 };
 
 function CarteHistorique({ era, lieuSelectionne, setLieuSelectionne }: any) {
@@ -989,58 +993,35 @@ function CarteHistorique({ era, lieuSelectionne, setLieuSelectionne }: any) {
   );
 }
 
+// Cartes fixes, tirées de Wikimedia Commons et adaptées pour l'appli
+// (étiquettes traduites en français, année retirée des cartes de la Province de
+// Québec). Les licences exigent de mentionner l'auteur et la licence.
+const CREDIT_GOLBEZ = "Carte : Golbez, Wikimedia Commons, CC BY 2.5 — étiquettes traduites en français.";
+const CREDIT_PROVINCE_QUEBEC = "Carte : Judicieux, Wikimedia Commons, CC BY-SA 3.0 — année retirée.";
+const CARTES_FIXES: Record<string, { image: string; credit: string }> = {
+  "1867": { image: "/maps/canada-1867.png", credit: CREDIT_GOLBEZ },
+  "1870-71": { image: "/maps/canada-1870-71.png", credit: CREDIT_GOLBEZ },
+  "1999": { image: "/maps/canada-aujourdhui.png", credit: "Carte : Golbez, Wikimedia Commons, CC BY 2.5." },
+  "province-quebec-1763": { image: "/maps/province-quebec-1763.png", credit: CREDIT_PROVINCE_QUEBEC },
+  "province-quebec-1774": { image: "/maps/province-quebec-1774.png", credit: CREDIT_PROVINCE_QUEBEC },
+  "province-quebec-1783": { image: "/maps/province-quebec-1783.png", credit: CREDIT_PROVINCE_QUEBEC },
+};
+
 function CarteImageLibre({ era, alt }: { era: string; alt: string }) {
-  const [visual, setVisual] = useState<any>(null);
-  const [sourceEnErreur, setSourceEnErreur] = useState(false);
-  const carteLocale = era.startsWith("province-quebec")
-    ? "/maps/carte-quebec.png"
-    : "/maps/carte-canada.png";
-
-  useEffect(() => {
-    let active = true;
-    setVisual(null);
-    setSourceEnErreur(false);
-    void chargerCarteHistoriqueLibre(era).then((carte) => {
-      if (active) setVisual(carte);
-    });
-    return () => { active = false; };
-  }, [era]);
-
-  const descriptionCarte = `${visual?.titre || ""} ${visual?.imageAlt || ""}`;
-  const carteDistanteFrancaise = Boolean(
-    visual
-      && /\b(?:carte|québec|province|territoire|canada français)\b/i.test(descriptionCarte),
-  );
-  const afficherCarteDistante = carteDistanteFrancaise && !sourceEnErreur;
-
+  const carte = CARTES_FIXES[era] || CARTES_FIXES["1999"];
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   return (
     <figure className="carte-figure">
-      {afficherCarteDistante ? (
-        <>
-          <img
-            src={getWikimediaImageProxySource(visual.imageUrl)}
-            alt={visual.imageAlt || alt}
-            className="carte-image"
-            onError={() => setSourceEnErreur(true)}
-          />
-          <figcaption className="carte-source-note">
-            Carte libre de droits — {visual.reference || "Wikimedia Commons"} · {visual.imageLicense}.
-          </figcaption>
-        </>
-      ) : (
-        <>
-          <img src={carteLocale} alt={alt} className="carte-image" />
-          <figcaption className="carte-source-note">Carte schématique en français — support de localisation.</figcaption>
-        </>
-      )}
+      <img src={`${base}${carte.image}`} alt={alt} className="carte-image" />
+      <figcaption className="carte-source-note">{carte.credit}</figcaption>
     </figure>
   );
 }
 
-const CARTES_PROVINCE_QUEBEC: Record<string, { label: string; image: string }> = {
-  "1763": { label: "1763 (Proclamation royale)", image: "/maps/carte-quebec.svg" },
-  "1774": { label: "1774 (Acte de Québec)", image: "/maps/carte-quebec.svg" },
-  "1783": { label: "1783 (Traité de Paris)", image: "/maps/carte-quebec.svg" }
+const CARTES_PROVINCE_QUEBEC: Record<string, { label: string }> = {
+  "1763": { label: "1763 (Proclamation royale)" },
+  "1774": { label: "1774 (Acte de Québec)" },
+  "1783": { label: "1783 (Traité de Paris)" }
 };
 
 function CarteComparaisonProvinceQuebec({ mode, annees, lieuCorrect, lieuSelectionne, setLieuSelectionne }: any) {
@@ -1718,6 +1699,39 @@ function normaliserActiviteFocus(reponse: any, intention: FocusIntention, catalo
   };
 }
 
+const CLE_RESERVE_VUES = "corrige-reserve-section-a-vues";
+
+function lireQuestionsDeReserveVues(): string[] {
+  try {
+    const valeur = JSON.parse(localStorage.getItem(CLE_RESERVE_VUES) || "[]");
+    return Array.isArray(valeur) ? valeur.filter((id) => typeof id === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
+function retenirQuestionsDeReserveVues(ids: string[]) {
+  try {
+    const toutes = [...new Set([...lireQuestionsDeReserveVues(), ...ids])].slice(-400);
+    localStorage.setItem(CLE_RESERVE_VUES, JSON.stringify(toutes));
+  } catch {
+    // Stockage indisponible (navigation privée) : on accepte des répétitions.
+  }
+}
+
+/** Lot de réserve de la Section A, ou null si la réserve n'a rien pour ces périodes. */
+async function chargerLotDeReserveA(parcours: string, periodes: number[]): Promise<any[] | null> {
+  const parametres = new URLSearchParams({
+    parcours,
+    periodes: periodes.join(","),
+    exclure: lireQuestionsDeReserveVues().slice(-300).join(","),
+  });
+  const reponse = await fetch(`/api/banque-section-a?${parametres.toString()}`, { headers: { Accept: "application/json" } });
+  if (!reponse.ok) return null;
+  const donnees = await reponse.json().catch(() => null);
+  return Array.isArray(donnees?.questions) && donnees.questions.length === 10 ? donnees.questions : null;
+}
+
 async function executerGenerationAvecTentatives<T>(
   operation: () => Promise<T>,
   nombreTentatives = 2,
@@ -1917,29 +1931,90 @@ function construireAnalyseFocus(resultats: any[], niveauScolaire: 3 | 4 | null, 
   return { groupes, priorites, forces, tentatives, progression, operations, formats, periodeScope, ciblesPrioritaires };
 }
 
+// Ordre d'affichage : ce qui demande du travail d'abord.
+const ORDRE_PRIORITE_STATUTS = ["travail", "partiel", "non-evalue", "reussi"];
+
 function FocusStatusBoard({ title, description, items }: { title: string; description: string; items: Array<{ label: string; score: number | null; total?: number; statut: typeof FOCUS_STATUTS[number]; criteresTotal?: number; criteresEvalues?: number }> }) {
+  const titreId = `focus-status-${title.replace(/\W+/g, "-").toLowerCase()}`;
+  const [filtre, setFiltre] = useState<string>("tous");
+  const statutsOrdonnes = ORDRE_PRIORITE_STATUTS
+    .map((id) => FOCUS_STATUTS.find((statut) => statut.id === id))
+    .filter((statut): statut is typeof FOCUS_STATUTS[number] => Boolean(statut));
+  const compte = (id: string) => items.filter((item) => item.statut.id === id).length;
+  const filtreActif = filtre !== "tous" && compte(filtre) === 0 ? "tous" : filtre;
+  const visibles = items
+    .filter((item) => filtreActif === "tous" || item.statut.id === filtreActif)
+    .slice()
+    .sort((a, b) => ORDRE_PRIORITE_STATUTS.indexOf(a.statut.id) - ORDRE_PRIORITE_STATUTS.indexOf(b.statut.id)
+      || (a.score ?? 101) - (b.score ?? 101)
+      || a.label.localeCompare(b.label, "fr"));
+  const resume = statutsOrdonnes
+    .filter((statut) => compte(statut.id) > 0)
+    .map((statut) => `${compte(statut.id)} ${statut.label.toLowerCase()}`)
+    .join(", ");
+
   return (
-    <section className="focus-status-board" aria-labelledby={`focus-status-${title.replace(/\W+/g, "-").toLowerCase()}`}>
+    <section className="focus-status-board" aria-labelledby={titreId}>
       <div className="focus-status-heading">
-        <div><h4 id={`focus-status-${title.replace(/\W+/g, "-").toLowerCase()}`}>{title}</h4><p>{description}</p></div>
+        <div><h4 id={titreId}>{title}</h4><p>{description}</p></div>
         <span>{items.length} cible{items.length > 1 ? "s" : ""}</span>
       </div>
-      <div className="focus-status-columns">
-        {FOCUS_STATUTS.map((statut) => {
-          const cibles = items.filter((item) => item.statut.id === statut.id);
-          return (
-            <div className={`focus-status-column ${statut.classe}`} key={statut.id}>
-              <div className="focus-status-column-heading"><strong>{statut.label}</strong><b>{cibles.length}</b></div>
-              <p>{statut.description}</p>
-              {cibles.length > 0 ? (
-                <ul>
-                   {cibles.map((item) => <li key={item.label}><span>{item.label}</span><small>{item.score === null ? "—" : `${item.score}%`}{item.total ? ` · ${item.total} résultat${item.total > 1 ? "s" : ""}` : ""}{item.criteresTotal ? ` · Critères évalués : ${item.criteresEvalues || 0}/${item.criteresTotal}` : ""}</small></li>)}
-                </ul>
-              ) : <span className="focus-status-empty">Aucune cible dans cette catégorie.</span>}
-            </div>
-          );
-        })}
+
+      {items.length > 0 && (
+        <div className="focus-status-summary" role="img" aria-label={`Répartition : ${resume}.`}>
+          {statutsOrdonnes.filter((statut) => compte(statut.id) > 0).map((statut) => (
+            <span key={statut.id} className={`focus-status-summary-part ${statut.classe}`} style={{ flexGrow: compte(statut.id) }}>
+              {compte(statut.id)}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div className="focus-status-filters" role="group" aria-label={`Filtrer les cibles : ${title}`}>
+        <button type="button" aria-pressed={filtreActif === "tous"} onClick={() => setFiltre("tous")}>
+          Tous <b>{items.length}</b>
+        </button>
+        {statutsOrdonnes.map((statut) => (
+          <button
+            type="button"
+            key={statut.id}
+            className={statut.classe}
+            aria-pressed={filtreActif === statut.id}
+            disabled={compte(statut.id) === 0}
+            onClick={() => setFiltre(statut.id)}
+          >
+            <i aria-hidden="true" />{statut.label} <b>{compte(statut.id)}</b>
+          </button>
+        ))}
       </div>
+
+      {visibles.length > 0 ? (
+        <ul className="focus-status-list">
+          {visibles.map((item) => (
+            <li className={`focus-status-row ${item.statut.classe}`} key={`${item.statut.id}-${item.label}`}>
+              <span className="focus-status-pill">{item.statut.label}</span>
+              <span className="focus-status-name">{item.label}</span>
+              <span className="focus-status-score" aria-label={item.score === null ? "Score non disponible" : `Score : ${item.score} %`}>
+                <span className="focus-status-meter" aria-hidden="true"><span style={{ width: `${item.score ?? 0}%` }} /></span>
+                <b>{item.score === null ? "—" : `${item.score} %`}</b>
+              </span>
+              <small className="focus-status-details">
+                {item.total ? `${item.total} résultat${item.total > 1 ? "s" : ""}` : "Aucun résultat"}
+                {item.criteresTotal ? ` · Critères évalués : ${item.criteresEvalues || 0}/${item.criteresTotal}` : ""}
+              </small>
+            </li>
+          ))}
+        </ul>
+      ) : <p className="focus-status-empty">Aucune cible pour l’instant.</p>}
+
+      <details className="focus-status-legend">
+        <summary>Que signifient les statuts ?</summary>
+        <dl>
+          {statutsOrdonnes.map((statut) => (
+            <div key={statut.id} className={statut.classe}><dt><i aria-hidden="true" />{statut.label}</dt><dd>{statut.description}</dd></div>
+          ))}
+        </dl>
+      </details>
     </section>
   );
 }
@@ -2314,6 +2389,11 @@ function ReglesEtConfidentialite() {
 }
 
 
+/** Échec d'enregistrement d'un résultat déjà corrigé : son message est déjà affiché. */
+class ErreurEnregistrement extends Error {
+  constructor(public cause: unknown) { super("Enregistrement du résultat impossible"); }
+}
+
 export default function App({ niveauInitial }: { niveauInitial?: 3 | 4 }) {
   const [showSplash, setShowSplash] = useState(true);
   const [isFading, setIsFading] = useState(false);
@@ -2678,6 +2758,8 @@ ${dejaVues.length ? dejaVues.map((item) => `- ${item}`).join("\n") : "- aucune a
   const [ordreChronologiqueA, setOrdreChronologiqueA] = useState<number[]>([]);
   const [erreurFormatA, setErreurFormatA] = useState<string | null>(null);
   const [feedbackA, setFeedbackA] = useState<any>(null);
+  // Correction automatique indisponible : message pour réessayer + réponse attendue.
+  const [correctionIndisponibleA, setCorrectionIndisponibleA] = useState<null | { bonneReponse?: string; ordre?: string[]; reponseAttendue?: string; criteres?: string[]; explication?: string }>(null);
   const [isAnswerValidated, setIsAnswerValidated] = useState(false);
   const [savingQcmA, setSavingQcmA] = useState(false);
   const [scoreA, setScoreA] = useState({ correct: 0, total: 0 });
@@ -2709,7 +2791,7 @@ ${dejaVues.length ? dejaVues.map((item) => `- ${item}`).join("\n") : "- aucune a
     if (error instanceof FocusTrainingError && error.code === "GEMINI_NOT_CONFIGURED") {
       if (parcours === "section-a") setGenerationAConfigGemini(true);
       setErreurGlobal(
-        "La génération est arrêtée parce que le service Gemini n’est pas configuré. Demande à un administrateur d’ajouter GEMINI_API_KEY dans les Secrets Replit, puis lance une nouvelle génération. Aucune demande n’est relancée automatiquement.",
+        "La génération est arrêtée parce que le service Gemini n’est pas configuré. Demande à un administrateur d’ajouter GEMINI_API_KEY dans les variables d’environnement Netlify, puis de redéployer le site avant de lancer une nouvelle génération. Aucune demande n’est relancée automatiquement.",
       );
       return;
     }
@@ -2760,7 +2842,7 @@ ${dejaVues.length ? dejaVues.map((item) => `- ${item}`).join("\n") : "- aucune a
     } catch (erreur) {
       console.error("Erreur ajout document : ", erreur);
       setErreurGlobal("La correction est prête, mais son enregistrement a échoué. Réessaie avant de poursuivre afin de conserver ta progression.");
-      throw erreur;
+      throw new ErreurEnregistrement(erreur);
     }
   }
 
@@ -3132,6 +3214,8 @@ Critères incomplets à remplacer : ${JSON.stringify(question.criteresCorrection
 CONTRATS PÉDAGOGIQUES OBLIGATOIRES PAR OPÉRATION :
 ${contratsOperationsPourPrompt()}
 Dans ce lot de Section A, l'opération "espace-temps" doit obligatoirement utiliser "dimension":"temps" et le format "classement"; la localisation spatiale est évaluée dans le dossier interactif de Section B.
+Pour ce classement "espace-temps", fournis exactement quatre documents textuels distincts et le champ interne "ordreCorrect" : un tableau des quatre indices des documents (0 à 3), du plus ancien au plus récent.
+Pour la mise en relation, "associationsAttendues" ne doit jamais valoir [0,1,2] : présente les documents dans un ordre différent de celui des faits.
 Les champs internes servent à valider et corriger l'activité; ne les révèle jamais dans la consigne destinée à l'élève.`;
     const regleFormats = parcoursPourGeneration === 'reponses'
          ? `Répartis les bonnes réponses des QCM de façon aléatoire entre A, B, C et D. Pour chaque réponse courte rédigée, ajoute "reponseAttendue" et "criteresCorrection" internes sans les révéler dans la consigne; son barème est de 2 points, accordés seulement si la réponse est correcte et formulée en phrase complète. Si l’élève écrit un ou deux mots, la note maximale est 1/2 même si l’idée est juste. Chaque réponse courte doit couvrir et permettre d’évaluer séparément les critères suivants : ${JSON.stringify(CRITERES_REPONSE_COURTE_PFEQ)}. Pour au moins une réponse courte, ajoute exactement quatre "elementsChronologiques" contenant chacun "label" et "annee" ou "ordre", dans l'ordre du plus ancien au plus récent; l'élève devra pouvoir les réorganiser. Pour cette question, retourne "documents":[] et ne demande pas de réponse rédigée : la correction doit porter uniquement sur l'ordre chronologique choisi. Pour les autres questions, chaque document doit être textuel, de type "Source primaire" ou "Source secondaire", avec "typeDoc", "texte" et "reference"; n'ajoute aucun champ d'image et ne demande jamais à l'élève de nommer un document. Une réponse courte doit être formulée directement avec le fait historique attendu, sans commencer par « Selon le document ». Ajoute "marqueursRelationAttendus" avec des mots adaptés à la réponse historique attendue.`
@@ -3160,26 +3244,14 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
       code: resume?.code || codeUtilise,
     } satisfies SectionAGenerationResume;
     sauvegarderRepriseSectionA(reprise);
-    try {
-      await executerGenerationAvecTentatives(async () => {
-        const response = await callGenerationService('generer', { prompt: systemPrompt }, {
-          requestId: generationId,
-          ...(resume?.statusUrl ? { statusUrl: resume.statusUrl } : {}),
-          onJobCreated: ({ statusUrl }) => {
-            sauvegarderRepriseSectionA({ ...reprise, statusUrl });
-          },
-          onProgress: (progress) => setGenerationProgressA({
-            stage: progress.stage,
-            percent: Math.max(0, Math.min(100, progress.percent)),
-          }),
-        });
-        try {
-          let questions = extraireJSON<any[]>(response.text);
+    // Préparation et validation d'un lot reçu (généré ou tiré de la réserve).
+    const preparerLotSectionA = async (questionsBrutes: unknown, options: { reparer: boolean }): Promise<any[]> => {
+          let questions: any = questionsBrutes;
           questions = Array.isArray(questions)
             ? questions.map(normaliserQuestionSectionA)
             : questions;
           questions = Array.isArray(questions)
-            ? (await reparerLotSectionAEnUnAppel(questions)).map((question) =>
+            ? (options.reparer ? await reparerLotSectionAEnUnAppel(questions) : questions).map((question: any) =>
                 question?.operationId === "liens-causalite"
                   ? { ...question, question: normaliserConsigneTroisPicots(question.question, question.etapes) }
                   : question)
@@ -3191,6 +3263,12 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
                   : question
               ))
             : questions;
+          // Le module de réponses courtes n'évalue pas d'opération : un
+          // operationId ajouté par Gemini y transformait chaque QCM en
+          // réponse courte (format attendu de l'opération « faits »).
+          if (parcoursPourGeneration === 'reponses' && Array.isArray(questions)) {
+            questions = questions.map(({ operationId: _operationId, operation: _operation, ...question }: any) => question);
+          }
           questions = Array.isArray(questions)
             ? questions.map((question: any) => question?.operationId
               ? {
@@ -3235,9 +3313,40 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
               etapes: Array.isArray(question.etapes) ? question.etapes.slice(0, 3) : undefined
            };
            }));
-           if (!questionsNormalisees.some((question: any) => Array.isArray(question.elementsChronologiques) && question.elementsChronologiques.length === 4)) {
+           // Exigence propre au module de réponses courtes; le module d'opérations
+           // évalue la chronologie par le classement de documents (espace-temps).
+           if (parcoursPourGeneration === 'reponses'
+             && !questionsNormalisees.some((question: any) => Array.isArray(question.elementsChronologiques) && question.elementsChronologiques.length === 4)) {
              throw new Error("Le lot doit contenir au moins un classement chronologique réorganisable.");
            }
+           return questionsNormalisees;
+    };
+
+    try {
+      await executerGenerationAvecTentatives(async () => {
+        // Après un lot refusé, l'identifiant est effacé : la tentative suivante
+        // doit en créer un nouveau, sinon le serveur renvoie le même lot.
+        const requestIdTentative = sectionAGenerationIdRef.current
+          || (sectionAGenerationIdRef.current = globalThis.crypto?.randomUUID?.()
+            || `section-a-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+        const repriseTentative = { ...reprise, requestId: requestIdTentative };
+        if (requestIdTentative !== generationId) {
+          delete (repriseTentative as { statusUrl?: string }).statusUrl;
+          sauvegarderRepriseSectionA(repriseTentative);
+        }
+        const response = await callGenerationService('generer', { prompt: systemPrompt }, {
+          requestId: requestIdTentative,
+          ...(resume?.statusUrl && requestIdTentative === generationId ? { statusUrl: resume.statusUrl } : {}),
+          onJobCreated: ({ statusUrl }) => {
+            sauvegarderRepriseSectionA({ ...repriseTentative, statusUrl });
+          },
+          onProgress: (progress) => setGenerationProgressA({
+            stage: progress.stage,
+            percent: Math.max(0, Math.min(100, progress.percent)),
+          }),
+        });
+        try {
+          const questionsNormalisees = await preparerLotSectionA(extraireJSON<any[]>(response.text), { reparer: true });
            memoriserQuestionsGenerees(questionsNormalisees);
           setBanqueQuestionsA(questionsNormalisees); setCurrentIndexA(0); setReponsesStructureA({}); setErreurFormatA(null);
           sectionAGenerationIdRef.current = null;
@@ -3252,9 +3361,28 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
           }
           throw error;
         }
-      });
+      }, 3);
     } catch(err) {
-      afficherErreurGeneration("section-a", err);
+      // Toutes les tentatives ont échoué : on pige un lot dans la réserve
+      // plutôt que d'afficher une erreur. Erreur seulement si la réserve
+      // ne peut rien fournir pour ces périodes.
+      const lotDeReserve = await chargerLotDeReserveA(parcoursPourGeneration, periodesPourGeneration)
+        .then((questions) => questions ? preparerLotSectionA(questions, { reparer: false }) : null)
+        .catch((erreurReserve) => {
+          console.warn("Réserve inutilisable", erreurReserve);
+          return null;
+        });
+      if (lotDeReserve && lotDeReserve.length === 10) {
+        console.warn("Lot de réserve utilisé après l'échec de la génération", err);
+        const marques = lotDeReserve.map((question: any) => ({ ...question, sourceQuestion: "reserve" }));
+        retenirQuestionsDeReserveVues(marques.map((question: any) => question.reserveId).filter(Boolean));
+        memoriserQuestionsGenerees(marques);
+        setBanqueQuestionsA(marques); setCurrentIndexA(0); setReponsesStructureA({}); setErreurFormatA(null);
+        sectionAGenerationIdRef.current = null;
+        supprimerRepriseSectionA();
+      } else {
+        afficherErreurGeneration("section-a", err);
+      }
     } finally {
       sectionAGenerationInFlightRef.current = false;
       setLoadingQuestionA(false);
@@ -3302,6 +3430,7 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
   }, [currentIndexA, banqueQuestionsA]);
 
   const passerQuestionSuivanteA = () => {
+    setCorrectionIndisponibleA(null);
     setSelectedChoice(null); setReponseCourteA(""); setReponsesStructureA({}); setAnnonceReponseStructureA(""); setOrdreChronologiqueA([]); setErreurFormatA(null); setFeedbackA(null); setIsAnswerValidated(false);
     if (currentIndexA + 1 < banqueQuestionsA.length) { setCurrentIndexA(currentIndexA + 1); } else { genererLotQuestionsA(); }
   };
@@ -3408,7 +3537,7 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
       : estClassementChronologique
         ? JSON.stringify({ ordreChronologique: ordreChronologiqueA.map((index) => elementsChronologiques[index]) })
         : reponseCourteA;
-    setLoadingCorrectionA(true); setErreurGlobal(null);
+    setLoadingCorrectionA(true); setErreurGlobal(null); setCorrectionIndisponibleA(null);
     setErreurFormatA(null);
     const operationQuestionA = OPERATIONS.find((operation) => operation.id === questionA.operationId);
        const correctionPrompt = `Tu es un correcteur d'histoire du Québec et du Canada de secondaire ${niveauScolaire}. Évalue cette réponse selon le barème de ${questionA.points || 1} point(s). Format : ${format}. Question : ${questionA.question}. Documents visibles : ${JSON.stringify(questionA.documents || [])}. Faits à mettre en relation affichés : ${format === "association-paires" ? JSON.stringify(questionA.faitsRelier || questionA.propositions || []) : "non applicable"}. Clé interne des associations par document : ${format === "association-paires" ? JSON.stringify(questionA.associationsAttendues || []) : "non applicable"}. Réponse attendue interne : ${questionA.reponseAttendue || ""}. Explication historique interne : ${questionA.explication || ""}. Réponse correcte du QCM (métadonnée interne, à ne pas révéler dans le commentaire) : ${estQcm ? questionA.choix?.[questionA.indexReponseCorrecte] || "" : ""}. Classement chronologique attendu interne (métadonnée à ne pas révéler) : ${estClassementChronologique ? JSON.stringify(elementsChronologiques) : "non applicable"}. Critères internes : ${JSON.stringify(questionA.criteresCorrection || [])}. Critères transversaux des réponses courtes : ${JSON.stringify(CRITERES_REPONSE_COURTE_PFEQ)}. Contrat de l'opération : ${operationQuestionA ? contratOperationPourPrompt(operationQuestionA) : "question de connaissance sans opération intellectuelle"}. Marqueurs attendus : ${JSON.stringify(questionA.marqueursRelationAttendus || [])}. Réponse de l'élève : "${reponseSoumise}". ${estClassementChronologique ? "Pour ce classement, évalue uniquement l'ordre du plus ancien au plus récent; l'élève n'a aucun texte à rédiger et ne doit pas être pénalisé pour l'absence de réponse textuelle." : ""} ${format === "association-paires" ? "Pour cette mise en relation officielle, compare le numéro choisi pour chaque fait à la clé interne qui associe chaque fait au document présentant sa manifestation ou sa description apparentée. N’expose jamais les indices de la clé dans la rétroaction." : ""} Pour ce module de QCM et de réponses courtes, n'exige jamais le nom d'un document et ne commence jamais une réponse modèle par « Selon le document » : formule directement le fait historique, puis le lien demandé s'il y en a un. Respecte la méthode historique et la progression des apprentissages du PFEQ. Les documents doivent fournir des indices sans écrire explicitement la réponse attendue. Commence toujours la rétroaction par un encouragement sincère et concret avant de nommer une erreur. Le champ "commentaire" doit contenir uniquement l'analyse générale : une première phrase qui indique clairement ce qui fonctionne ou ne fonctionne pas, puis une ligne vide, puis une explication qui aide l'élève à formuler sa réponse. Ne mets jamais dans "commentaire" de point fort, de défi, d'élément à travailler, d'astuce documentaire ou leurs étiquettes; ces informations vont dans leurs champs séparés. Formule l'explication avec les marqueurs de relation historiques appropriés. ${format === "court" && !estClassementChronologique ? `RÈGLE POUR LES RÉPONSES COURTES : n’écris jamais « Ta réponse a été reçue », « Relis la consigne et vérifie chaque élément attendu » ni « Appuie-toi sur un fait précis et explique le lien avec la question ». Si la réponse est partielle ou erronée, explique le fait historique attendu et son contexte afin que l’élève comprenne son erreur. L’astuce documentaire doit nommer un document visible précis et indiquer quel indice chercher pour répondre à cette question. Évalue séparément chaque critère de ${JSON.stringify(CRITERES_REPONSE_COURTE_PFEQ)} et chaque critère interne de la question dans "criteresEvaluation"; chaque entrée doit contenir le texte exact du critère et "statut" égal à "respecte" ou "a-retravailler".` : ""} Pour une opération intellectuelle, ajoute "diagnosticOperation" avec les critères respectés, les critères à retravailler, les marqueurs réellement utilisés par l'élève, une preuve documentaire précise et un champ "lienExtraitReponse" qui explique clairement comment l'extrait soutient ou contredit la réponse. Même si la réponse est vide de sens, le pointFort doit encourager une prochaine action concrète et ne doit jamais dire "aucun point fort décelé". ${questionA.documents?.length ? "Donne une astuce documentaire précise." : "Retourne une chaîne vide pour astuceDocumentaire."} Réponds UNIQUEMENT en JSON valide : {"correct":true,"note":"2/2","commentaire":"Première phrase de diagnostic.\n\nExplication historique liée à cette question.","explication":"Le fait historique attendu, son contexte et le lien avec la question","exempleReponse":"Réponse modèle conforme","criteresEvaluation":[{"critere":"Critère exact","statut":"respecte"}],"diagnosticOperation":{"criteresRespectes":[],"criteresARetravailler":[],"marqueursUtilises":[],"preuveDocumentaire":"Indice précis observé ou attendu","lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève"},"lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève","pointFort":"Encouragement fondé sur une prochaine action","elementATravailler":"Élément à préciser","astuceDocumentaire":"Conseil qui nomme un document précis et l’indice à y chercher","progressionOperation":"Compétence travaillée"}. La note doit respecter le barème demandé, de 0 à ${questionA.points || 1}.`;
@@ -3460,12 +3589,19 @@ Les champs internes servent à valider et corriger l'activité; ne les révèle 
          note: `${Math.min(total, Math.max(0, points))}/${total}`, commentaire: parsed.commentaire || '-', detailCorrection: parsed,
          ...(format === "court" && !estClassementChronologique ? { criteresCibles: parsed.criteresCibles || [], criteresEvaluation: parsed.criteresEvaluation || [] } : {}),
          ...(operationQuestionA ? { criteresCibles: operationQuestionA.criteresObligatoires || [] } : {}),
+         ...(questionA.sourceQuestion === "reserve" ? { sourceQuestion: "reserve", reserveId: questionA.reserveId || null } : {}),
        });
     } catch (err) {
       console.error(err);
-      setErreurGlobal(err instanceof Error && err.message
-        ? err.message
-        : "CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      if (err instanceof ErreurEnregistrement) return;
+      // Pas d'« Oups! » : on invite à réessayer et on montre la réponse attendue.
+      setCorrectionIndisponibleA({
+        ...(estQcm && Array.isArray(questionA.choix) ? { bonneReponse: String(questionA.choix[questionA.indexReponseCorrecte] ?? "") } : {}),
+        ...(estClassementChronologique ? { ordre: elementsChronologiques.map((element: any) => `${element.label}${element.annee ? ` (${element.annee})` : ""}`) } : {}),
+        ...(String(questionA.reponseAttendue || "").trim() ? { reponseAttendue: String(questionA.reponseAttendue).trim() } : {}),
+        ...(Array.isArray(questionA.criteresCorrection) && !estQcm && !estClassementChronologique ? { criteres: questionA.criteresCorrection.map(String) } : {}),
+        ...(String(questionA.explication || "").trim() ? { explication: String(questionA.explication).trim() } : {}),
+      });
     } finally { setLoadingCorrectionA(false); }
   }
 
@@ -3640,6 +3776,7 @@ ${genererConsigneDifficulte()}
           };
           const validerDossier = (dossier: any) => {
             normaliserMetadonneesOperation(dossier);
+            harmoniserDossierOperation(dossier);
            if (!periodeAutorisee(periodeIdQuestionB)) throw new Error("Le dossier généré utilise une période désactivée.");
            validerQuestionB(dossier, operation.id, periodesSelectionnees, expectedDocumentCount);
            if (dossier.type === "temps" && dossier.documents.length !== 4) {
@@ -3658,6 +3795,10 @@ La sortie JSON suivante est presque conforme, mais elle a échoué au contrat de
 ${JSON.stringify(parsed)}
 
 Erreur de validation : ${validationError instanceof Error ? validationError.message : String(validationError)}
+${(operation.marqueursRecommandes || []).length
+  ? `Marqueurs de relation autorisés pour cette opération (à employer mot pour mot dans les réponses attendues et à inscrire dans "marqueursRelationAttendus") : ${(operation.marqueursRecommandes || []).map((groupe: any) => `${groupe.typeLien} : ${groupe.marqueurs}`).join(" ; ")}.`
+  : ""}
+La consigne doit rester une question qui nomme explicitement les documents et se termine par un point d’interrogation, sans verbe directif.
 
 Répare uniquement les champs nécessaires. Conserve le thème historique, la période imposée et les documents vérifiables. Retourne un seul objet JSON complet, sans Markdown, avec tous les champs exigés par le schéma initial. Pour un exercice spatial, retourne une carte compatible et aucun document; pour un exercice temporel, retourne exactement quatre documents et les métadonnées de classement requises.`,
            });
@@ -3693,7 +3834,7 @@ Répare uniquement les champs nécessaires. Conserve le thème historique, la p�
          if (parsed.type === 'espace' && parsed.carteEra === 'province-quebec') { setModeCarteComparaison(Math.random() < 0.5 ? 'identifier' : 'comparer'); }
           memoriserQuestionsGenerees([parsed], operation.id);
           return parsed;
-       });
+       }, 3);
      } catch(err) {
         // Le détail reste dans la console pour le diagnostic développeur; la
         // couche appelante affiche un message sûr et actionnable à l'élève.
@@ -3890,7 +4031,7 @@ Réponds UNIQUEMENT en JSON valide : {"noteGlobale":"X/8","commentaireGlobal":"P
       });
     } catch (err) {
       console.error(err);
-      setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      if (!(err instanceof ErreurEnregistrement)) setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
     } finally { setLoadingSchemaB(false); }
   }
 
@@ -3916,11 +4057,27 @@ Réponds UNIQUEMENT en JSON valide : {"noteGlobale":"X/8","commentaireGlobal":"P
     setLoadingCorrectionB(true); setErreurGlobal(null);
     const pointsQuestion = Number(questionB.points) || pointsOperation(questionB, currentOp.id);
     const infosSources = `Documents fournis: ${(questionB.documents||[]).map((d: any, i: number)=>`Doc ${String.fromCharCode(65+i)}: ${d.texte}`).join(" | ")}`;
-       const correctionPrompt = `Tu es un enseignant d'histoire du Québec et du Canada de secondaire ${niveauScolaire}. Corrige la réponse selon l'opération intellectuelle "${currentOp.nom}" et son format exigé : ${currentOp.formatAttendu}. Contrat exact : ${contratOperationPourPrompt(currentOp)}. Le barème de cette question est exactement de ${pointsQuestion} point${pointsQuestion > 1 ? "s" : ""}; n'utilise jamais un autre dénominateur. ${infosSources} Consigne : ${questionB.consigne}. Réponse de l'élève : "${reponseB}". Vérifie séparément chaque critère obligatoire et n'accorde jamais un lien seulement implicite. Respecte la progression des apprentissages du PFEQ et la méthode historique : exactitude du fait, repère temporel ou spatial pertinent, preuve et relation explicitée selon la tâche. Le champ "commentaire" doit contenir uniquement l'analyse générale : une première phrase qui indique clairement ce qui fonctionne ou ne fonctionne pas, puis une ligne vide, puis une explication qui aide l'élève à formuler sa réponse. Ne mets jamais dans "commentaire" de point fort, de défi, d'élément à travailler, d'astuce documentaire ou leurs étiquettes; ces informations vont dans leurs champs séparés. L'exemple de réponse doit respecter exactement la structure de l'opération et employer les bons marqueurs de relation. Ajoute "diagnosticOperation" : les critères réellement respectés, ceux à retravailler, les marqueurs réellement employés par l'élève, une preuve documentaire précise et un champ "lienExtraitReponse" qui explique clairement comment l'extrait soutient ou contredit la réponse. Chaque critère obligatoire doit apparaître dans l'une des deux listes de diagnostic : ne considère jamais une liste vide comme une évaluation complète. Même si la réponse est sans rapport, propose un point fort motivationnel orienté vers la prochaine action; n'écris jamais "aucun point fort décelé". ${(questionB.documents || []).length ? "Donne une astuce documentaire." : "Retourne une chaîne vide pour astuceDocumentaire."} Réponds UNIQUEMENT en JSON valide: {"niveau":"Réussi / Réussi partiellement / À revoir","note":"x/${pointsQuestion}","commentaire":"Première phrase de diagnostic.\n\nExplication pour aider à formuler la réponse.","pisteAmelioration":"conseil court avec marqueur utile","exempleReponse":"réponse modèle structurée selon l'opération","diagnosticOperation":{"criteresRespectes":[],"criteresARetravailler":[],"marqueursUtilises":[],"preuveDocumentaire":"Indice précis observé ou attendu","lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève"},"lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève","pointFort":"encouragement concret","elementATravailler":"élément à retravailler","astuceDocumentaire":"","progressionOperation":"progression dans l'opération"}`;
+       const correctionPrompt = `Tu es un enseignant d'histoire du Québec et du Canada de secondaire ${niveauScolaire}. Corrige la réponse selon l'opération intellectuelle "${currentOp.nom}" et son format exigé : ${currentOp.formatAttendu}. Contrat exact : ${contratOperationPourPrompt(currentOp)}. Le barème de cette question est exactement de ${pointsQuestion} point${pointsQuestion > 1 ? "s" : ""}; n'utilise jamais un autre dénominateur. ${infosSources} Consigne : ${questionB.consigne}. Réponse de l'élève : "${reponseB}". Vérifie séparément chaque critère obligatoire et n'accorde jamais un lien seulement implicite. Respecte la progression des apprentissages du PFEQ et la méthode historique : exactitude du fait, repère temporel ou spatial pertinent, preuve et relation explicitée selon la tâche. Le champ "commentaire" doit contenir uniquement l'analyse générale : une première phrase qui indique clairement ce qui fonctionne ou ne fonctionne pas, puis une ligne vide, puis une explication qui aide l'élève à formuler sa réponse. Ne mets jamais dans "commentaire" de point fort, de défi, d'élément à travailler, d'astuce documentaire ou leurs étiquettes; ces informations vont dans leurs champs séparés. L'exemple de réponse doit respecter exactement la structure de l'opération et employer les bons marqueurs de relation. Ajoute "diagnosticOperation" : les critères réellement respectés, ceux à retravailler, les marqueurs réellement employés par l'élève, une preuve documentaire précise et un champ "lienExtraitReponse" qui explique clairement comment l'extrait soutient ou contredit la réponse. Chaque critère obligatoire doit apparaître dans l'une des deux listes de diagnostic : ne considère jamais une liste vide comme une évaluation complète. Les critères obligatoires sont, mot pour mot : ${JSON.stringify(currentOp.criteresObligatoires || [])}; recopie chacun d'eux, sans le reformuler ni le fusionner, soit dans criteresRespectes soit dans criteresARetravailler. Même si la réponse est sans rapport, propose un point fort motivationnel orienté vers la prochaine action; n'écris jamais "aucun point fort décelé". ${(questionB.documents || []).length ? "Donne une astuce documentaire." : "Retourne une chaîne vide pour astuceDocumentaire."} Réponds UNIQUEMENT en JSON valide: {"niveau":"Réussi / Réussi partiellement / À revoir","note":"x/${pointsQuestion}","commentaire":"Première phrase de diagnostic.\n\nExplication pour aider à formuler la réponse.","pisteAmelioration":"conseil court avec marqueur utile","exempleReponse":"réponse modèle structurée selon l'opération","diagnosticOperation":{"criteresRespectes":[],"criteresARetravailler":[],"marqueursUtilises":[],"preuveDocumentaire":"Indice précis observé ou attendu","lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève"},"lienExtraitReponse":"Lien explicite entre un extrait et la réponse de l'élève","pointFort":"encouragement concret","elementATravailler":"élément à retravailler","astuceDocumentaire":"","progressionOperation":"progression dans l'opération"}`;
     try {
-      const response = await callGenerationService('corriger', { prompt: `${CONSIGNE_ORTHOGRAPHE_NOMS}\n${correctionPrompt}` });
-       const parsed = extraireJSON<any>(response.text);
-       validerFeedbackOperation(parsed, currentOp.id);
+      // Gemini oublie parfois un critère obligatoire : on redemande en nommant le problème.
+      let parsed: any = null;
+      let probleme = "";
+      for (let tentative = 1; tentative <= 3; tentative++) {
+        const relance = probleme
+          ? `\n\nTa réponse précédente a été refusée : ${probleme} Les critères obligatoires à classer chacun dans criteresRespectes ou criteresARetravailler sont : ${JSON.stringify(currentOp.criteresObligatoires || [])}.`
+          : "";
+        try {
+          const response = await callGenerationService('corriger', { prompt: `${CONSIGNE_ORTHOGRAPHE_NOMS}\n${correctionPrompt}${relance}` });
+          const candidat = extraireJSON<any>(response.text);
+          validerFeedbackOperation(candidat, currentOp.id);
+          parsed = candidat;
+          break;
+        } catch (erreurTentative: any) {
+          if (tentative === 3) throw erreurTentative;
+          probleme = String(erreurTentative?.message || erreurTentative);
+          console.warn(`Correction refusée, nouvelle tentative ${tentative + 1}/3`, probleme);
+        }
+      }
         const feedbackNormalise = normaliserFeedbackCourte(parsed, pointsQuestion, parsed?.niveau === "Réussi");
        setFeedbackB({ ...feedbackNormalise, niveau: parsed?.niveau || "Évalué" });
        const nivCalcul = obtenirNiveauPourResultat();
@@ -3929,7 +4086,7 @@ Réponds UNIQUEMENT en JSON valide : {"noteGlobale":"X/8","commentaireGlobal":"P
        });
     } catch(err) { 
       console.error(err); 
-      setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      if (!(err instanceof ErreurEnregistrement)) setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
     } finally { setLoadingCorrectionB(false); }
   }
 
@@ -4029,7 +4186,7 @@ Réponds UNIQUEMENT en format JSON valide:
         eleve: studentName || "Anonyme", niveau: `Sec ${nivCalcul}`, section: "Section C", periodeId: questionC.periodeId, periode: questionC.periode, conceptsPfeq: questionC.conceptsPfeq, connaissancesPfeq: questionC.connaissancesPfeq, operation: `Section C (${questionC.typeTache})`, consigne: questionC.consigne, reponse: reponseC, notesDocuments: notesDocumentsC, plan: planReponseC, planStructure: planStructureC, diagnosticPlan: parsed.diagnosticPlan || null, associationsDocuments: parsed.associationsDocuments || [], resultat: parsed.noteGlobale || 'Non évalué', note: parsed.noteGlobale || '-', commentaire: parsed.commentaireGlobal || '-', detailCorrection: parsed
       });
     } catch(err: any) { 
-      setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
+      if (!(err instanceof ErreurEnregistrement)) setErreurGlobal("CorrigeMoi rencontre un problème technique. Veuillez réessayer.");
     } finally { setLoadingCorrectionC(false); }
   }
 
@@ -4781,22 +4938,16 @@ Réponds UNIQUEMENT en format JSON valide:
                 {erreurGlobal && <div className="app-error-banner" role="alert" aria-live="assertive"><strong>Oups!</strong> {erreurGlobal}</div>}
 
                 {loadingQuestionA ? (
-                   <div className="loading section-a-generation-loading" role="status" aria-live="polite">
-                     <div className="spinner" aria-hidden="true"></div>
-                     <strong>
-                       {generationProgressA.stage === "queued"
-                         ? "Préparation du lot de 10 questions..."
-                         : generationProgressA.stage === "generating"
-                           ? "Génération des deux sous-lots en cours..."
-                           : generationProgressA.stage === "validating"
-                             ? "Vérification des 10 questions et du rattachement PFEQ..."
-                             : "Lot de questions prêt..."}
-                     </strong>
-                     <div className="generation-progress" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={generationProgressA.percent} aria-label={`Progression de la génération : ${generationProgressA.percent}%`}>
-                       <div className="generation-progress-bar" style={{ width: `${generationProgressA.percent}%` }}></div>
-                     </div>
-                     <span>{generationProgressA.percent}% — Ne relance pas : une reprise utilise la même demande et évite un doublon.</span>
-                   </div>
+                   <AttenteHistorique
+                     titre={generationProgressA.stage === "queued"
+                       ? "Préparation de ton lot de 10 questions"
+                       : generationProgressA.stage === "generating"
+                         ? "Rédaction des questions"
+                         : generationProgressA.stage === "validating"
+                           ? "Vérification des 10 questions et du rattachement au programme"
+                           : "Ton lot de questions est prêt"}
+                     detail={`${generationProgressA.percent} % — Ne relance pas : la génération continue même si tu attends.`}
+                   />
                 ) : banqueQuestionsA.length === 0 ? (
                     <button className="btn-generer" onClick={relancerLotQuestionsA} style={{backgroundColor: 'var(--card-blue)'}}><i className="ti ti-rotate-clockwise"></i> {generationAJobExpire ? "Relancer la génération" : "Charger un nouveau lot de 10 questions"}</button>
                 ) : questionA && (
@@ -4830,6 +4981,21 @@ Réponds UNIQUEMENT en format JSON valide:
                               corrige.moi
                             </button>
                           </div>
+                          {correctionIndisponibleA && !isAnswerValidated && (
+                            <div className="correction-indisponible" role="status" aria-live="polite">
+                              <strong>La correction automatique n’a pas répondu.</strong>
+                              <p>Ta réponse est toujours là : réessaie dans un instant avec le bouton corrige.moi.</p>
+                              <details>
+                                <summary>Voir la réponse attendue</summary>
+                                {correctionIndisponibleA.bonneReponse && <p><b>Bonne réponse :</b> {correctionIndisponibleA.bonneReponse}</p>}
+                                {correctionIndisponibleA.ordre && <ol>{correctionIndisponibleA.ordre.map((element) => <li key={element}>{element}</li>)}</ol>}
+                                {correctionIndisponibleA.reponseAttendue && <p><b>Réponse attendue :</b> {correctionIndisponibleA.reponseAttendue}</p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <p><b>Critères de correction :</b></p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <ul>{correctionIndisponibleA.criteres.map((critere) => <li key={critere}>{critere}</li>)}</ul>}
+                                {correctionIndisponibleA.explication && <p>{correctionIndisponibleA.explication}</p>}
+                              </details>
+                            </div>
+                          )}
                           {feedbackA && isAnswerValidated && (
                             <div className="verdict" role="status" aria-live="polite" style={{borderTopColor: 'var(--card-blue)'}}>
                               <div className={`stamp ${feedbackA.correct ? 'reussi' : ''}`} style={feedbackA.correct ? {borderColor: 'var(--card-blue)', color: 'var(--card-blue)'} : {}}>{feedbackA.correct ? 'Classement réussi !' : 'À revoir'} • {feedbackA.note}</div>
@@ -4885,6 +5051,21 @@ Réponds UNIQUEMENT en format JSON valide:
                          <div className="actions">
                                <button className="btn-generer" onClick={corrigerReponseA} disabled={loadingCorrectionA} style={{backgroundColor: 'var(--card-blue)'}}>corrige.moi</button>
                          </div>
+                          {correctionIndisponibleA && !isAnswerValidated && (
+                            <div className="correction-indisponible" role="status" aria-live="polite">
+                              <strong>La correction automatique n’a pas répondu.</strong>
+                              <p>Ta réponse est toujours là : réessaie dans un instant avec le bouton corrige.moi.</p>
+                              <details>
+                                <summary>Voir la réponse attendue</summary>
+                                {correctionIndisponibleA.bonneReponse && <p><b>Bonne réponse :</b> {correctionIndisponibleA.bonneReponse}</p>}
+                                {correctionIndisponibleA.ordre && <ol>{correctionIndisponibleA.ordre.map((element) => <li key={element}>{element}</li>)}</ol>}
+                                {correctionIndisponibleA.reponseAttendue && <p><b>Réponse attendue :</b> {correctionIndisponibleA.reponseAttendue}</p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <p><b>Critères de correction :</b></p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <ul>{correctionIndisponibleA.criteres.map((critere) => <li key={critere}>{critere}</li>)}</ul>}
+                                {correctionIndisponibleA.explication && <p>{correctionIndisponibleA.explication}</p>}
+                              </details>
+                            </div>
+                          )}
                           {feedbackA && isAnswerValidated && (
                            <div className="verdict" style={{borderTopColor: 'var(--card-blue)'}}>
                              <div className={`stamp ${feedbackA.correct ? 'reussi' : ''}`} style={feedbackA.correct ? {borderColor: 'var(--card-blue)', color: 'var(--card-blue)'} : {}}>{feedbackA.correct ? 'Réponse satisfaisante' : 'À revoir'} • {feedbackA.note}</div>
@@ -4901,6 +5082,21 @@ Réponds UNIQUEMENT en format JSON valide:
                          <div className="actions">
                              <button className="btn-generer" onClick={corrigerReponseA} disabled={loadingCorrectionA} style={{backgroundColor: 'var(--card-blue)'}}>corrige.moi</button>
                          </div>
+                          {correctionIndisponibleA && !isAnswerValidated && (
+                            <div className="correction-indisponible" role="status" aria-live="polite">
+                              <strong>La correction automatique n’a pas répondu.</strong>
+                              <p>Ta réponse est toujours là : réessaie dans un instant avec le bouton corrige.moi.</p>
+                              <details>
+                                <summary>Voir la réponse attendue</summary>
+                                {correctionIndisponibleA.bonneReponse && <p><b>Bonne réponse :</b> {correctionIndisponibleA.bonneReponse}</p>}
+                                {correctionIndisponibleA.ordre && <ol>{correctionIndisponibleA.ordre.map((element) => <li key={element}>{element}</li>)}</ol>}
+                                {correctionIndisponibleA.reponseAttendue && <p><b>Réponse attendue :</b> {correctionIndisponibleA.reponseAttendue}</p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <p><b>Critères de correction :</b></p>}
+                                {correctionIndisponibleA.criteres && correctionIndisponibleA.criteres.length > 0 && <ul>{correctionIndisponibleA.criteres.map((critere) => <li key={critere}>{critere}</li>)}</ul>}
+                                {correctionIndisponibleA.explication && <p>{correctionIndisponibleA.explication}</p>}
+                              </details>
+                            </div>
+                          )}
                           {feedbackA && isAnswerValidated && (
                            <div className="verdict" style={{borderTopColor: 'var(--card-blue)'}}>
                              <div className={`stamp ${feedbackA.correct ? 'reussi' : ''}`} style={feedbackA.correct ? {borderColor: 'var(--card-blue)', color: 'var(--card-blue)'} : {}}>{feedbackA.correct ? 'Réponse satisfaisante' : 'À revoir'} • {feedbackA.note}</div>
@@ -4971,7 +5167,7 @@ Réponds UNIQUEMENT en format JSON valide:
                      {renderPeriodesActives("var(--card-teal)")}
                     {erreurGlobal && <div className="app-error-banner" role="alert" aria-live="assertive"><strong>Oups!</strong> {erreurGlobal}</div>}
                     {loadingSchemaB ? (
-                      <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>Construction du schéma conceptuel...</div>
+                      <AttenteHistorique titre="Construction du schéma conceptuel" />
                     ) : !questionSchemaB ? (
                       <button className="btn-generer" onClick={genererSchemaB} style={{backgroundColor: 'var(--card-teal)'}}><i className="ti ti-sitemap"></i> Générer un schéma conceptuel</button>
                     ) : (
@@ -5022,16 +5218,13 @@ Réponds UNIQUEMENT en format JSON valide:
                     )}
 
                     {loadingQuestionB && !questionB ? (
-                      <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>Recherche dans les archives...</div>
+                      <AttenteHistorique titre="Recherche dans les archives" />
                     ) : !questionB ? (
                        <button className="btn-generer" onClick={genererQuestionsB} style={{backgroundColor: 'var(--card-teal)'}}><i className="ti ti-sparkles"></i> Générer les questions sélectionnées</button>
                     ) : (
                       <div>
                         {loadingQuestionB && (
-                          <div className="operation-dossier-loading" role="status" aria-live="polite">
-                            <div className="spinner" aria-hidden="true"></div>
-                            Génération d’un nouveau dossier… Ton dossier actif reste disponible.
-                          </div>
+                          <AttenteHistorique compact titre="Génération d’un nouveau dossier" detail="Ton dossier actif reste disponible pendant ce temps." />
                         )}
                          <div className="catalog-num" style={{marginTop: '16px'}}>{afficherDatesPeriode(questionB.periode, questionB.periodeId)}</div>
                          <div className="operation-question-heading" aria-label={`Opération intellectuelle : ${currentOp.nom}`}>
@@ -5173,7 +5366,7 @@ Réponds UNIQUEMENT en format JSON valide:
                             <div className="actions">
                                 <button className="btn-generer" onClick={corrigerReponseB} disabled={loadingCorrectionB} style={{backgroundColor: 'var(--card-teal)'}}>corrige.moi</button>
                             </div>
-                            {loadingCorrectionB && <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>corrige.moi examine ta réponse...</div>}
+                            {loadingCorrectionB && <AttenteHistorique titre="corrige.moi examine ta réponse" compact />}
                              {feedbackB && (
                               <div className="verdict" style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '24px' }}>
                                  <div><div className="feedback-step-label">1. Résultat</div><div className={`stamp ${feedbackB.niveau?.toLowerCase().includes('réussi') ? 'reussi' : ''}`} style={{ display: 'inline-block', margin: 0 }}>{feedbackB.niveau || 'Évalué'} • {feedbackB.note || ''}</div></div>
@@ -5215,7 +5408,7 @@ Réponds UNIQUEMENT en format JSON valide:
                 {erreurGlobal && <div className="app-error-banner" role="alert" aria-live="assertive"><strong>Oups!</strong> {erreurGlobal}</div>}
 
                 {loadingQuestionC ? (
-                  <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>Compilation du dossier ministériel (textes et statistiques)...</div>
+                  <AttenteHistorique titre="Compilation du dossier ministériel (textes et statistiques)" />
                 ) : !questionC ? (
                    <button className="btn-generer" onClick={genererQuestionC} style={{backgroundColor: 'var(--question-elab)'}}><i className="ti ti-folder-open"></i> Ouvrir le dossier documentaire de l’épreuve</button>
                 ) : (
@@ -5255,7 +5448,7 @@ Réponds UNIQUEMENT en format JSON valide:
                         <button className="btn-generer" onClick={corrigerReponseC} disabled={loadingCorrectionC} style={{backgroundColor: 'var(--question-elab)'}}>corrige.moi</button>
                          <button className="link-btn" onClick={passerQuestionSuivanteC} disabled={loadingQuestionC || loadingCorrectionC} style={{color: 'var(--question-elab)'}}>Question suivante →</button>
                     </div>
-                    {loadingCorrectionC && <div className="loading" role="status" aria-live="polite"><div className="spinner" aria-hidden="true"></div>corrige.moi évalue votre utilisation des documents et applique la grille sur 8 points...</div>}
+                    {loadingCorrectionC && <AttenteHistorique titre="corrige.moi évalue votre utilisation des documents et applique la grille sur 8 points" compact />}
                     
                     {feedbackC && (
                        <div className="verdict" style={{borderTopColor: 'var(--question-elab)'}}>
