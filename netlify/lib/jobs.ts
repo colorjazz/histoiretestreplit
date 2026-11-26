@@ -37,7 +37,7 @@ const storeMemoire: Store = {
   async delete(key) { memoire.delete(key); },
 };
 
-function surNetlify(): boolean {
+export function surNetlify(): boolean {
   return Boolean((globalThis as any).Netlify) || Boolean(process.env.NETLIFY_BLOBS_CONTEXT);
 }
 

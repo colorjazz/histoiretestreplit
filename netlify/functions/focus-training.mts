@@ -6,6 +6,8 @@
  *   exécuté par une fonction d'arrière-plan; le navigateur suit /api/focus-training/jobs/:id.
  * - « correct » : appel direct, réponse immédiate.
  *
+ * Accès : utilisateur Firebase connecté (jeton dans Authorization) et quotas, voir lib/acces.ts.
+ *
  * Variables : GEMINI_API_KEY (obligatoire), GEMINI_MODEL (facultatif).
  */
 import { randomUUID } from "node:crypto";
@@ -15,6 +17,7 @@ import { validerRequeteFocusTraining } from "../lib/focusTrainingContracts";
 import { executerGeminiAvecReparation } from "../lib/focusTrainingLogic";
 import { createJob, getJobByIdempotencyKey, jobOrphelin } from "../lib/jobs";
 import { logger } from "../lib/logger";
+import { consommerQuota, identifierUtilisateur } from "../lib/acces";
 import {
   declencherWorker,
   FOCUS_TRAINING_TRACKING_UNAVAILABLE_CODE,
@@ -33,6 +36,9 @@ const GEMINI_NOT_CONFIGURED = {
 
 export default async (req: Request): Promise<Response> => {
   if (req.method !== "POST") return json(405, { error: "Méthode non permise." });
+
+  const utilisateur = await identifierUtilisateur(req);
+  if (!("uid" in utilisateur)) return json(utilisateur.status, { error: utilisateur.error, code: utilisateur.code });
 
   let body: unknown;
   try {
@@ -69,6 +75,8 @@ export default async (req: Request): Promise<Response> => {
         return json(statutHttpJob(existant), reponseJob(existant));
       }
       if (!apiKey) return json(503, GEMINI_NOT_CONFIGURED);
+      const refus = await consommerQuota(utilisateur.uid);
+      if (refus) return json(refus.status, { error: refus.error, code: refus.code });
       const job = await createJob({
         id: randomUUID(),
         idempotencyKey,
@@ -88,6 +96,8 @@ export default async (req: Request): Promise<Response> => {
   }
 
   if (!apiKey) return json(503, GEMINI_NOT_CONFIGURED);
+  const refus = await consommerQuota(utilisateur.uid);
+  if (refus) return json(refus.status, { error: refus.error, code: refus.code });
   const result = await executerGeminiAvecReparation({
     apiKey,
     prompt,

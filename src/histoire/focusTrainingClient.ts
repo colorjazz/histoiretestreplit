@@ -1,8 +1,13 @@
+import { getAuth } from "firebase/auth";
+
 export type FocusTrainingAction = "generate" | "correct";
 export type FocusTrainingErrorCode =
   | "GEMINI_NOT_CONFIGURED"
   | "FOCUS_TRAINING_JOB_EXPIRED"
-  | "FOCUS_TRAINING_TRACKING_UNAVAILABLE";
+  | "FOCUS_TRAINING_TRACKING_UNAVAILABLE"
+  | "AUTH_REQUIRED"
+  | "QUOTA_UTILISATEUR"
+  | "QUOTA_GLOBAL";
 
 export type FocusTrainingResponse = {
   text: string;
@@ -44,7 +49,25 @@ const MESSAGES_ERREUR_SÛRS: Record<FocusTrainingErrorCode, string> = {
     "Cette génération n’est plus disponible. Lance une nouvelle génération.",
   FOCUS_TRAINING_TRACKING_UNAVAILABLE:
     "Le suivi de la génération est temporairement indisponible. Réessaie dans quelques instants.",
+  AUTH_REQUIRED:
+    "Ta session a expiré. Reconnecte-toi pour continuer.",
+  QUOTA_UTILISATEUR:
+    "Tu as atteint la limite d’activités pour le moment. Prends une pause et reviens un peu plus tard.",
+  QUOTA_GLOBAL:
+    "corrige.moi a atteint sa limite d’activités pour aujourd’hui. Reviens demain!",
 };
+
+/** Codes définitifs : inutile de relancer la même demande. */
+const CODES_DEFINITIFS = new Set<FocusTrainingErrorCode>(["GEMINI_NOT_CONFIGURED", "AUTH_REQUIRED", "QUOTA_UTILISATEUR", "QUOTA_GLOBAL"]);
+
+/** Jeton Firebase de l'utilisateur connecté, exigé par le serveur pour appeler Gemini. */
+async function jetonUtilisateur(): Promise<string | null> {
+  try {
+    return (await getAuth().currentUser?.getIdToken()) || null;
+  } catch {
+    return null;
+  }
+}
 
 function messageErreurSûr(
   status: number,
@@ -96,10 +119,8 @@ export class FocusTrainingError extends Error {
 }
 
 function extraireCodeErreur(data: any): FocusTrainingErrorCode | undefined {
-  return data?.code === "GEMINI_NOT_CONFIGURED"
-    || data?.code === "FOCUS_TRAINING_JOB_EXPIRED"
-    || data?.code === "FOCUS_TRAINING_TRACKING_UNAVAILABLE"
-    ? data.code
+  return typeof data?.code === "string" && data.code in MESSAGES_ERREUR_SÛRS
+    ? data.code as FocusTrainingErrorCode
     : undefined;
 }
 
@@ -134,6 +155,8 @@ export async function appelerFocusTraining(
     || globalThis.crypto?.randomUUID?.()
     || `focus-${Date.now()}-${Math.random().toString(36).slice(2)}`;
   requete.headers["Idempotency-Key"] = requestId;
+  const jeton = await jetonUtilisateur();
+  if (jeton) (requete.headers as Record<string, string>).Authorization = `Bearer ${jeton}`;
   // Une génération de lot peut durer 2 à 4 minutes (sous-lots, validation, relances).
   // 1,5 s × 240 ≈ 6 minutes de suivi, avec peu d'appels aux fonctions Netlify.
   const pollIntervalMs = options.pollIntervalMs ?? 1500;
@@ -230,7 +253,7 @@ export async function appelerFocusTraining(
       if (
         tentative === 0
         && statutsRetentables.has(response.status)
-        && errorCode !== "GEMINI_NOT_CONFIGURED"
+        && !(errorCode && CODES_DEFINITIFS.has(errorCode))
       ) {
       await attendre(350);
       return null;
@@ -255,7 +278,8 @@ export async function appelerFocusTraining(
     } catch (error) {
       if (
         error instanceof FocusTrainingError
-        && error.code === "GEMINI_NOT_CONFIGURED"
+        && error.code
+        && CODES_DEFINITIFS.has(error.code)
       ) {
         throw error;
       }

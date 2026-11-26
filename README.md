@@ -47,6 +47,23 @@ Vérifications : `npm run typecheck` et `npm run build`.
 4. Firebase console → **Authentication → Settings → Authorized domains** : ajouter le domaine
    Netlify (ex. `ton-site.netlify.app`) et, plus tard, ton domaine personnalisé.
 
+## Accès au service Gemini
+
+`/api/focus-training` (génération et correction) n'accepte que les utilisateurs connectés :
+le navigateur envoie le jeton Firebase de l'élève ou de l'enseignant, vérifié avec les clés
+publiques de Google (`netlify/lib/acces.ts`). Chaque utilisateur a aussi des plafonds, comptés
+dans Netlify Blobs. Variables facultatives pour les ajuster :
+
+| Variable | Défaut | Rôle |
+|---|---|---|
+| `QUOTA_PAR_HEURE` | 60 | appels par utilisateur et par heure |
+| `QUOTA_PAR_JOUR` | 300 | appels par utilisateur et par jour |
+| `QUOTA_GLOBAL_PAR_JOUR` | 6000 | appels pour tout le site, par jour (plafond de dépenses) |
+| `FIREBASE_PROJECT_ID` | `histoire-nationale` | projet Firebase des jetons |
+
+Un lot de 10 questions compte pour 1 appel, chaque correction pour 1 appel. En local
+(`npm run dev:api`), la vérification est sautée pour le mode démo ; `FOCUS_AUTH_FORCE=1` la réactive.
+
 ## Différences avec le serveur Replit
 
 La logique de génération (`netlify/lib/focusTrainingLogic.ts`) reprend celle de Replit, avec
